@@ -23,8 +23,8 @@
       /* Fake Zoom meeting background */
       .zoom-bg {
         position: relative;
-        width: 760px;
-        height: 480px;
+        width: min(760px, 100vw - 32px);
+        aspect-ratio: 16 / 10;
         background: #1c1c1c;
         border-radius: 12px;
         overflow: hidden;
@@ -74,10 +74,10 @@
       /* ── THE PANEL ── */
       .panel {
         position: absolute;
-        bottom: 20px;
-        right: 20px;
-        width: 290px;
-        padding: 16px;
+        bottom: clamp(8px, 2.5%, 20px);
+        right: clamp(8px, 2.5%, 20px);
+        width: clamp(200px, 38%, 290px);
+        padding: clamp(10px, 1.5vw, 16px);
         background: rgba(15, 15, 35, 0.93);
         backdrop-filter: blur(16px);
         border-radius: 24px;
@@ -311,6 +311,27 @@
         pointer-events: none;
       }
 
+      /* ── Mobile tweaks ── */
+      @media (max-width: 500px) {
+        body { padding: 16px 12px 80px; gap: 24px; }
+
+        .panel { gap: 10px; border-radius: 16px; }
+
+        .emoji-btn .emoji-icon { font-size: 1.25rem; }
+        .emoji-btn .emoji-label { font-size: 0.5rem; }
+        .emoji-grid { gap: 6px; }
+
+        .ctrl-btn { min-height: 48px; padding: 0 12px; border-radius: 14px; gap: 8px; }
+        .ctrl-icon { font-size: 1.3rem; }
+        .ctrl-status { font-size: 0.85rem; }
+        .ctrl-hint { font-size: 0.55rem; }
+
+        .panel-title { font-size: 0.8rem; }
+
+        /* Stack side panel below */
+        body > div:last-of-type { width: 100%; }
+      }
+
       /* Toggle demo button */
       .demo-toggle {
         position: fixed;
@@ -372,32 +393,32 @@
           <p class="section-label">React! 🎭</p>
           <div class="emoji-grid">
             <button class="emoji-btn" style="background:#f59e0b"
-              onclick="popBtn(this)" title="Clap">
+              onclick="popBtn(this, event)" title="Clap">
               <span class="emoji-icon">👏</span>
               <span class="emoji-label">Clap</span>
             </button>
             <button class="emoji-btn" style="background:#22c55e"
-              onclick="popBtn(this)" title="Good">
+              onclick="popBtn(this, event)" title="Good">
               <span class="emoji-icon">👍</span>
               <span class="emoji-label">Good</span>
             </button>
             <button class="emoji-btn" style="background:#ef4444"
-              onclick="popBtn(this)" title="Love">
+              onclick="popBtn(this, event)" title="Love">
               <span class="emoji-icon">❤️</span>
               <span class="emoji-label">Love</span>
             </button>
             <button class="emoji-btn" style="background:#f97316"
-              onclick="popBtn(this)" title="Funny">
+              onclick="popBtn(this, event)" title="Funny">
               <span class="emoji-icon">😂</span>
               <span class="emoji-label">Funny</span>
             </button>
             <button class="emoji-btn" style="background:#8b5cf6"
-              onclick="popBtn(this)" title="Party">
+              onclick="popBtn(this, event)" title="Party">
               <span class="emoji-icon">🎉</span>
               <span class="emoji-label">Party</span>
             </button>
             <button class="emoji-btn" style="background:#06b6d4"
-              onclick="popBtn(this)" title="Wow">
+              onclick="popBtn(this, event)" title="Wow">
               <span class="emoji-icon">😮</span>
               <span class="emoji-label">Wow</span>
             </button>
@@ -492,18 +513,22 @@
       let handRaised = false;
       let isMuted = false;
 
-      function popBtn(btn) {
+      function popBtn(btn, evt) {
         btn.style.transform = 'scale(0.82)';
         setTimeout(() => { btn.style.transform = 'scale(1.18)'; }, 80);
         setTimeout(() => { btn.style.transform = ''; }, 280);
 
-        // Show floating emoji burst
+        // Show floating emoji burst — handle both mouse and touch
+        const src = (evt && evt.changedTouches) ? evt.changedTouches[0] : evt || event;
+        const x = src ? src.clientX : window.innerWidth / 2;
+        const y = src ? src.clientY : window.innerHeight / 2;
+
         const burst = document.createElement('div');
         burst.textContent = btn.querySelector('.emoji-icon').textContent;
         burst.style.cssText = `
           position:fixed;
-          left:${event.clientX - 20}px;
-          top:${event.clientY - 20}px;
+          left:${x - 20}px;
+          top:${y - 20}px;
           font-size:2.5rem;
           pointer-events:none;
           animation:burstUp 0.7s ease-out forwards;

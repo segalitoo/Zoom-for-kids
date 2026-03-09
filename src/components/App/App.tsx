@@ -47,8 +47,8 @@ export function App({ shadowRoot }: AppProps) {
       <button
         className={styles.minimizedBtn}
         onClick={() => setIsExpanded(true)}
-        aria-label="Open Zoom for Kids controls"
-        title="Open Zoom for Kids"
+        aria-label="פתח את בקרי זום לילדים"
+        title="פתח זום לילדים"
       >
         🚀
       </button>
@@ -56,16 +56,16 @@ export function App({ shadowRoot }: AppProps) {
   }
 
   return (
-    <div className={styles.panel} role="complementary" aria-label="Zoom for Kids controls">
+    <div className={styles.panel} role="complementary" aria-label="בקרי זום לילדים" dir="rtl">
       {/* Header */}
       <div className={styles.header}>
         <span className={styles.headerTitle}>
-          <span aria-hidden="true">🌟</span> Zoom for Kids
+          <span aria-hidden="true">🌟</span> זום לילדים
         </span>
         <button
           className={styles.minimizeBtn}
           onClick={() => setIsExpanded(false)}
-          aria-label="Minimize controls"
+          aria-label="מזער"
         >
           ✕
         </button>

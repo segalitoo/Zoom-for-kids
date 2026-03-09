@@ -21,22 +21,22 @@ export function HandRaiseButton({ isHandRaised, onRaise, onLower }: HandRaiseBut
   }, [isHandRaised, onRaise, onLower]);
 
   return (
-    <section aria-label="Hand raise control">
+    <section aria-label="הרמת יד">
       <button
         className={`${styles.btn} ${isHandRaised ? styles.raised : styles.lowered} ${isAnimating ? styles.animating : ''}`}
         onClick={handleClick}
         aria-pressed={isHandRaised}
-        aria-label={isHandRaised ? 'Lower your hand' : 'Raise your hand'}
+        aria-label={isHandRaised ? 'הורד את היד' : 'הרם את היד'}
       >
         <span className={styles.handIcon} aria-hidden="true">
           ✋
         </span>
         <span className={styles.label}>
-          {isHandRaised ? 'Hand Up!' : 'Raise Hand'}
+          {isHandRaised ? '!יד למעלה' : 'הרם יד'}
         </span>
         {isHandRaised && (
           <span className={styles.tapHint} aria-hidden="true">
-            tap to lower
+            לחץ להורדה
           </span>
         )}
       </button>

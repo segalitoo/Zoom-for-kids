@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zoom for Kids — UI Preview</title>
+    <title>זום לילדים — תצוגה מקדימה</title>
     <style>
       /* ── Page scaffold ── */
       * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -352,7 +352,7 @@
   </head>
   <body>
 
-    <p class="page-title">Zoom for Kids — UI Preview</p>
+    <p class="page-title">זום לילדים — תצוגה מקדימה</p>
 
     <!-- ══════════════════════════════════════════════
          MAIN: Fake Zoom meeting with panel injected
@@ -380,47 +380,47 @@
       </div>
 
       <!-- THE INJECTED PANEL -->
-      <div class="panel" id="main-panel">
+      <div class="panel" id="main-panel" dir="rtl">
 
         <!-- Header -->
         <div class="panel-header">
-          <span class="panel-title">🌟 Zoom for Kids</span>
-          <button class="minimize-btn" onclick="minimizePanel()" title="Minimize">✕</button>
+          <span class="panel-title">🌟 זום לילדים</span>
+          <button class="minimize-btn" onclick="minimizePanel()" title="מזער">✕</button>
         </div>
 
         <!-- Emoji Reactions -->
         <section>
-          <p class="section-label">React! 🎭</p>
+          <p class="section-label">תגיבו! 🎭</p>
           <div class="emoji-grid">
             <button class="emoji-btn" style="background:#f59e0b"
-              onclick="popBtn(this, event)" title="Clap">
+              onclick="popBtn(this, event)" title="כל הכבוד">
               <span class="emoji-icon">👏</span>
-              <span class="emoji-label">Clap</span>
+              <span class="emoji-label">כל הכבוד</span>
             </button>
             <button class="emoji-btn" style="background:#22c55e"
-              onclick="popBtn(this, event)" title="Good">
+              onclick="popBtn(this, event)" title="סבבה">
               <span class="emoji-icon">👍</span>
-              <span class="emoji-label">Good</span>
+              <span class="emoji-label">סבבה</span>
             </button>
             <button class="emoji-btn" style="background:#ef4444"
-              onclick="popBtn(this, event)" title="Love">
+              onclick="popBtn(this, event)" title="אהבה">
               <span class="emoji-icon">❤️</span>
-              <span class="emoji-label">Love</span>
+              <span class="emoji-label">אהבה</span>
             </button>
             <button class="emoji-btn" style="background:#f97316"
-              onclick="popBtn(this, event)" title="Funny">
+              onclick="popBtn(this, event)" title="מצחיק">
               <span class="emoji-icon">😂</span>
-              <span class="emoji-label">Funny</span>
+              <span class="emoji-label">מצחיק</span>
             </button>
             <button class="emoji-btn" style="background:#8b5cf6"
-              onclick="popBtn(this, event)" title="Party">
+              onclick="popBtn(this, event)" title="יאללה">
               <span class="emoji-icon">🎉</span>
-              <span class="emoji-label">Party</span>
+              <span class="emoji-label">יאללה</span>
             </button>
             <button class="emoji-btn" style="background:#06b6d4"
-              onclick="popBtn(this, event)" title="Wow">
+              onclick="popBtn(this, event)" title="וואו">
               <span class="emoji-icon">😮</span>
-              <span class="emoji-label">Wow</span>
+              <span class="emoji-label">וואו</span>
             </button>
           </div>
         </section>
@@ -429,8 +429,8 @@
         <button class="ctrl-btn hand-lowered" id="hand-btn" onclick="toggleHand()">
           <span class="ctrl-icon">✋</span>
           <span class="ctrl-text">
-            <span class="ctrl-status" id="hand-status">Raise Hand</span>
-            <span class="ctrl-hint" id="hand-hint">tap to raise</span>
+            <span class="ctrl-status" id="hand-status">הרם יד</span>
+            <span class="ctrl-hint" id="hand-hint">לחץ להרמה</span>
           </span>
         </button>
 
@@ -438,8 +438,8 @@
         <button class="ctrl-btn unmuted" id="mute-btn" onclick="toggleMute()">
           <span class="ctrl-icon" id="mute-icon">🎤</span>
           <span class="ctrl-text">
-            <span class="ctrl-status" id="mute-status">I can talk</span>
-            <span class="ctrl-hint" id="mute-hint">tap to mute</span>
+            <span class="ctrl-status" id="mute-status">אני מדבר</span>
+            <span class="ctrl-hint" id="mute-hint">לחץ להשתקה</span>
           </span>
         </button>
 
@@ -458,48 +458,48 @@
 
       <!-- Popup -->
       <div>
-        <p class="state-label" style="text-align:center;margin-bottom:8px">Extension Popup</p>
+        <p class="state-label" style="text-align:center;margin-bottom:8px">חלון הרחבה</p>
         <div class="popup-preview">
           <div class="popup-header">
             <span class="popup-icon">🌟</span>
-            <h1 class="popup-title">Zoom for Kids</h1>
+            <h1 class="popup-title">זום לילדים</h1>
           </div>
-          <p class="popup-desc">Big, easy buttons for Zoom — made for kids!</p>
-          <p class="popup-tip">Join a Zoom meeting to see your kid-friendly controls.</p>
+          <p class="popup-desc">כפתורים גדולים וקלים לזום — מיוחד לילדים!</p>
+          <p class="popup-tip">הצטרפו לפגישת זום כדי לראות את הכפתורים שלכם.</p>
           <div class="popup-footer">👏 👍 ❤️ ✋ 🎤</div>
         </div>
       </div>
 
       <!-- Button state showcase -->
       <div>
-        <p class="state-label" style="text-align:center;margin-bottom:8px">Button States</p>
+        <p class="state-label" style="text-align:center;margin-bottom:8px">מצבי כפתורים</p>
         <div style="display:flex;flex-direction:column;gap:10px;width:200px">
           <button class="ctrl-btn hand-raised" style="pointer-events:none">
             <span class="ctrl-icon">✋</span>
             <span class="ctrl-text">
-              <span class="ctrl-status">Hand Up!</span>
-              <span class="ctrl-hint">tap to lower</span>
+              <span class="ctrl-status">!יד למעלה</span>
+              <span class="ctrl-hint">לחץ להורדה</span>
             </span>
           </button>
           <button class="ctrl-btn hand-lowered" style="pointer-events:none">
             <span class="ctrl-icon">✋</span>
             <span class="ctrl-text">
-              <span class="ctrl-status">Raise Hand</span>
-              <span class="ctrl-hint">tap to raise</span>
+              <span class="ctrl-status">הרם יד</span>
+              <span class="ctrl-hint">לחץ להרמה</span>
             </span>
           </button>
           <button class="ctrl-btn unmuted" style="pointer-events:none">
             <span class="ctrl-icon">🎤</span>
             <span class="ctrl-text">
-              <span class="ctrl-status">I can talk</span>
-              <span class="ctrl-hint">tap to mute</span>
+              <span class="ctrl-status">אני מדבר</span>
+              <span class="ctrl-hint">לחץ להשתקה</span>
             </span>
           </button>
           <button class="ctrl-btn muted" style="pointer-events:none">
             <span class="ctrl-icon">🔇</span>
             <span class="ctrl-text">
-              <span class="ctrl-status">I'm quiet</span>
-              <span class="ctrl-hint">tap to speak</span>
+              <span class="ctrl-status">אני שקט</span>
+              <span class="ctrl-hint">לחץ לדיבור</span>
             </span>
           </button>
         </div>
@@ -507,7 +507,7 @@
 
     </div>
 
-    <button class="demo-toggle" onclick="toggleMute()">Toggle Mute</button>
+    <button class="demo-toggle" onclick="toggleMute()">החלף השתקה</button>
 
     <script>
       let handRaised = false;
@@ -546,15 +546,15 @@
 
         if (handRaised) {
           btn.className = 'ctrl-btn hand-raised';
-          status.textContent = 'Hand Up!';
-          hint.textContent = 'tap to lower';
+          status.textContent = '!יד למעלה';
+          hint.textContent = 'לחץ להורדה';
           // Wave animation
           btn.style.animation = 'handWave 0.5s ease-in-out';
           setTimeout(() => { btn.style.animation = ''; }, 500);
         } else {
           btn.className = 'ctrl-btn hand-lowered';
-          status.textContent = 'Raise Hand';
-          hint.textContent = 'tap to raise';
+          status.textContent = 'הרם יד';
+          hint.textContent = 'לחץ להרמה';
         }
       }
 
@@ -568,13 +568,13 @@
         if (isMuted) {
           btn.className = 'ctrl-btn muted';
           icon.textContent = '🔇';
-          status.textContent = "I'm quiet";
-          hint.textContent = 'tap to speak';
+          status.textContent = 'אני שקט';
+          hint.textContent = 'לחץ לדיבור';
         } else {
           btn.className = 'ctrl-btn unmuted';
           icon.textContent = '🎤';
-          status.textContent = 'I can talk';
-          hint.textContent = 'tap to mute';
+          status.textContent = 'אני מדבר';
+          hint.textContent = 'לחץ להשתקה';
         }
 
         btn.style.transform = 'scale(0.93)';

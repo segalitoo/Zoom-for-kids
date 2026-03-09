@@ -7,13 +7,13 @@ function Popup() {
     <main className="popup">
       <header className="popup-header">
         <span className="popup-icon" aria-hidden="true">🌟</span>
-        <h1 className="popup-title">Zoom for Kids</h1>
+        <h1 className="popup-title">זום לילדים</h1>
       </header>
       <p className="popup-description">
-        Big, easy buttons for Zoom — made for kids!
+        כפתורים גדולים וקלים לזום — מיוחד לילדים!
       </p>
       <p className="popup-tip">
-        Join a Zoom meeting to see your kid-friendly controls.
+        הצטרפו לפגישת זום כדי לראות את הכפתורים שלכם.
       </p>
       <footer className="popup-footer">
         <span aria-hidden="true">👏 👍 ❤️ ✋ 🎤</span>

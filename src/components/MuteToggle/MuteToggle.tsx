@@ -16,19 +16,19 @@ export function MuteToggle({ isMuted, onToggle }: MuteToggleProps) {
   }, [onToggle]);
 
   return (
-    <section aria-label="Microphone control">
+    <section aria-label="שליטה במיקרופון">
       <button
         className={`${styles.btn} ${isMuted ? styles.muted : styles.unmuted} ${isAnimating ? styles.animating : ''}`}
         onClick={handleClick}
         aria-pressed={isMuted}
-        aria-label={isMuted ? 'Unmute your microphone' : 'Mute your microphone'}
+        aria-label={isMuted ? 'הפעל מיקרופון' : 'השתק מיקרופון'}
       >
         <span className={styles.micIcon} aria-hidden="true">
           {isMuted ? '🔇' : '🎤'}
         </span>
         <div className={styles.textGroup}>
-          <span className={styles.statusText}>{isMuted ? "I'm quiet" : 'I can talk'}</span>
-          <span className={styles.actionHint}>{isMuted ? 'tap to speak' : 'tap to mute'}</span>
+          <span className={styles.statusText}>{isMuted ? 'אני שקט' : 'אני מדבר'}</span>
+          <span className={styles.actionHint}>{isMuted ? 'לחץ לדיבור' : 'לחץ להשתקה'}</span>
         </div>
       </button>
     </section>

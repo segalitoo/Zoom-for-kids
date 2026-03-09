@@ -1,0 +1,124 @@
+/* ============================================================
+   HandRaiseButton — Large pill button, yellow when active
+   ============================================================ */
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 64px;
+  padding: 0 20px;
+
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+
+  font-family: inherit;
+  font-weight: 800;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.15s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: scale(1.02);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* ---- Lowered state (neutral gray) ---- */
+.lowered {
+  background: rgba(100, 116, 139, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lowered:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+/* ---- Raised state (vibrant yellow — attention color) ---- */
+.raised {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a1a;
+  box-shadow:
+    0 4px 16px rgba(251, 191, 36, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+
+  /* Pulsing glow to show the teacher your hand is up */
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 4px 16px rgba(251, 191, 36, 0.4),
+      0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 4px 28px rgba(251, 191, 36, 0.7),
+      0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ---- Click animation ---- */
+.animating {
+  animation: handWave 0.45s ease-in-out;
+}
+
+@keyframes handWave {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(-8deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(8deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(-4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ---- Text elements ---- */
+.handIcon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.tapHint {
+  position: absolute;
+  bottom: 5px;
+  right: 12px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  opacity: 0.6;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}

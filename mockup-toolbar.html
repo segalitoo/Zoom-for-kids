@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>זום לילדים — מוקאפ שורה תחתונה</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #111;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Zoom meeting area ── */
+  .meeting {
+    flex: 1;
+    position: relative;
+    background: #1a1a2e;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* participants strip */
+  .participants {
+    display: flex;
+    gap: 6px;
+    padding: 8px;
+    background: rgba(0,0,0,0.4);
+  }
+  .participant {
+    width: 90px;
+    height: 60px;
+    border-radius: 8px;
+    background: #2d2d4e;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    overflow: hidden;
+  }
+  .participant .avatar { font-size: 1.4rem; }
+  .participant.active { border-color: #22c55e; }
+  .participant .speaking-ring {
+    position: absolute; inset: 0;
+    border-radius: 8px;
+    border: 2px solid #22c55e;
+    animation: pulse-ring 1.5s infinite;
+  }
+  @keyframes pulse-ring {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* shared screen area */
+  .shared-screen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #0f3460 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .shared-screen::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 40%, rgba(99,102,241,0.15) 0%, transparent 60%);
+  }
+  .screen-content {
+    text-align: center;
+    color: white;
+    z-index: 1;
+    padding: 20px;
+  }
+  .screen-content .screen-emoji { font-size: 3rem; margin-bottom: 8px; }
+  .screen-content h2 {
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    font-weight: 800;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .screen-content p {
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+    opacity: 0.7;
+    max-width: 380px;
+  }
+  .screen-label {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ── Kids toolbar ── */
+  .kids-toolbar {
+    background: rgba(15, 15, 35, 0.97);
+    backdrop-filter: blur(20px);
+    border-top: 1.5px solid rgba(255,255,255,0.1);
+    padding: 10px 12px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .kids-toolbar.hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    height: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .toolbar-label {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.45);
+    white-space: nowrap;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+  .toolbar-label span { font-size: 0.8rem; }
+
+  .divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+  }
+
+  /* emoji buttons */
+  .emoji-row {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .emoji-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s cubic-bezier(0.34,1.56,0.64,1);
+    flex-shrink: 0;
+    position: relative;
+  }
+  .emoji-btn:active { transform: scale(0.88); }
+  .emoji-btn:hover { transform: scale(1.15); }
+  .emoji-btn.clap  { background: linear-gradient(135deg,#f59e0b,#d97706); }
+  .emoji-btn.thumb { background: linear-gradient(135deg,#22c55e,#16a34a); }
+  .emoji-btn.heart { background: linear-gradient(135deg,#ef4444,#dc2626); }
+  .emoji-btn.laugh { background: linear-gradient(135deg,#f97316,#ea580c); }
+  .emoji-btn.party { background: linear-gradient(135deg,#8b5cf6,#7c3aed); }
+  .emoji-btn.wow   { background: linear-gradient(135deg,#06b6d4,#0891b2); }
+
+  /* hand raise */
+  .hand-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 0 14px;
+    height: 44px;
+    border-radius: 22px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    background: rgba(100,116,139,0.3);
+    color: rgba(255,255,255,0.8);
+    border: 1.5px solid rgba(255,255,255,0.1);
+  }
+  .hand-btn.raised {
+    background: rgba(251,191,36,0.2);
+    border-color: #fbbf24;
+    color: #fbbf24;
+    box-shadow: 0 0 12px rgba(251,191,36,0.3);
+    animation: hand-glow 1.5s infinite;
+  }
+  @keyframes hand-glow {
+    0%,100% { box-shadow: 0 0 8px rgba(251,191,36,0.3); }
+    50%      { box-shadow: 0 0 20px rgba(251,191,36,0.6); }
+  }
+  .hand-btn .hand-icon { font-size: 1.1rem; }
+
+  /* mute */
+  .mute-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 0 16px;
+    height: 44px;
+    border-radius: 22px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    margin-right: auto; /* push to left edge in RTL = push to right */
+  }
+  .mute-btn.talking {
+    background: linear-gradient(135deg,#34d399,#10b981);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(52,211,153,0.4);
+  }
+  .mute-btn.muted {
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(239,68,68,0.4);
+  }
+  .mute-btn:active { transform: scale(0.93); }
+
+  .mute-sub {
+    font-size: 0.6rem;
+    opacity: 0.8;
+    font-weight: 400;
+  }
+  .mute-stack { display: flex; flex-direction: column; line-height: 1.2; }
+
+  /* toggle button for demo */
+  .toggle-bar-btn {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15,15,35,0.9);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.65rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    z-index: 10;
+    transition: all 0.2s;
+  }
+  .toggle-bar-btn:hover { color: white; border-color: rgba(255,255,255,0.4); }
+
+  /* ── Zoom original toolbar ── */
+  .zoom-toolbar {
+    background: #1c1c1c;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: center;
+    gap: clamp(16px, 3vw, 32px);
+    padding: 8px 16px 10px;
+  }
+  .zoom-btn {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.6rem;
+    cursor: pointer;
+    opacity: 0.7;
+    min-width: 44px;
+  }
+  .zoom-btn .zoom-icon { font-size: 1.2rem; }
+
+  /* demo controls */
+  .demo-controls {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    gap: 6px;
+    z-index: 100;
+  }
+  .demo-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 0.65rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: background 0.15s;
+  }
+  .demo-btn:hover { background: rgba(255,255,255,0.2); }
+
+  /* reaction burst animation */
+  .burst {
+    position: fixed;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: burst-anim 1s ease-out forwards;
+    z-index: 9999;
+  }
+  @keyframes burst-anim {
+    0%   { transform: translateY(0) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
+  }
+
+  /* scrollable on small screens */
+  .kids-toolbar { overflow-x: auto; scrollbar-width: none; }
+  .kids-toolbar::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Demo toggle buttons -->
+<div class="demo-controls">
+  <button class="demo-btn" onclick="toggleBar()">🔀 הסתר/הצג סרגל</button>
+  <button class="demo-btn" onclick="toggleHand()">✋ הרם/הורד יד</button>
+  <button class="demo-btn" onclick="toggleMute()">🎤 מוט/בטל</button>
+</div>
+
+<!-- Zoom meeting -->
+<div class="meeting">
+
+  <!-- Participants strip -->
+  <div class="participants">
+    <div class="participant active">
+      <div class="speaking-ring"></div>
+      <div class="avatar">👩‍🏫</div>
+      <span>המורה</span>
+    </div>
+    <div class="participant">
+      <div class="avatar">👦</div>
+      <span>דניאל</span>
+    </div>
+    <div class="participant">
+      <div class="avatar">👧</div>
+      <span>נועה</span>
+    </div>
+    <div class="participant">
+      <div class="avatar">🧒</div>
+      <span>יואב</span>
+    </div>
+  </div>
+
+  <!-- Shared screen -->
+  <div class="shared-screen">
+    <div class="screen-label">🖥️ שיתוף מסך</div>
+    <div class="screen-content">
+      <div class="screen-emoji">🌍</div>
+      <h2>מהו יום המעשים הטובים?</h2>
+      <p>זה, מיליוני אנשים בעולם עושים משהו טוב למען אחרים ולמען הסביבה!</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Kids toolbar -->
+<div class="kids-toolbar" id="kidsToolbar">
+  <button class="toggle-bar-btn" onclick="toggleBar()">מזער ▼</button>
+
+  <span class="toolbar-label"><span>🌟</span> זום לילדים</span>
+
+  <div class="divider"></div>
+
+  <!-- Emoji reactions -->
+  <div class="emoji-row">
+    <button class="emoji-btn clap"  onclick="burst(this,'👏')" title="מחיאות כפיים">👏</button>
+    <button class="emoji-btn thumb" onclick="burst(this,'👍')" title="כל הכבוד">👍</button>
+    <button class="emoji-btn heart" onclick="burst(this,'❤️')" title="אהבה">❤️</button>
+    <button class="emoji-btn laugh" onclick="burst(this,'😂')" title="מצחיק">😂</button>
+    <button class="emoji-btn party" onclick="burst(this,'🎉')" title="יאיי!">🎉</button>
+    <button class="emoji-btn wow"   onclick="burst(this,'😮')" title="וואו">😮</button>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Hand raise -->
+  <button class="hand-btn" id="handBtn" onclick="toggleHand()">
+    <span class="hand-icon">✋</span>
+    <span id="handLabel">הרם יד</span>
+  </button>
+
+  <!-- Mute -->
+  <button class="mute-btn talking" id="muteBtn" onclick="toggleMute()">
+    <span id="muteIcon">🎤</span>
+    <div class="mute-stack">
+      <span id="muteLabel">אני מדבר</span>
+      <span class="mute-sub" id="muteSub">לחץ להשתקה</span>
+    </div>
+  </button>
+</div>
+
+<!-- Original Zoom toolbar -->
+<div class="zoom-toolbar">
+  <div class="zoom-btn"><span class="zoom-icon">👥</span><span>Participants</span></div>
+  <div class="zoom-btn"><span class="zoom-icon">💬</span><span>Chat</span></div>
+  <div class="zoom-btn"><span class="zoom-icon">😀</span><span>Reactions</span></div>
+  <div class="zoom-btn"><span class="zoom-icon">🖥️</span><span>Share</span></div>
+  <div class="zoom-btn"><span class="zoom-icon">⋯</span><span>More</span></div>
+</div>
+
+<script>
+  let handRaised = false;
+  let muted = false;
+  let barVisible = true;
+
+  function toggleBar() {
+    barVisible = !barVisible;
+    document.getElementById('kidsToolbar').classList.toggle('hidden', !barVisible);
+  }
+
+  function toggleHand() {
+    handRaised = !handRaised;
+    const btn = document.getElementById('handBtn');
+    const lbl = document.getElementById('handLabel');
+    btn.classList.toggle('raised', handRaised);
+    btn.querySelector('.hand-icon').textContent = handRaised ? '✋' : '✋';
+    lbl.textContent = handRaised ? 'הורד יד' : 'הרם יד';
+  }
+
+  function toggleMute() {
+    muted = !muted;
+    const btn = document.getElementById('muteBtn');
+    btn.className = 'mute-btn ' + (muted ? 'muted' : 'talking');
+    document.getElementById('muteIcon').textContent = muted ? '🔇' : '🎤';
+    document.getElementById('muteLabel').textContent = muted ? 'אני שקט' : 'אני מדבר';
+    document.getElementById('muteSub').textContent = muted ? 'לחץ לדיבור' : 'לחץ להשתקה';
+  }
+
+  function burst(btn, emoji) {
+    const rect = btn.getBoundingClientRect();
+    const el = document.createElement('div');
+    el.className = 'burst';
+    el.textContent = emoji;
+    el.style.left = (rect.left + rect.width / 2 - 16) + 'px';
+    el.style.top  = (rect.top - 10) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1000);
+  }
+</script>
+</body>
+</html>

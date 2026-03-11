@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoomi — Zoom for Kids</title>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8f9fa;
+      color: #4a5568;
+      min-height: 100vh;
+    }
+
+    .hero {
+      background: white;
+      text-align: center;
+      padding: 60px 24px 48px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    }
+
+    .logo {
+      font-size: 64px;
+      font-weight: bold;
+      color: #9ca3af;
+      letter-spacing: -2px;
+      margin-bottom: 16px;
+    }
+
+    .tagline {
+      font-size: 22px;
+      color: #718096;
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.3);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.4);
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 48px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      text-align: center;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #2d3748;
+    }
+
+    .feature-desc {
+      font-size: 15px;
+      color: #718096;
+    }
+
+    .install-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .install-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 36px;
+      color: #2d3748;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content h3 {
+      font-size: 18px;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .step-content p {
+      font-size: 15px;
+      color: #718096;
+      line-height: 1.6;
+    }
+
+    .step-content code {
+      background: #f1f5f9;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: #a0aec0;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #6366f1;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .logo { font-size: 48px; }
+      .tagline { font-size: 18px; }
+      .features { gap: 24px; }
+      .step { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="logo">Zoomi</div>
+    <p class="tagline">כפתורים גדולים וצבעוניים לזום — מיועד לילדים בגילאי 5-12</p>
+    <a href="zoomi-extension.zip" class="download-btn" download>
+      הורד את התוסף
+    </a>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <div class="feature-icon">😂👏❤️</div>
+      <div class="feature-title">תגובות בקליק</div>
+      <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">✋</div>
+      <div class="feature-title">הרמת יד</div>
+      <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">🎤</div>
+      <div class="feature-title">השתקה</div>
+      <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור — אני מדבר / אני בשקט</div>
+    </div>
+  </section>
+
+  <section class="install-section">
+    <h2 class="install-title">איך מתקינים?</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>הורד את הקובץ</h3>
+          <p>לחץ על כפתור "הורד את התוסף" למעלה. יירד קובץ ZIP למחשב.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>חלץ את הקובץ</h3>
+          <p>לחץ לחיצה כפולה על קובץ ה-ZIP כדי לחלץ אותו. תיווצר תיקייה חדשה.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>פתח את דף התוספים בכרום</h3>
+          <p>הקלד בשורת הכתובת: <code>chrome://extensions</code> ולחץ Enter.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>הפעל מצב מפתח</h3>
+          <p>בפינה הימנית העליונה של הדף, הפעל את המתג "מצב מפתח" (Developer mode).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>טען את התוסף</h3>
+          <p>לחץ על "טען תוסף שלא נארז" (Load unpacked) ובחר את התיקייה שחילצת בשלב 2.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h3>היכנס לשיעור בזום</h3>
+          <p>פתח פגישת זום בדפדפן כרום. החלונית של Zoomi תופיע אוטומטית בצד ימין!</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>
+      Zoomi — <a href="https://github.com/segalitoo/Zoom-for-kids">GitHub</a>
+      &nbsp;|&nbsp;
+      <a href="https://github.com/segalitoo/Zoom-for-kids/blob/claude/add-claude-documentation-gFq7q/PRIVACY.md">מדיניות פרטיות</a>
+    </p>
+  </footer>
+
+</body>
+</html>

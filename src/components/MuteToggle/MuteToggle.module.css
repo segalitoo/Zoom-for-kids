@@ -1,33 +1,29 @@
 /* ============================================================
-   MuteToggle — Large pill button
-   Green = I can talk · Red = I'm quiet
+   MuteToggle — Themed pill button
    ============================================================ */
 
 .btn {
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
-  justify-content: flex-start;
-  gap: 14px;
+  justify-content: center;
+  gap: 12px;
 
   width: 100%;
-  min-height: 64px;
-  padding: 0 20px;
+  padding: 16px;
 
-  border-radius: 18px;
+  border-radius: var(--zoomi-btn-radius, 25px);
   border: none;
   cursor: pointer;
 
   font-family: inherit;
-  font-weight: 800;
+  font-weight: bold;
 
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.15s ease;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
 }
 
 .btn:active {
@@ -35,38 +31,32 @@
 }
 
 .btn:focus-visible {
-  outline: 3px solid #ffffff;
+  outline: 3px solid var(--zoomi-focus-color, #7c3aed);
   outline-offset: 3px;
 }
 
-/* ---- Unmuted (green — can speak) ---- */
+/* ---- Unmuted (can speak) ---- */
 .unmuted {
-  background: linear-gradient(135deg, #34d399, #10b981);
-  color: #052e16;
-  box-shadow:
-    0 4px 16px rgba(52, 211, 153, 0.4),
-    0 1px 3px rgba(0, 0, 0, 0.2);
+  background: var(--zoomi-mute-unmuted, #22c55e);
+  color: white;
+  box-shadow: 0 14px 28px var(--zoomi-mute-unmuted-shadow, rgba(34, 197, 94, 0.3));
 }
 
 .unmuted:hover {
-  box-shadow:
-    0 4px 22px rgba(52, 211, 153, 0.55),
-    0 1px 3px rgba(0, 0, 0, 0.2);
+  background: var(--zoomi-mute-unmuted-hover, #16a34a);
+  box-shadow: 0 18px 32px var(--zoomi-mute-unmuted-shadow, rgba(34, 197, 94, 0.4));
 }
 
-/* ---- Muted (red — quiet) ---- */
+/* ---- Muted (quiet) ---- */
 .muted {
-  background: linear-gradient(135deg, #f87171, #ef4444);
-  color: #ffffff;
-  box-shadow:
-    0 4px 16px rgba(239, 68, 68, 0.4),
-    0 1px 3px rgba(0, 0, 0, 0.2);
+  background: var(--zoomi-mute-muted, #ef4444);
+  color: white;
+  box-shadow: 0 14px 28px var(--zoomi-mute-muted-shadow, rgba(239, 68, 68, 0.3));
 }
 
 .muted:hover {
-  box-shadow:
-    0 4px 22px rgba(239, 68, 68, 0.55),
-    0 1px 3px rgba(0, 0, 0, 0.2);
+  background: var(--zoomi-mute-muted-hover, #dc2626);
+  box-shadow: 0 18px 32px var(--zoomi-mute-muted-shadow, rgba(239, 68, 68, 0.4));
 }
 
 /* ---- Click bounce ---- */
@@ -75,20 +65,14 @@
 }
 
 @keyframes bounce {
-  0% {
-    transform: scale(1);
-  }
-  40% {
-    transform: scale(0.93);
-  }
-  100% {
-    transform: scale(1.04);
-  }
+  0% { transform: scale(1); }
+  40% { transform: scale(0.93); }
+  100% { transform: scale(1.04); }
 }
 
 /* ---- Text elements ---- */
 .micIcon {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   line-height: 1;
   flex-shrink: 0;
 }
@@ -96,20 +80,18 @@
 .textGroup {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 2px;
 }
 
 .statusText {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 23px;
+  font-weight: bold;
   line-height: 1;
 }
 
 .actionHint {
-  font-size: 0.65rem;
-  font-weight: 600;
-  opacity: 0.7;
-  text-transform: lowercase;
-  letter-spacing: 0.02em;
+  font-size: 13px;
+  font-weight: normal;
+  opacity: 0.9;
 }

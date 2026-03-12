@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react';
+import { useTheme } from '../../themes/theme-context';
+import { themes } from '../../themes/themes';
 import styles from './EmojiPanel.module.css';
 
 type EmojiButtonProps = {
@@ -20,7 +22,7 @@ function EmojiButton({ emoji, label, color, onClick }: EmojiButtonProps) {
   return (
     <button
       className={`${styles.emojiBtn} ${isPopping ? styles.popping : ''}`}
-      style={{ '--btn-color': color } as React.CSSProperties}
+      style={{ '--btn-color': color, '--btn-shadow': `${color}cc` } as React.CSSProperties}
       onClick={handleClick}
       aria-label={`שלח תגובת ${label}`}
       title={label}
@@ -28,7 +30,6 @@ function EmojiButton({ emoji, label, color, onClick }: EmojiButtonProps) {
       <span className={styles.emojiIcon} aria-hidden="true">
         {emoji}
       </span>
-      <span className={styles.emojiLabel}>{label}</span>
     </button>
   );
 }
@@ -42,26 +43,28 @@ type EmojiPanelProps = {
   onWow: () => void | Promise<void>;
 };
 
-const REACTIONS: Array<Omit<EmojiButtonProps, 'onClick'> & { key: keyof EmojiPanelProps }> = [
-  { key: 'onClap', emoji: '👏', label: 'כל הכבוד', color: '#f59e0b' },
-  { key: 'onThumbsUp', emoji: '👍', label: 'סבבה', color: '#22c55e' },
-  { key: 'onHeart', emoji: '❤️', label: 'אהבה', color: '#ef4444' },
-  { key: 'onLaugh', emoji: '😂', label: 'מצחיק', color: '#f97316' },
-  { key: 'onParty', emoji: '🎉', label: 'יאללה', color: '#8b5cf6' },
-  { key: 'onWow', emoji: '😮', label: 'וואו', color: '#06b6d4' },
+const REACTION_KEYS: Array<{ key: keyof EmojiPanelProps; emoji: string; label: string; colorIndex: number }> = [
+  { key: 'onHeart', emoji: '❤️', label: 'אהבה', colorIndex: 0 },
+  { key: 'onThumbsUp', emoji: '👍', label: 'סבבה', colorIndex: 1 },
+  { key: 'onClap', emoji: '👏', label: 'כל הכבוד', colorIndex: 2 },
+  { key: 'onWow', emoji: '😮', label: 'וואו', colorIndex: 3 },
+  { key: 'onParty', emoji: '🎉', label: 'יאללה', colorIndex: 4 },
+  { key: 'onLaugh', emoji: '😂', label: 'מצחיק', colorIndex: 5 },
 ];
 
 export function EmojiPanel(props: EmojiPanelProps) {
+  const { themeId } = useTheme();
+  const emojiColors = themes[themeId].emojiColors;
+
   return (
     <section aria-label="שלח תגובה">
-      <p className={styles.sectionLabel}>תגיבו! 🎭</p>
       <div className={styles.grid}>
-        {REACTIONS.map(({ key, emoji, label, color }) => (
+        {REACTION_KEYS.map(({ key, emoji, label, colorIndex }) => (
           <EmojiButton
             key={key}
             emoji={emoji}
             label={label}
-            color={color}
+            color={emojiColors[colorIndex]}
             onClick={props[key]}
           />
         ))}

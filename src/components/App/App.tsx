@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { EmojiPanel } from '../EmojiPanel/EmojiPanel';
 import { HandRaiseButton } from '../HandRaiseButton/HandRaiseButton';
 import { MuteToggle } from '../MuteToggle/MuteToggle';
+import { ThemeProvider } from '../../themes/theme-context';
+import { ThemePicker } from '../../themes/ThemePicker';
 import { useZoomControls } from '../../hooks/useZoomControls';
 import { useMeetingState } from '../../hooks/useMeetingState';
 import styles from './App.module.css';
@@ -9,6 +11,10 @@ import styles from './App.module.css';
 // Inject styles as raw strings into the shadow root (Vite ?inline query)
 import appCss from './App.module.css?inline';
 import contentCss from '../../content/content.css?inline';
+import emojiCss from '../EmojiPanel/EmojiPanel.module.css?inline';
+import handRaiseCss from '../HandRaiseButton/HandRaiseButton.module.css?inline';
+import muteCss from '../MuteToggle/MuteToggle.module.css?inline';
+import themePickerCss from '../../themes/ThemePicker.module.css?inline';
 
 type AppProps = {
   shadowRoot: ShadowRoot;
@@ -36,60 +42,61 @@ export function App({ shadowRoot }: AppProps) {
 
     const styleEl = document.createElement('style');
     styleEl.id = 'zoom-kids-styles';
-    styleEl.textContent = contentCss + '\n' + appCss;
+    styleEl.textContent = [contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
     shadowRoot.insertBefore(styleEl, shadowRoot.firstChild);
   }, [shadowRoot]);
 
   if (!isMeetingActive) return null;
 
-  if (!isExpanded) {
-    return (
-      <button
-        className={styles.minimizedBtn}
-        onClick={() => setIsExpanded(true)}
-        aria-label="פתח את בקרי זום לילדים"
-        title="פתח זום לילדים"
-      >
-        🚀
-      </button>
-    );
-  }
-
   return (
-    <div className={styles.panel} role="complementary" aria-label="בקרי זום לילדים" dir="rtl">
-      {/* Header */}
-      <div className={styles.header}>
-        <span className={styles.headerTitle}>
-          <span aria-hidden="true">🌟</span> זום לילדים
-        </span>
+    <ThemeProvider>
+      {!isExpanded ? (
         <button
-          className={styles.minimizeBtn}
-          onClick={() => setIsExpanded(false)}
-          aria-label="מזער"
+          className={styles.minimizedBtn}
+          onClick={() => setIsExpanded(true)}
+          aria-label="פתח את בקרי זום לילדים"
+          title="פתח זום לילדים"
         >
-          ✕
+          🚀
         </button>
-      </div>
+      ) : (
+        <div className={styles.panel} role="complementary" aria-label="בקרי זום לילדים" dir="rtl">
+          {/* Header */}
+          <div className={styles.header}>
+            <span className={styles.logo} aria-label="Zoomi">Zoomi</span>
+            <div className={styles.headerRight}>
+              <ThemePicker />
+              <button
+                className={styles.minimizeBtn}
+                onClick={() => setIsExpanded(false)}
+                aria-label="מזער"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
 
-      {/* Emoji reactions */}
-      <EmojiPanel
-        onClap={sendClap}
-        onThumbsUp={sendThumbsUp}
-        onHeart={sendHeart}
-        onLaugh={sendLaugh}
-        onParty={sendParty}
-        onWow={sendWow}
-      />
+          {/* Emoji reactions */}
+          <EmojiPanel
+            onClap={sendClap}
+            onThumbsUp={sendThumbsUp}
+            onHeart={sendHeart}
+            onLaugh={sendLaugh}
+            onParty={sendParty}
+            onWow={sendWow}
+          />
 
-      {/* Hand raise */}
-      <HandRaiseButton
-        isHandRaised={isHandRaised}
-        onRaise={raiseHand}
-        onLower={lowerHand}
-      />
+          {/* Hand raise */}
+          <HandRaiseButton
+            isHandRaised={isHandRaised}
+            onRaise={raiseHand}
+            onLower={lowerHand}
+          />
 
-      {/* Mute toggle */}
-      <MuteToggle isMuted={isMuted} onToggle={toggleMute} />
-    </div>
+          {/* Mute toggle */}
+          <MuteToggle isMuted={isMuted} onToggle={toggleMute} />
+        </div>
+      )}
+    </ThemeProvider>
   );
 }

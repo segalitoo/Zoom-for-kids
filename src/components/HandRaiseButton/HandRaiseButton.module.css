@@ -1,5 +1,5 @@
 /* ============================================================
-   HandRaiseButton — Large pill button, yellow when active
+   HandRaiseButton — Themed pill button
    ============================================================ */
 
 .btn {
@@ -9,26 +9,22 @@
   gap: 10px;
 
   width: 100%;
-  min-height: 64px;
-  padding: 0 20px;
+  padding: 20px;
 
-  border-radius: 18px;
+  border-radius: var(--zoomi-btn-radius, 25px);
   border: none;
   cursor: pointer;
 
   font-family: inherit;
-  font-weight: 800;
-  transition:
-    background 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.15s ease;
+  font-size: 20px;
+  font-weight: bold;
 
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
-  overflow: hidden;
 }
 
 .btn:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
 }
 
 .btn:active {
@@ -36,45 +32,32 @@
 }
 
 .btn:focus-visible {
-  outline: 3px solid #ffffff;
+  outline: 3px solid var(--zoomi-focus-color, #7c3aed);
   outline-offset: 3px;
 }
 
-/* ---- Lowered state (neutral gray) ---- */
+/* ---- Lowered state ---- */
 .lowered {
-  background: rgba(100, 116, 139, 0.5);
-  color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: var(--zoomi-hand-lowered-bg, #f1f5f9);
+  color: var(--zoomi-hand-lowered-text, #475569);
 }
 
 .lowered:hover {
-  background: rgba(100, 116, 139, 0.7);
+  background: var(--zoomi-hand-lowered-hover, #e2e8f0);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* ---- Raised state (vibrant yellow — attention color) ---- */
+/* ---- Raised state ---- */
 .raised {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #1a1a1a;
-  box-shadow:
-    0 4px 16px rgba(251, 191, 36, 0.45),
-    0 1px 3px rgba(0, 0, 0, 0.2);
-
-  /* Pulsing glow to show the teacher your hand is up */
+  background: linear-gradient(135deg, var(--zoomi-hand-raised-start, #fbbf24), var(--zoomi-hand-raised-end, #f59e0b));
+  color: var(--zoomi-hand-raised-text, #1a1a1a);
+  box-shadow: 0 12px 24px var(--zoomi-hand-raised-shadow, rgba(251, 191, 36, 0.4));
   animation: pulseGlow 2s ease-in-out infinite;
 }
 
 @keyframes pulseGlow {
-  0%,
-  100% {
-    box-shadow:
-      0 4px 16px rgba(251, 191, 36, 0.4),
-      0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-  50% {
-    box-shadow:
-      0 4px 28px rgba(251, 191, 36, 0.7),
-      0 1px 3px rgba(0, 0, 0, 0.2);
-  }
+  0%, 100% { box-shadow: 0 12px 24px var(--zoomi-hand-raised-shadow, rgba(251, 191, 36, 0.4)); }
+  50% { box-shadow: 0 12px 32px var(--zoomi-hand-raised-shadow, rgba(251, 191, 36, 0.7)); }
 }
 
 /* ---- Click animation ---- */
@@ -83,42 +66,32 @@
 }
 
 @keyframes handWave {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  25% {
-    transform: scale(1.05) rotate(-8deg);
-  }
-  50% {
-    transform: scale(1.05) rotate(8deg);
-  }
-  75% {
-    transform: scale(1.05) rotate(-4deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-  }
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.05) rotate(-8deg); }
+  50% { transform: scale(1.05) rotate(8deg); }
+  75% { transform: scale(1.05) rotate(-4deg); }
+  100% { transform: scale(1) rotate(0deg); }
 }
 
 /* ---- Text elements ---- */
 .handIcon {
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   line-height: 1;
 }
 
 .label {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: bold;
   line-height: 1;
 }
 
 .tapHint {
   position: absolute;
-  bottom: 5px;
-  right: 12px;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 0.6rem;
   font-weight: 600;
   opacity: 0.6;
-  text-transform: lowercase;
   letter-spacing: 0.03em;
 }

@@ -15,28 +15,181 @@
       min-height: 100vh;
     }
 
+    /* ---- Hero with dark gradient background ---- */
     .hero {
-      background: white;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
       text-align: center;
-      padding: 60px 24px 48px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+      padding: 60px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40%;
+      left: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
     .logo {
       font-size: 64px;
       font-weight: bold;
-      color: #9ca3af;
+      color: white;
       letter-spacing: -2px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .tagline {
       font-size: 22px;
-      color: #718096;
-      margin-bottom: 32px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 40px;
       max-width: 500px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    /* ---- Widget mockup ---- */
+    .mockup-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .mockup {
+      width: 260px;
+      background: white;
+      border-radius: 32px;
+      padding: 24px;
+      box-shadow:
+        0 30px 60px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transform: perspective(800px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.4s ease;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .mockup:hover {
+      transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.03);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(0); }
+      50% { transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(-8px); }
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .mockup-logo {
+      font-size: 17px;
+      font-weight: bold;
+      color: #9ca3af;
+      opacity: 0.5;
+    }
+
+    .mockup-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #edf2f7;
+      color: #a0aec0;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mockup-emoji {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      border: none;
+    }
+
+    .mockup-hand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      border-radius: 22px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 17px;
+      font-weight: bold;
+      font-family: inherit;
+      border: none;
+    }
+
+    .mockup-mute {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 22px;
+      background: #ef4444;
+      color: white;
+      font-family: inherit;
+      border: none;
+    }
+
+    .mockup-mute-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .mockup-mute-status {
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .mockup-mute-hint {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    .mockup-mute-icon {
+      font-size: 1.5rem;
     }
 
     .download-btn {
@@ -54,14 +207,15 @@
       cursor: pointer;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.3);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
     }
 
     .download-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
     }
 
+    /* ---- Features ---- */
     .features {
       display: flex;
       justify-content: center;
@@ -95,6 +249,7 @@
       color: #718096;
     }
 
+    /* ---- Install steps ---- */
     .install-section {
       max-width: 700px;
       margin: 0 auto;
@@ -175,6 +330,8 @@
     @media (max-width: 600px) {
       .logo { font-size: 48px; }
       .tagline { font-size: 18px; }
+      .mockup { transform: none; animation: none; }
+      .mockup:hover { transform: scale(1.02); }
       .features { gap: 24px; }
       .step { flex-direction: column; align-items: center; text-align: center; }
     }
@@ -183,11 +340,46 @@
 <body>
 
   <section class="hero">
-    <div class="logo">Zoomi</div>
-    <p class="tagline">כפתורים גדולים וצבעוניים לזום — מיועד לילדים בגילאי 5-12</p>
-    <a href="zoomi-extension.zip" class="download-btn" download>
-      הורד את התוסף
-    </a>
+    <div class="hero-content">
+      <div class="logo">Zoomi</div>
+      <p class="tagline">כפתורים גדולים וצבעוניים לזום — מיועד לילדים בגילאי 5-12</p>
+
+      <!-- Widget mockup -->
+      <div class="mockup-wrapper">
+        <div class="mockup" dir="rtl">
+          <div class="mockup-header">
+            <div class="mockup-close">✕</div>
+            <div class="mockup-logo">Zoomi</div>
+          </div>
+
+          <div class="mockup-grid">
+            <div class="mockup-emoji" style="background:#fef3c7;box-shadow:0 6px 14px rgba(254,243,199,0.6)">👏</div>
+            <div class="mockup-emoji" style="background:#d1fae5;box-shadow:0 6px 14px rgba(209,250,229,0.6)">👍</div>
+            <div class="mockup-emoji" style="background:#fce7f3;box-shadow:0 6px 14px rgba(252,231,243,0.6)">❤️</div>
+            <div class="mockup-emoji" style="background:#ffedd5;box-shadow:0 6px 14px rgba(255,237,213,0.6)">😂</div>
+            <div class="mockup-emoji" style="background:#f3e8ff;box-shadow:0 6px 14px rgba(243,232,255,0.6)">🎉</div>
+            <div class="mockup-emoji" style="background:#dbeafe;box-shadow:0 6px 14px rgba(219,234,254,0.6)">😮</div>
+          </div>
+
+          <div class="mockup-hand">
+            <span>הרם יד</span>
+            <span>🤚</span>
+          </div>
+
+          <div class="mockup-mute">
+            <span class="mockup-mute-icon">🔇</span>
+            <div class="mockup-mute-text">
+              <span class="mockup-mute-status">אני בשקט</span>
+              <span class="mockup-mute-hint">לחץ לדבר</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="zoomi-extension.zip" class="download-btn" download>
+        הורד את התוסף
+      </a>
+    </div>
   </section>
 
   <section class="features">

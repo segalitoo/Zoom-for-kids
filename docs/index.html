@@ -18,7 +18,6 @@
     /* ---- Hero with dark gradient background ---- */
     .hero {
       background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-      text-align: center;
       padding: 60px 24px 80px;
       position: relative;
       overflow: hidden;
@@ -49,6 +48,17 @@
     .hero-content {
       position: relative;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-text {
+      flex: 1;
+      text-align: right;
     }
 
     .logo {
@@ -62,17 +72,12 @@
     .tagline {
       font-size: 22px;
       color: rgba(255,255,255,0.7);
-      margin-bottom: 40px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 32px;
     }
 
     /* ---- Widget mockup ---- */
     .mockup-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
+      flex-shrink: 0;
     }
 
     .mockup {
@@ -327,7 +332,9 @@
       text-decoration: none;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 750px) {
+      .hero-content { flex-direction: column; text-align: center; }
+      .hero-text { text-align: center; }
       .logo { font-size: 48px; }
       .tagline { font-size: 18px; }
       .mockup { transform: none; animation: none; }
@@ -341,8 +348,13 @@
 
   <section class="hero">
     <div class="hero-content">
-      <div class="logo">Zoomi</div>
-      <p class="tagline">כפתורים גדולים וצבעוניים לזום — מיועד לילדים בגילאי 5-12</p>
+      <div class="hero-text">
+        <div class="logo">Zoomi</div>
+        <p class="tagline">כפתורים גדולים וצבעוניים לזום</p>
+        <a href="zoomi-extension.zip" class="download-btn" download>
+          הורד את התוסף
+        </a>
+      </div>
 
       <!-- Widget mockup -->
       <div class="mockup-wrapper">
@@ -375,10 +387,6 @@
           </div>
         </div>
       </div>
-
-      <a href="zoomi-extension.zip" class="download-btn" download>
-        הורד את התוסף
-      </a>
     </div>
   </section>
 

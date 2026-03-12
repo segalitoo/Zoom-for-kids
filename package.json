@@ -4,7 +4,11 @@
   "description": "A kid-friendly control panel extension for Zoom web meetings",
   "scripts": {
     "dev": "vite build --watch",
+    "dev:zoom-app": "vite --config vite.zoom-app.config.ts",
     "build": "vite build",
+    "build:extension": "vite build",
+    "build:zoom-app": "vite build --config vite.zoom-app.config.ts",
+    "build:all": "npm run build:extension && npm run build:zoom-app",
     "type-check": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx",
     "format": "prettier --write src",
@@ -37,6 +41,7 @@
     "vite-plugin-web-extension": "^4.1.1"
   },
   "dependencies": {
+    "@zoom/appssdk": "^0.16.37",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }

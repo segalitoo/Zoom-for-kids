@@ -1,0 +1,68 @@
+/* ============================================================
+   Zoom App — Sidebar Panel (fills Zoom's WebView)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+.panel {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 28px;
+
+  background: #ffffff;
+  border-radius: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: #4a5568;
+
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---- Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #9ca3af;
+  opacity: 0.5;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+/* ---- Waiting state ---- */
+.waiting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 200px;
+  padding: 40px;
+  font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.waitingEmoji {
+  font-size: 48px;
+}
+
+.waitingText {
+  font-size: 18px;
+  color: #9ca3af;
+  font-weight: bold;
+}

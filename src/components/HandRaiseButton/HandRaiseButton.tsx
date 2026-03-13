@@ -26,19 +26,14 @@ export function HandRaiseButton({ isHandRaised, onRaise, onLower }: HandRaiseBut
         className={`${styles.btn} ${isHandRaised ? styles.raised : styles.lowered} ${isAnimating ? styles.animating : ''}`}
         onClick={handleClick}
         aria-pressed={isHandRaised}
-        aria-label={isHandRaised ? 'הורד את היד' : 'הרם את היד'}
+        aria-label={isHandRaised ? 'הורד יד' : 'הרם יד'}
       >
+        <span className={styles.label}>
+          {isHandRaised ? 'הורד יד' : 'הרם יד'}
+        </span>
         <span className={styles.handIcon} aria-hidden="true">
           ✋
         </span>
-        <span className={styles.label}>
-          {isHandRaised ? '!יד למעלה' : 'הרם יד'}
-        </span>
-        {isHandRaised && (
-          <span className={styles.tapHint} aria-hidden="true">
-            לחץ להורדה
-          </span>
-        )}
       </button>
     </section>
   );

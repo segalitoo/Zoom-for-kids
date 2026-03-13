@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { EmojiPanel } from '../EmojiPanel/EmojiPanel';
 import { HandRaiseButton } from '../HandRaiseButton/HandRaiseButton';
 import { MuteToggle } from '../MuteToggle/MuteToggle';
-import { ThemeProvider } from '../../themes/theme-context';
+import { ThemeProvider, useTheme } from '../../themes/theme-context';
 import { ThemePicker } from '../../themes/ThemePicker';
 import { useZoomControls } from '../../hooks/useZoomControls';
 import { useMeetingState } from '../../hooks/useMeetingState';
@@ -20,8 +20,9 @@ type AppProps = {
   shadowRoot: ShadowRoot;
 };
 
-export function App({ shadowRoot }: AppProps) {
+function AppInner({ shadowRoot }: AppProps) {
   const [isExpanded, setIsExpanded] = useState(true);
+  const { themeStyle } = useTheme();
   const { isMuted, isHandRaised, isMeetingActive } = useMeetingState();
   const {
     sendClap,
@@ -48,55 +49,70 @@ export function App({ shadowRoot }: AppProps) {
 
   if (!isMeetingActive) return null;
 
+  if (!isExpanded) {
+    return (
+      <button
+        className={styles.minimizedBtn}
+        style={themeStyle as React.CSSProperties}
+        onClick={() => setIsExpanded(true)}
+        aria-label="פתח את בקרי זום לילדים"
+        title="פתח זום לילדים"
+      >
+        🚀
+      </button>
+    );
+  }
+
+  return (
+    <div
+      className={styles.panel}
+      style={themeStyle as React.CSSProperties}
+      role="complementary"
+      aria-label="בקרי זום לילדים"
+      dir="rtl"
+    >
+      {/* Header */}
+      <div className={styles.header}>
+        <span className={styles.logo} aria-label="Zoomi">Zoomi</span>
+        <div className={styles.headerRight}>
+          <ThemePicker />
+          <button
+            className={styles.minimizeBtn}
+            onClick={() => setIsExpanded(false)}
+            aria-label="מזער"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      {/* Emoji reactions */}
+      <EmojiPanel
+        onClap={sendClap}
+        onThumbsUp={sendThumbsUp}
+        onHeart={sendHeart}
+        onLaugh={sendLaugh}
+        onParty={sendParty}
+        onWow={sendWow}
+      />
+
+      {/* Hand raise */}
+      <HandRaiseButton
+        isHandRaised={isHandRaised}
+        onRaise={raiseHand}
+        onLower={lowerHand}
+      />
+
+      {/* Mute toggle */}
+      <MuteToggle isMuted={isMuted} onToggle={toggleMute} />
+    </div>
+  );
+}
+
+export function App({ shadowRoot }: AppProps) {
   return (
     <ThemeProvider>
-      {!isExpanded ? (
-        <button
-          className={styles.minimizedBtn}
-          onClick={() => setIsExpanded(true)}
-          aria-label="פתח את בקרי זום לילדים"
-          title="פתח זום לילדים"
-        >
-          🚀
-        </button>
-      ) : (
-        <div className={styles.panel} role="complementary" aria-label="בקרי זום לילדים" dir="rtl">
-          {/* Header */}
-          <div className={styles.header}>
-            <span className={styles.logo} aria-label="Zoomi">Zoomi</span>
-            <div className={styles.headerRight}>
-              <ThemePicker />
-              <button
-                className={styles.minimizeBtn}
-                onClick={() => setIsExpanded(false)}
-                aria-label="מזער"
-              >
-                ✕
-              </button>
-            </div>
-          </div>
-
-          {/* Emoji reactions */}
-          <EmojiPanel
-            onClap={sendClap}
-            onThumbsUp={sendThumbsUp}
-            onHeart={sendHeart}
-            onLaugh={sendLaugh}
-            onParty={sendParty}
-            onWow={sendWow}
-          />
-
-          {/* Hand raise */}
-          <HandRaiseButton
-            isHandRaised={isHandRaised}
-            onRaise={raiseHand}
-            onLower={lowerHand}
-          />
-
-          {/* Mute toggle */}
-          <MuteToggle isMuted={isMuted} onToggle={toggleMute} />
-        </div>
-      )}
+      <AppInner shadowRoot={shadowRoot} />
     </ThemeProvider>
   );
 }

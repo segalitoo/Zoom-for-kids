@@ -8,9 +8,20 @@ export function ThemePicker() {
   const { themeId, setTheme } = useTheme();
 
   return (
-    <div className={styles.wrapper}>
+    <div style={{ position: 'relative' }}>
       <button
-        className={styles.trigger}
+        style={{
+          width: 36,
+          height: 36,
+          borderRadius: '50%',
+          border: '2px solid rgba(0,0,0,0.1)',
+          background: '#edf2f7',
+          fontSize: 18,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+        }}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="בחר עיצוב"
         title="בחר עיצוב"

@@ -23,11 +23,12 @@
 }
 
 .btn:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px) scale(1.02);
 }
 
 .btn:active {
   transform: scale(0.97);
+  transition-duration: 0.1s;
 }
 
 .btn:focus-visible {
@@ -66,8 +67,9 @@
 
 @keyframes bounce {
   0% { transform: scale(1); }
-  40% { transform: scale(0.93); }
-  100% { transform: scale(1.04); }
+  30% { transform: scale(0.93); }
+  60% { transform: scale(1.04); }
+  100% { transform: scale(1); }
 }
 
 /* ---- Text elements ---- */

@@ -5,14 +5,14 @@ import { MuteToggle } from './MuteToggle';
 describe('MuteToggle', () => {
   it('renders unmuted state correctly', () => {
     render(<MuteToggle isMuted={false} onToggle={jest.fn()} />);
-    expect(screen.getByRole('button', { name: /mute your microphone/i })).toBeInTheDocument();
-    expect(screen.getByText('I can talk')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /השתק מיקרופון/i })).toBeInTheDocument();
+    expect(screen.getByText('אני מדבר')).toBeInTheDocument();
   });
 
   it('renders muted state correctly', () => {
     render(<MuteToggle isMuted={true} onToggle={jest.fn()} />);
-    expect(screen.getByRole('button', { name: /unmute your microphone/i })).toBeInTheDocument();
-    expect(screen.getByText("I'm quiet")).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /הפעל מיקרופון/i })).toBeInTheDocument();
+    expect(screen.getByText('אני בשקט')).toBeInTheDocument();
   });
 
   it('calls onToggle when clicked', async () => {
@@ -41,10 +41,10 @@ describe('MuteToggle', () => {
 
   it('shows action hint text', () => {
     const { rerender } = render(<MuteToggle isMuted={false} onToggle={jest.fn()} />);
-    expect(screen.getByText('tap to mute')).toBeInTheDocument();
+    expect(screen.getByText('לחץ להשתיק')).toBeInTheDocument();
 
     rerender(<MuteToggle isMuted={true} onToggle={jest.fn()} />);
-    expect(screen.getByText('tap to speak')).toBeInTheDocument();
+    expect(screen.getByText('לחץ לדבר')).toBeInTheDocument();
   });
 
   it('is keyboard accessible via Space', async () => {

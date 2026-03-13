@@ -27,8 +27,10 @@ export function MuteToggle({ isMuted, onToggle }: MuteToggleProps) {
           {isMuted ? '🔇' : '🎤'}
         </span>
         <div className={styles.textGroup}>
-          <span className={styles.statusText}>{isMuted ? 'אני שקט' : 'אני מדבר'}</span>
-          <span className={styles.actionHint}>{isMuted ? 'לחץ לדיבור' : 'לחץ להשתקה'}</span>
+          <span className={styles.statusText}>
+            {isMuted ? 'אני בשקט' : 'אני מדבר'}
+          </span>
+          <span className={styles.actionHint}>{isMuted ? 'לחץ לדבר' : 'לחץ להשתיק'}</span>
         </div>
       </button>
     </section>

@@ -1,17 +1,103 @@
 import { useCallback } from 'react';
-import { ZOOM_ARIA_LABELS } from '../types/zoom.d';
 
-const REACTION_POPUP_DELAY_MS = 350;
+/**
+ * Find a Zoom element by exact aria-label match.
+ */
+function findByExactLabel(label: string): HTMLElement | null {
+  return document.querySelector<HTMLElement>(`[aria-label="${label}"]`);
+}
 
-function clickZoomButton(ariaLabel: string): boolean {
-  const btn = document.querySelector<HTMLButtonElement>(`[aria-label="${ariaLabel}"]`);
-  if (!btn) return false;
-  btn.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+/**
+ * Find a Zoom element by partial aria-label match (case-insensitive).
+ */
+function findByPartialLabel(partial: string): HTMLElement | null {
+  const all = document.querySelectorAll<HTMLElement>('[aria-label]');
+  for (const el of all) {
+    if (el.ariaLabel?.toLowerCase().includes(partial.toLowerCase())) {
+      return el;
+    }
+  }
+  return null;
+}
+
+function findZoomElement(label: string): HTMLElement | null {
+  return findByExactLabel(label) || findByPartialLabel(label);
+}
+
+/**
+ * Simulate a real mouse click sequence (mousedown → mouseup → click).
+ * Some React/framework UIs only respond to full event sequences.
+ */
+function simulateClick(el: HTMLElement): void {
+  const opts = { bubbles: true, cancelable: true, view: window };
+  el.dispatchEvent(new MouseEvent('mousedown', opts));
+  el.dispatchEvent(new MouseEvent('mouseup', opts));
+  el.dispatchEvent(new MouseEvent('click', opts));
+}
+
+function clickZoomElement(label: string): boolean {
+  const el = findZoomElement(label);
+  if (!el) {
+    console.warn(`[Zoom for Kids] Element not found: "${label}"`);
+    return false;
+  }
+  simulateClick(el);
   return true;
 }
 
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+/**
+ * Wait for an element with the given aria-label to appear, then click it.
+ * Polls every 100ms for up to 2 seconds.
+ */
+function waitAndClick(label: string, maxWaitMs = 2000): Promise<boolean> {
+  return new Promise((resolve) => {
+    const interval = 100;
+    let elapsed = 0;
+
+    const check = () => {
+      const el = findZoomElement(label);
+      if (el) {
+        simulateClick(el);
+        resolve(true);
+        return;
+      }
+      elapsed += interval;
+      if (elapsed >= maxWaitMs) {
+        console.warn(`[Zoom for Kids] Timed out waiting for: "${label}"`);
+        resolve(false);
+        return;
+      }
+      setTimeout(check, interval);
+    };
+    check();
+  });
+}
+
+/**
+ * Wait for an element matching a CSS selector to appear, then click it.
+ */
+function waitForAndClick(selector: string, maxWaitMs = 2000): Promise<boolean> {
+  return new Promise((resolve) => {
+    const interval = 100;
+    let elapsed = 0;
+
+    const check = () => {
+      const el = document.querySelector<HTMLElement>(selector);
+      if (el) {
+        simulateClick(el);
+        resolve(true);
+        return;
+      }
+      elapsed += interval;
+      if (elapsed >= maxWaitMs) {
+        console.warn(`[Zoom for Kids] Timed out waiting for selector: "${selector}"`);
+        resolve(false);
+        return;
+      }
+      setTimeout(check, interval);
+    };
+    check();
+  });
 }
 
 /**
@@ -21,38 +107,33 @@ function delay(ms: number): Promise<void> {
  * query Zoom's DOM directly.
  */
 export function useZoomControls() {
-  const sendReaction = useCallback(async (emojiAriaLabel: string): Promise<void> => {
-    // Open the reactions popup first
-    clickZoomButton(ZOOM_ARIA_LABELS.REACTIONS_MENU);
-    // Wait for Zoom's popup animation to complete
-    await delay(REACTION_POPUP_DELAY_MS);
-    // Click the specific emoji inside the popup
-    clickZoomButton(emojiAriaLabel);
+  const sendReaction = useCallback(async (emojiLabel: string): Promise<void> => {
+    clickZoomElement('Reactions');
+    await waitAndClick(emojiLabel);
   }, []);
 
-  const sendClap = useCallback(() => sendReaction(ZOOM_ARIA_LABELS.CLAP), [sendReaction]);
-  const sendThumbsUp = useCallback(() => sendReaction(ZOOM_ARIA_LABELS.THUMBS_UP), [sendReaction]);
-  const sendHeart = useCallback(() => sendReaction(ZOOM_ARIA_LABELS.HEART), [sendReaction]);
-  const sendLaugh = useCallback(() => sendReaction(ZOOM_ARIA_LABELS.LAUGH), [sendReaction]);
-  const sendParty = useCallback(() => sendReaction(ZOOM_ARIA_LABELS.PARTY), [sendReaction]);
-  const sendWow = useCallback(() => sendReaction(ZOOM_ARIA_LABELS.WOW), [sendReaction]);
+  const sendClap = useCallback(() => sendReaction('clapping hands'), [sendReaction]);
+  const sendThumbsUp = useCallback(() => sendReaction('thumbs up'), [sendReaction]);
+  const sendHeart = useCallback(() => sendReaction('red heart'), [sendReaction]);
+  const sendLaugh = useCallback(() => sendReaction('face with tears of joy'), [sendReaction]);
+  const sendParty = useCallback(() => sendReaction('party popper'), [sendReaction]);
+  const sendWow = useCallback(() => sendReaction('face with open mouth'), [sendReaction]);
 
   const raiseHand = useCallback(async (): Promise<void> => {
-    clickZoomButton(ZOOM_ARIA_LABELS.REACTIONS_MENU);
-    await delay(REACTION_POPUP_DELAY_MS);
-    clickZoomButton(ZOOM_ARIA_LABELS.RAISE_HAND);
+    // Open Reactions popup, then find raise-hand button by class (it has no aria-label)
+    clickZoomElement('Reactions');
+    await waitForAndClick('.reaction-simple-picker__block--raise-hand');
   }, []);
 
   const lowerHand = useCallback(async (): Promise<void> => {
-    clickZoomButton(ZOOM_ARIA_LABELS.REACTIONS_MENU);
-    await delay(REACTION_POPUP_DELAY_MS);
-    clickZoomButton(ZOOM_ARIA_LABELS.LOWER_HAND);
+    // Same button toggles raise/lower
+    clickZoomElement('Reactions');
+    await waitForAndClick('.reaction-simple-picker__block--raise-hand');
   }, []);
 
   const toggleMute = useCallback((): void => {
-    // Try unmute first; if no unmute button, try mute
-    const unmuted = clickZoomButton(ZOOM_ARIA_LABELS.UNMUTE);
-    if (!unmuted) clickZoomButton(ZOOM_ARIA_LABELS.MUTE);
+    const unmuted = clickZoomElement('unmute my microphone');
+    if (!unmuted) clickZoomElement('mute my microphone');
   }, []);
 
   return {

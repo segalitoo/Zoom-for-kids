@@ -4,12 +4,13 @@
   "version": "1.0.0",
   "description": "Kid-friendly big buttons for Zoom reactions, hand raise, and mute",
   "permissions": ["activeTab"],
-  "host_permissions": ["https://*.zoom.us/wc/*"],
+  "host_permissions": ["https://*.zoom.us/*"],
   "content_scripts": [
     {
-      "matches": ["https://*.zoom.us/wc/*"],
+      "matches": ["https://*.zoom.us/*"],
       "js": ["src/content/index.tsx"],
-      "run_at": "document_idle"
+      "run_at": "document_idle",
+      "all_frames": true
     }
   ],
   "background": {

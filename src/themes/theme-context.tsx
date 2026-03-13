@@ -4,11 +4,13 @@ import { type ThemeId, themes } from './themes';
 type ThemeContextValue = {
   themeId: ThemeId;
   setTheme: (id: ThemeId) => void;
+  themeStyle: Record<string, string>;
 };
 
 const ThemeContext = createContext<ThemeContextValue>({
   themeId: 'classic',
   setTheme: () => {},
+  themeStyle: themes.classic.vars,
 });
 
 export function useTheme() {
@@ -19,7 +21,9 @@ function loadSavedTheme(): ThemeId {
   try {
     const saved = localStorage.getItem('zoomi-theme');
     if (saved && saved in themes) return saved as ThemeId;
-  } catch {}
+  } catch {
+    // localStorage may not be available in some contexts
+  }
   return 'classic';
 }
 
@@ -37,13 +41,11 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     } catch {}
   }, []);
 
-  const themeVars = themes[themeId].vars;
+  const themeStyle = themes[themeId].vars;
 
   return (
-    <ThemeContext.Provider value={{ themeId, setTheme }}>
-      <div style={themeVars as React.CSSProperties}>
-        {children}
-      </div>
+    <ThemeContext.Provider value={{ themeId, setTheme, themeStyle }}>
+      {children}
     </ThemeContext.Provider>
   );
 }

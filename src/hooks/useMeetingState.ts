@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react';
-import { ZOOM_ARIA_LABELS, type MeetingState } from '../types/zoom.d';
+import { type MeetingState } from '../types/zoom.d';
 
+
+function findByAriaLabelContaining(text: string): Element | null {
+  return document.querySelector(`[aria-label*="${text}"]`);
+}
 
 function getIsMuted(): boolean {
-  // Muted = unmute button visible; unmuted = mute button visible
-  return !!document.querySelector(`[aria-label="${ZOOM_ARIA_LABELS.UNMUTE}"]`);
+  return !!findByAriaLabelContaining('unmute my microphone');
 }
 
 function getIsHandRaised(): boolean {
-  return !!document.querySelector(`[aria-label="${ZOOM_ARIA_LABELS.LOWER_HAND}"]`);
+  return !!findByAriaLabelContaining('Lower hand');
 }
 
 function getIsMeetingActive(): boolean {
-  // Zoom's toolbar appears when meeting is active
+  // Only activate inside the meeting iframe where toolbar buttons exist.
+  // Check for the meeting footer/toolbar or video elements.
   return !!(
-    document.querySelector(`[aria-label="${ZOOM_ARIA_LABELS.MUTE}"]`) ||
-    document.querySelector(`[aria-label="${ZOOM_ARIA_LABELS.UNMUTE}"]`)
+    findByAriaLabelContaining('unmute my microphone') ||
+    findByAriaLabelContaining('mute my microphone')
   );
 }
 

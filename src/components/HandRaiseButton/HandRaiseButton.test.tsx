@@ -3,24 +3,24 @@ import userEvent from '@testing-library/user-event';
 import { HandRaiseButton } from './HandRaiseButton';
 
 describe('HandRaiseButton', () => {
-  it('renders with "Raise your hand" label when hand is not raised', () => {
+  it('renders with "הרם יד" label when hand is not raised', () => {
     render(<HandRaiseButton isHandRaised={false} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByRole('button', { name: /raise your hand/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /הרם יד/i })).toBeInTheDocument();
   });
 
-  it('renders with "Lower your hand" label when hand is raised', () => {
+  it('renders with "הורד יד" label when hand is raised', () => {
     render(<HandRaiseButton isHandRaised={true} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByRole('button', { name: /lower your hand/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /הורד יד/i })).toBeInTheDocument();
   });
 
-  it('shows "Hand Up!" text when raised', () => {
+  it('shows "הורד יד" text when raised', () => {
     render(<HandRaiseButton isHandRaised={true} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByText('Hand Up!')).toBeInTheDocument();
+    expect(screen.getByText('הורד יד')).toBeInTheDocument();
   });
 
-  it('shows "Raise Hand" text when not raised', () => {
+  it('shows "הרם יד" text when not raised', () => {
     render(<HandRaiseButton isHandRaised={false} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByText('Raise Hand')).toBeInTheDocument();
+    expect(screen.getByText('הרם יד')).toBeInTheDocument();
   });
 
   it('calls onRaise when clicked and hand is not raised', async () => {

@@ -18,43 +18,43 @@ describe('EmojiPanel', () => {
     const props = makeProps();
     render(<EmojiPanel {...props} />);
 
-    expect(screen.getByRole('button', { name: /clap/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /good/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /love/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /funny/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /party/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /wow/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /כל הכבוד/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /סבבה/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /אהבה/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /מצחיק/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /יאללה/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /וואו/i })).toBeInTheDocument();
   });
 
-  it('calls onClap when Clap button is clicked', async () => {
+  it('calls onClap when כל הכבוד button is clicked', async () => {
     const props = makeProps();
     render(<EmojiPanel {...props} />);
 
-    await userEvent.click(screen.getByRole('button', { name: /clap/i }));
+    await userEvent.click(screen.getByRole('button', { name: /כל הכבוד/i }));
     expect(props.onClap).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onThumbsUp when Good button is clicked', async () => {
+  it('calls onThumbsUp when סבבה button is clicked', async () => {
     const props = makeProps();
     render(<EmojiPanel {...props} />);
 
-    await userEvent.click(screen.getByRole('button', { name: /good/i }));
+    await userEvent.click(screen.getByRole('button', { name: /סבבה/i }));
     expect(props.onThumbsUp).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onHeart when Love button is clicked', async () => {
+  it('calls onHeart when אהבה button is clicked', async () => {
     const props = makeProps();
     render(<EmojiPanel {...props} />);
 
-    await userEvent.click(screen.getByRole('button', { name: /love/i }));
+    await userEvent.click(screen.getByRole('button', { name: /אהבה/i }));
     expect(props.onHeart).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onParty when Party button is clicked', async () => {
+  it('calls onParty when יאללה button is clicked', async () => {
     const props = makeProps();
     render(<EmojiPanel {...props} />);
 
-    await userEvent.click(screen.getByRole('button', { name: /party/i }));
+    await userEvent.click(screen.getByRole('button', { name: /יאללה/i }));
     expect(props.onParty).toHaveBeenCalledTimes(1);
   });
 
@@ -72,7 +72,7 @@ describe('EmojiPanel', () => {
     const props = makeProps();
     render(<EmojiPanel {...props} />);
 
-    const clapBtn = screen.getByRole('button', { name: /clap/i });
+    const clapBtn = screen.getByRole('button', { name: /כל הכבוד/i });
     clapBtn.focus();
     expect(clapBtn).toHaveFocus();
 

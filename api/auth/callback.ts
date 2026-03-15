@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const { code } = req.query;
 
@@ -53,3 +53,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(500).send('Internal server error');
   }
 }
+
+module.exports = handler;

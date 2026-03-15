@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-export default function handler(_req: VercelRequest, res: VercelResponse) {
+function handler(_req: VercelRequest, res: VercelResponse) {
   const clientId = process.env.ZOOM_CLIENT_ID;
   const redirectUri = process.env.ZOOM_REDIRECT_URI;
 
@@ -17,3 +17,5 @@ export default function handler(_req: VercelRequest, res: VercelResponse) {
 
   res.redirect(302, `https://zoom.us/oauth/authorize?${params.toString()}`);
 }
+
+module.exports = handler;

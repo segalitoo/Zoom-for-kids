@@ -43,6 +43,9 @@
     "vite": "^5.3.1",
     "vite-plugin-web-extension": "^4.1.1"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@zoom/appssdk": "^0.16.37",
     "react": "^18.3.1",

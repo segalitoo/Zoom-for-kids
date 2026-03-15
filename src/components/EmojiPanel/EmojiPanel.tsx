@@ -1,16 +1,19 @@
 import React, { useState, useCallback } from 'react';
 import { useTheme } from '../../themes/theme-context';
 import { themes } from '../../themes/themes';
+import './animations.css';
 import styles from './EmojiPanel.module.css';
 
 type EmojiButtonProps = {
   emoji: string;
   label: string;
   color: string;
+  index: number;
+  shouldFloat: boolean;
   onClick: () => void | Promise<void>;
 };
 
-function EmojiButton({ emoji, label, color, onClick }: EmojiButtonProps) {
+function EmojiButton({ emoji, label, color, index, shouldFloat, onClick }: EmojiButtonProps) {
   const [isPopping, setIsPopping] = useState(false);
 
   const handleClick = useCallback(async () => {
@@ -19,10 +22,16 @@ function EmojiButton({ emoji, label, color, onClick }: EmojiButtonProps) {
     await onClick();
   }, [onClick]);
 
+  const className = [
+    styles.emojiBtn,
+    isPopping ? styles.popping : '',
+    shouldFloat ? 'zoomi-float' : '',
+  ].filter(Boolean).join(' ');
+
   return (
     <button
-      className={`${styles.emojiBtn} ${isPopping ? styles.popping : ''}`}
-      style={{ '--btn-color': color, '--btn-shadow': `${color}cc` } as React.CSSProperties}
+      className={className}
+      style={{ '--btn-color': color, '--btn-shadow': `${color}cc`, animationDelay: shouldFloat ? `0s, ${index * 0.4}s` : undefined } as React.CSSProperties}
       onClick={handleClick}
       aria-label={`שלח תגובת ${label}`}
       title={label}
@@ -54,17 +63,20 @@ const REACTION_KEYS: Array<{ key: keyof EmojiPanelProps; emoji: string; label: s
 
 export function EmojiPanel(props: EmojiPanelProps) {
   const { themeId } = useTheme();
-  const emojiColors = themes[themeId].emojiColors;
+  const theme = themes[themeId];
+  const shouldFloat = !!theme.vars['--zoomi-emoji-float'];
 
   return (
     <section aria-label="שלח תגובה">
       <div className={styles.grid}>
-        {REACTION_KEYS.map(({ key, emoji, label, colorIndex }) => (
+        {REACTION_KEYS.map(({ key, emoji, label, colorIndex }, i) => (
           <EmojiButton
             key={key}
             emoji={emoji}
             label={label}
-            color={emojiColors[colorIndex]}
+            color={theme.emojiColors[colorIndex]}
+            index={i}
+            shouldFloat={shouldFloat}
             onClick={props[key]}
           />
         ))}

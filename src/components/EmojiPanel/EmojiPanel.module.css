@@ -18,9 +18,9 @@
   aspect-ratio: 1;
 
   border-radius: 50%;
-  border: none;
-  background: var(--btn-color, #f3e8ff);
-  box-shadow: 0 10px 20px var(--btn-shadow, rgba(243, 232, 255, 0.8));
+  border: var(--zoomi-emoji-border, none);
+  background: var(--zoomi-emoji-bg, var(--btn-color, #f3e8ff));
+  box-shadow: var(--zoomi-emoji-shadow, 0 10px 20px var(--btn-shadow, rgba(243, 232, 255, 0.8)));
 
   cursor: pointer;
   transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -28,9 +28,9 @@
 }
 
 .emojiBtn:hover {
-  transform: scale(1.12) translateY(-5px);
-  box-shadow: 0 16px 32px var(--btn-shadow, rgba(243, 232, 255, 0.95)),
-              0 6px 12px rgba(0, 0, 0, 0.06);
+  transform: var(--zoomi-emoji-hover-transform, scale(1.08));
+  border-color: var(--zoomi-emoji-hover-border, var(--btn-color, transparent));
+  box-shadow: var(--zoomi-emoji-hover-shadow, 0 0 20px var(--btn-shadow, rgba(243, 232, 255, 0.95)));
 }
 
 .emojiBtn:active {
@@ -56,8 +56,8 @@
 }
 
 @keyframes popIn {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .emojiIcon {
@@ -67,14 +67,3 @@
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.emojiBtn:hover .emojiIcon {
-  animation: wiggle 0.5s ease-in-out;
-}
-
-@keyframes wiggle {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-12deg); }
-  50% { transform: rotate(10deg); }
-  75% { transform: rotate(-6deg); }
-  100% { transform: rotate(0deg); }
-}

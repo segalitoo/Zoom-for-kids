@@ -1,0 +1,8 @@
+@keyframes zoomiFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.zoomi-float {
+  animation: zoomiFloat 3s ease-in-out infinite;
+}

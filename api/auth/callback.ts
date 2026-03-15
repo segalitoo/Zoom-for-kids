@@ -1,6 +1,4 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-async function handler(req: VercelRequest, res: VercelResponse) {
+const handler = async (req: any, res: any) => {
   try {
     const { code } = req.query;
 
@@ -45,13 +43,11 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       return;
     }
 
-    // Token exchanged successfully — Marketplace compliance satisfied.
-    // Redirect user to the app's Home URL inside Zoom.
     res.redirect(302, '/');
   } catch (error) {
     console.error('[Zoomi] Callback error:', error);
     res.status(500).send('Internal server error');
   }
-}
+};
 
 module.exports = handler;

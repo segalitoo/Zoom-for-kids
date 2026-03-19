@@ -320,6 +320,64 @@
       unicode-bidi: embed;
     }
 
+    /* ---- Testimonials ---- */
+    .testimonials {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .testimonials-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 36px;
+      color: #2d3748;
+    }
+
+    .testimonial-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .testimonial-quote {
+      font-size: 18px;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-quote::before {
+      content: '"';
+      font-size: 48px;
+      color: #e2e8f0;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .testimonial-author {
+      font-size: 15px;
+      font-weight: bold;
+      color: #6366f1;
+    }
+
+    .testimonial-stars {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
     .footer {
       text-align: center;
       padding: 32px 24px;
@@ -460,6 +518,17 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2 class="testimonials-title">מה אומרים עלינו</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial">
+        <div class="testimonial-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+        <p class="testimonial-quote">וואו זה מגניב בטירופים!</p>
+        <div class="testimonial-author">&#8212; יונתן ס.</div>
+      </div>
     </div>
   </section>
 

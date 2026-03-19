@@ -92,7 +92,7 @@
       flex-direction: column;
       gap: 16px;
       transform: perspective(800px) rotateY(-4deg) rotateX(2deg);
-      transition: transform 0.4s ease;
+      transition: transform 0.4s ease, background 0.4s, box-shadow 0.4s, border 0.4s;
       animation: float 4s ease-in-out infinite;
     }
 
@@ -131,6 +131,22 @@
       justify-content: center;
       border: 2px solid #e5e7eb;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .mockup-theme-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .mockup-theme-label {
+      font-size: 12px;
+      font-weight: bold;
+      color: #9ca3af;
+      opacity: 0.7;
+      text-align: center;
+      margin-top: -8px;
+      transition: color 0.4s;
+      direction: ltr;
     }
 
     .mockup-grid {
@@ -147,6 +163,7 @@
       justify-content: center;
       font-size: 30px;
       border: none;
+      transition: background 0.4s, box-shadow 0.4s, border 0.4s;
     }
 
     .mockup-hand {
@@ -162,6 +179,7 @@
       font-weight: bold;
       font-family: inherit;
       border: none;
+      transition: background 0.4s, color 0.4s, box-shadow 0.4s;
     }
 
     .mockup-mute {
@@ -177,6 +195,7 @@
       font-family: inherit;
       border: none;
       box-shadow: 0 14px 28px rgba(239, 68, 68, 0.3);
+      transition: background 0.4s, box-shadow 0.4s;
     }
 
     .mockup-mute-text {
@@ -425,7 +444,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <div class="logo">Zoomi</div>
-        <p class="tagline">שיעורי זום הופכים לכיפיים! 🌈<br><span style="font-size:17px;opacity:0.85">כפתורים גדולים, צבעוניים וקלים לשימוש -בדיוק בשביל ילדים</span></p>
+        <p class="tagline">שיעורי זום הופכים לכיפיים! 🌈<br><span style="font-size:17px;opacity:0.85">כפתורים גדולים, צבעוניים וקלים לשימוש לילדים</span></p>
         <a href="zoomi-extension.zip" class="download-btn" download>
           הורד בחינם 🚀
         </a>
@@ -461,6 +480,7 @@
             </div>
           </div>
         </div>
+        <div class="mockup-theme-label">Classic</div>
       </div>
     </div>
   </section>
@@ -565,5 +585,127 @@
     </p>
   </footer>
 
+<script>
+(function() {
+  var themes = [
+    {
+      name: 'Classic',
+      icon: '🎨',
+      bg: 'white',
+      shadow: '0 24px 48px rgba(219,39,119,0.15), 0 8px 24px rgba(0,0,0,0.12)',
+      border: 'none',
+      logo: '#9ca3af',
+      labelColor: '#9ca3af',
+      emojis: [
+        { bg: '#fee2e2', shadow: '0 10px 20px rgba(239,68,68,0.35)' },
+        { bg: '#dcfce7', shadow: '0 10px 20px rgba(34,197,94,0.35)' },
+        { bg: '#fef3c7', shadow: '0 10px 20px rgba(245,158,11,0.35)' },
+        { bg: '#cffafe', shadow: '0 10px 20px rgba(6,182,212,0.35)' },
+        { bg: '#f3e8ff', shadow: '0 10px 20px rgba(139,92,246,0.35)' },
+        { bg: '#ffedd5', shadow: '0 10px 20px rgba(249,115,22,0.35)' }
+      ],
+      hand: { bg: '#f1f5f9', color: '#475569', shadow: 'none' },
+      mute: { bg: '#ef4444', shadow: '0 14px 28px rgba(239,68,68,0.3)' }
+    },
+    {
+      name: 'Gamer',
+      icon: '🎮',
+      bg: 'rgba(22,27,42,0.95)',
+      shadow: '0 24px 48px rgba(0,0,0,0.4), 0 0 30px rgba(139,92,246,0.2)',
+      border: '1px solid rgba(139,92,246,0.3)',
+      logo: '#818cf8',
+      labelColor: '#a78bfa',
+      emojis: [
+        { bg: 'rgba(239,68,68,0.15)', shadow: '0 0 12px rgba(239,68,68,0.4)' },
+        { bg: 'rgba(34,197,94,0.15)', shadow: '0 0 12px rgba(34,197,94,0.4)' },
+        { bg: 'rgba(245,158,11,0.15)', shadow: '0 0 12px rgba(245,158,11,0.4)' },
+        { bg: 'rgba(6,182,212,0.15)', shadow: '0 0 12px rgba(6,182,212,0.4)' },
+        { bg: 'rgba(139,92,246,0.15)', shadow: '0 0 12px rgba(139,92,246,0.4)' },
+        { bg: 'rgba(249,115,22,0.15)', shadow: '0 0 12px rgba(249,115,22,0.4)' }
+      ],
+      hand: { bg: 'rgba(139,92,246,0.2)', color: '#c4b5fd', shadow: '0 0 12px rgba(139,92,246,0.3)' },
+      mute: { bg: 'linear-gradient(135deg, #ef4444, #dc2626)', shadow: '0 0 20px rgba(239,68,68,0.5)' }
+    },
+    {
+      name: 'Space',
+      icon: '🚀',
+      bg: 'linear-gradient(180deg, #0f0c29, #302b63, #24243e)',
+      shadow: '0 24px 48px rgba(99,102,241,0.3), 0 0 40px rgba(99,102,241,0.15)',
+      border: '1px solid rgba(99,102,241,0.3)',
+      logo: '#818cf8',
+      labelColor: '#818cf8',
+      emojis: [
+        { bg: 'rgba(99,102,241,0.2)', shadow: '0 0 10px rgba(99,102,241,0.3)' },
+        { bg: 'rgba(139,92,246,0.2)', shadow: '0 0 10px rgba(139,92,246,0.3)' },
+        { bg: 'rgba(236,72,153,0.2)', shadow: '0 0 10px rgba(236,72,153,0.3)' },
+        { bg: 'rgba(59,130,246,0.2)', shadow: '0 0 10px rgba(59,130,246,0.3)' },
+        { bg: 'rgba(168,85,247,0.2)', shadow: '0 0 10px rgba(168,85,247,0.3)' },
+        { bg: 'rgba(14,165,233,0.2)', shadow: '0 0 10px rgba(14,165,233,0.3)' }
+      ],
+      hand: { bg: 'rgba(99,102,241,0.15)', color: '#c4b5fd', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #818cf8, #6366f1)', shadow: '0 14px 28px rgba(99,102,241,0.4)' }
+    },
+    {
+      name: 'Candy',
+      icon: '🍬',
+      bg: '#fff0f6',
+      shadow: '0 24px 48px rgba(236,72,153,0.15), 0 8px 24px rgba(0,0,0,0.08)',
+      border: '2px dashed rgba(236,72,153,0.25)',
+      logo: '#f472b6',
+      labelColor: '#ec4899',
+      emojis: [
+        { bg: '#fff1f2', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
+        { bg: '#fdf4ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' },
+        { bg: '#fce7f3', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
+        { bg: '#faf5ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' },
+        { bg: '#fff1f2', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
+        { bg: '#fdf4ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' }
+      ],
+      hand: { bg: '#fff1f2', color: '#ec4899', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #f472b6, #ec4899)', shadow: '0 14px 28px rgba(236,72,153,0.35)' }
+    }
+  ];
+
+  var currentTheme = 0;
+  var mockup = document.querySelector('.mockup');
+  var themeBtn = document.querySelector('.mockup-theme-btn');
+  var themeLabel = document.querySelector('.mockup-theme-label');
+  var emojiEls = document.querySelectorAll('.mockup-emoji');
+  var handEl = document.querySelector('.mockup-hand');
+  var muteEl = document.querySelector('.mockup-mute');
+  var logoEl = document.querySelector('.mockup-logo');
+
+  function applyTheme(t) {
+    mockup.style.background = t.bg;
+    mockup.style.boxShadow = t.shadow;
+    mockup.style.border = t.border;
+    logoEl.style.color = t.logo;
+    themeBtn.textContent = t.icon;
+    themeLabel.textContent = t.name;
+    themeLabel.style.color = t.labelColor;
+    for (var i = 0; i < emojiEls.length; i++) {
+      emojiEls[i].style.background = t.emojis[i].bg;
+      emojiEls[i].style.boxShadow = t.emojis[i].shadow;
+    }
+    handEl.style.background = t.hand.bg;
+    handEl.style.color = t.hand.color;
+    handEl.style.boxShadow = t.hand.shadow;
+    muteEl.style.background = t.mute.bg;
+    muteEl.style.boxShadow = t.mute.shadow;
+  }
+
+  themeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentTheme = (currentTheme + 1) % themes.length;
+    applyTheme(themes[currentTheme]);
+  });
+
+  // Auto-cycle every 3 seconds
+  setInterval(function() {
+    currentTheme = (currentTheme + 1) % themes.length;
+    applyTheme(themes[currentTheme]);
+  }, 3000);
+})();
+</script>
 </body>
 </html>

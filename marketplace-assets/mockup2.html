@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px; height: 780px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  display: flex; align-items: center; justify-content: center; gap: 60px;
+  font-family: 'Varela Round', sans-serif;
+  overflow: hidden;
+}
+.text-side {
+  max-width: 440px;
+  color: #e2e8f0;
+}
+.text-side h2 {
+  font-size: 40px;
+  color: #c084fc;
+  margin-bottom: 16px;
+}
+.text-side p {
+  font-size: 20px;
+  line-height: 1.5;
+  color: #94a3b8;
+}
+.themes-row {
+  display: flex; gap: 30px;
+}
+.panel {
+  width: 240px; padding: 22px;
+  border-radius: 30px;
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative;
+  transform: scale(0.92);
+}
+.panel.classic {
+  background: #fff;
+  box-shadow: 0 16px 32px rgba(219, 39, 119, 0.12);
+}
+.panel.space {
+  background: linear-gradient(180deg, #1e1b4b, #312e81);
+  box-shadow: 0 16px 32px rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+.panel.candy {
+  background: linear-gradient(180deg, #fdf2f8, #fce7f3);
+  box-shadow: 0 16px 32px rgba(236, 72, 153, 0.15);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+}
+.panel-label {
+  text-align: center; font-size: 13px; font-weight: bold;
+  margin-bottom: 4px;
+}
+.classic .panel-label { color: #9ca3af; }
+.space .panel-label { color: #a78bfa; }
+.candy .panel-label { color: #ec4899; }
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-size: 16px; font-weight: bold; opacity: 0.5; }
+.classic .logo { color: #9ca3af; }
+.space .logo { color: #818cf8; }
+.candy .logo { color: #f472b6; }
+.theme-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.emoji-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.emoji-btn {
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+/* Classic emoji colors */
+.classic .emoji-btn:nth-child(1) { background: #fef9c3; }
+.classic .emoji-btn:nth-child(2) { background: #fef3c7; }
+.classic .emoji-btn:nth-child(3) { background: #fce7f3; }
+.classic .emoji-btn:nth-child(4) { background: #dbeafe; }
+.classic .emoji-btn:nth-child(5) { background: #f3e8ff; }
+.classic .emoji-btn:nth-child(6) { background: #e0f2fe; }
+/* Space emoji colors */
+.space .emoji-btn:nth-child(1) { background: rgba(99,102,241,0.2); }
+.space .emoji-btn:nth-child(2) { background: rgba(139,92,246,0.2); }
+.space .emoji-btn:nth-child(3) { background: rgba(236,72,153,0.2); }
+.space .emoji-btn:nth-child(4) { background: rgba(59,130,246,0.2); }
+.space .emoji-btn:nth-child(5) { background: rgba(168,85,247,0.2); }
+.space .emoji-btn:nth-child(6) { background: rgba(14,165,233,0.2); }
+/* Candy emoji colors */
+.candy .emoji-btn:nth-child(1) { background: #fff1f2; }
+.candy .emoji-btn:nth-child(2) { background: #fdf4ff; }
+.candy .emoji-btn:nth-child(3) { background: #fce7f3; }
+.candy .emoji-btn:nth-child(4) { background: #faf5ff; }
+.candy .emoji-btn:nth-child(5) { background: #fff1f2; }
+.candy .emoji-btn:nth-child(6) { background: #fdf4ff; }
+.hand-btn {
+  padding: 12px; border-radius: 16px;
+  text-align: center; font-size: 15px; font-weight: bold;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.classic .hand-btn { background: #f3f4f6; color: #4a5568; }
+.space .hand-btn { background: rgba(99,102,241,0.15); color: #c4b5fd; }
+.candy .hand-btn { background: #fff1f2; color: #ec4899; }
+.mute-btn {
+  padding: 12px; border-radius: 16px;
+  text-align: center; font-size: 15px; font-weight: bold; color: #fff;
+}
+.classic .mute-btn { background: linear-gradient(135deg, #34d399, #10b981); }
+.space .mute-btn { background: linear-gradient(135deg, #818cf8, #6366f1); }
+.candy .mute-btn { background: linear-gradient(135deg, #f472b6, #ec4899); }
+</style>
+</head>
+<body>
+  <div class="text-side">
+    <h2>4 Fun Themes</h2>
+    <p>Kids can pick their favorite look — from classic pastels to a cosmic space adventure or sweet candy colors.</p>
+  </div>
+  <div class="themes-row">
+    <div class="panel classic">
+      <div class="panel-label">Classic</div>
+      <div class="header">
+        <div class="theme-dot">&#x1F3A8;</div>
+        <span class="logo">Zoomi</span>
+      </div>
+      <div class="emoji-grid">
+        <div class="emoji-btn">&#x1F44F;</div>
+        <div class="emoji-btn">&#x1F44D;</div>
+        <div class="emoji-btn">&#x2764;&#xFE0F;</div>
+        <div class="emoji-btn">&#x1F602;</div>
+        <div class="emoji-btn">&#x1F389;</div>
+        <div class="emoji-btn">&#x1F62E;</div>
+      </div>
+      <div class="hand-btn">&#x270B; Raise Hand</div>
+      <div class="mute-btn">&#x1F3A4; Talking</div>
+    </div>
+    <div class="panel space">
+      <div class="panel-label">Space</div>
+      <div class="header">
+        <div class="theme-dot">&#x1F680;</div>
+        <span class="logo">Zoomi</span>
+      </div>
+      <div class="emoji-grid">
+        <div class="emoji-btn">&#x1F44F;</div>
+        <div class="emoji-btn">&#x1F44D;</div>
+        <div class="emoji-btn">&#x2764;&#xFE0F;</div>
+        <div class="emoji-btn">&#x1F602;</div>
+        <div class="emoji-btn">&#x1F389;</div>
+        <div class="emoji-btn">&#x1F62E;</div>
+      </div>
+      <div class="hand-btn">&#x270B; Raise Hand</div>
+      <div class="mute-btn">&#x1F3A4; Talking</div>
+    </div>
+    <div class="panel candy">
+      <div class="panel-label">Candy</div>
+      <div class="header">
+        <div class="theme-dot">&#x1F36C;</div>
+        <span class="logo">Zoomi</span>
+      </div>
+      <div class="emoji-grid">
+        <div class="emoji-btn">&#x1F44F;</div>
+        <div class="emoji-btn">&#x1F44D;</div>
+        <div class="emoji-btn">&#x2764;&#xFE0F;</div>
+        <div class="emoji-btn">&#x1F602;</div>
+        <div class="emoji-btn">&#x1F389;</div>
+        <div class="emoji-btn">&#x1F62E;</div>
+      </div>
+      <div class="hand-btn">&#x270B; Raise Hand</div>
+      <div class="mute-btn">&#x1F3A4; Talking</div>
+    </div>
+  </div>
+</body>
+</html>

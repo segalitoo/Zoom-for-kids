@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px; height: 780px;
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 50%, #f0f9ff 100%);
+  display: flex; align-items: center; justify-content: center; gap: 80px;
+  font-family: 'Varela Round', sans-serif;
+  overflow: hidden;
+}
+.features {
+  display: flex; flex-direction: column; gap: 36px;
+  max-width: 520px;
+}
+.feature {
+  display: flex; align-items: flex-start; gap: 20px;
+}
+.feature-icon {
+  width: 64px; height: 64px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; flex-shrink: 0;
+}
+.feature-icon.reactions { background: #fef3c7; }
+.feature-icon.hand { background: #dbeafe; }
+.feature-icon.mute { background: #d1fae5; }
+.feature-icon.themes { background: #f3e8ff; }
+.feature-text h3 {
+  font-size: 22px; color: #1e293b; margin-bottom: 4px;
+}
+.feature-text p {
+  font-size: 16px; color: #64748b; line-height: 1.4;
+}
+.panel-wrapper {
+  position: relative;
+}
+.zoom-frame {
+  width: 340px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+.zoom-titlebar {
+  height: 36px;
+  background: #2d2d2d;
+  display: flex; align-items: center; padding: 0 12px; gap: 8px;
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.red { background: #ff5f57; }
+.dot.yellow { background: #febc2e; }
+.dot.green { background: #28c840; }
+.titlebar-text {
+  flex: 1; text-align: center; color: #999; font-size: 12px;
+}
+.zoom-sidebar {
+  background: #f7f7f7;
+  padding: 12px;
+}
+.sidebar-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 0 12px;
+  font-size: 14px; color: #666;
+}
+.sidebar-header span { font-weight: bold; color: #333; }
+.panel {
+  width: 100%; padding: 22px;
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 12px 24px rgba(219, 39, 119, 0.08);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-size: 16px; font-weight: bold; color: #9ca3af; opacity: 0.5; }
+.theme-dot {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  background: linear-gradient(135deg, #f472b6, #a78bfa);
+}
+.emoji-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.emoji-btn {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin: 0 auto;
+}
+.emoji-btn:nth-child(1) { background: #fef9c3; }
+.emoji-btn:nth-child(2) { background: #fef3c7; }
+.emoji-btn:nth-child(3) { background: #fce7f3; }
+.emoji-btn:nth-child(4) { background: #dbeafe; }
+.emoji-btn:nth-child(5) { background: #f3e8ff; }
+.emoji-btn:nth-child(6) { background: #e0f2fe; }
+.hand-btn {
+  padding: 14px; border-radius: 16px; background: #fef3c7;
+  text-align: center; font-size: 15px; font-weight: bold; color: #92400e;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border: 2px solid #fbbf24;
+}
+.mute-btn {
+  padding: 14px; border-radius: 16px;
+  background: #ef4444;
+  text-align: center; font-size: 15px; font-weight: bold; color: #fff;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.badge {
+  position: absolute; top: -12px; right: -12px;
+  background: #db2777; color: white;
+  padding: 6px 16px; border-radius: 20px;
+  font-size: 14px; font-weight: bold;
+  box-shadow: 0 4px 12px rgba(219, 39, 119, 0.3);
+}
+</style>
+</head>
+<body>
+  <div class="features">
+    <div class="feature">
+      <div class="feature-icon reactions">&#x1F44F;</div>
+      <div class="feature-text">
+        <h3>Emoji Reactions</h3>
+        <p>Six big, colorful buttons for clap, thumbs up, heart, laugh, party, and wow.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon hand">&#x270B;</div>
+      <div class="feature-text">
+        <h3>Raise Hand</h3>
+        <p>One tap to raise or lower your hand and get the teacher's attention.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon mute">&#x1F3A4;</div>
+      <div class="feature-text">
+        <h3>Mute / Unmute</h3>
+        <p>Clear visual toggle to control the microphone with a single tap.</p>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon themes">&#x1F3A8;</div>
+      <div class="feature-text">
+        <h3>Fun Themes</h3>
+        <p>Classic, Gamer, Space, and Candy — pick a look that makes Zoom fun.</p>
+      </div>
+    </div>
+  </div>
+  <div class="panel-wrapper">
+    <div class="zoom-frame">
+      <div class="zoom-titlebar">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+        <div class="titlebar-text">Apps</div>
+      </div>
+      <div class="zoom-sidebar">
+        <div class="sidebar-header">&#x2190; <span>Zoomi</span> BETA</div>
+        <div class="panel">
+          <div class="header">
+            <div class="theme-dot">&#x1F3A8;</div>
+            <span class="logo">Zoomi</span>
+          </div>
+          <div class="emoji-grid">
+            <div class="emoji-btn">&#x1F44F;</div>
+            <div class="emoji-btn">&#x1F44D;</div>
+            <div class="emoji-btn">&#x2764;&#xFE0F;</div>
+            <div class="emoji-btn">&#x1F602;</div>
+            <div class="emoji-btn">&#x1F389;</div>
+            <div class="emoji-btn">&#x1F62E;</div>
+          </div>
+          <div class="hand-btn">&#x270B; Hand Raised!</div>
+          <div class="mute-btn">&#x1F507; Muted — tap to talk</div>
+        </div>
+      </div>
+    </div>
+    <div class="badge">In Zoom</div>
+  </div>
+</body>
+</html>

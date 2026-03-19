@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="#9ca3af">
+  <text x="0" y="68" font-family="'Varela Round', 'Rounded Mplus 1c', Arial Rounded MT Bold, sans-serif" font-size="78" font-weight="bold" letter-spacing="-2">Zoom</text>
+  <text x="218" y="68" font-family="'Varela Round', 'Rounded Mplus 1c', Arial Rounded MT Bold, sans-serif" font-size="78" font-weight="bold" letter-spacing="-2">i</text>
+  <!-- Dot on the i replaced with a filled circle for the bubbly feel -->
+  <circle cx="232" cy="14" r="10" />
+</svg>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px; height: 780px;
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #e8eaf6 100%);
+  display: flex; align-items: center; justify-content: center; gap: 80px;
+  font-family: 'Varela Round', sans-serif;
+  overflow: hidden;
+}
+.text-side {
+  max-width: 480px;
+  color: #2d3748;
+}
+.text-side h1 {
+  font-size: 52px;
+  color: #db2777;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+.text-side p {
+  font-size: 22px;
+  line-height: 1.5;
+  color: #4a5568;
+}
+.panel {
+  width: 300px;
+  padding: 28px;
+  background: #fff;
+  border-radius: 36px;
+  box-shadow: 0 24px 48px rgba(219, 39, 119, 0.12);
+  display: flex; flex-direction: column; gap: 16px;
+}
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo {
+  font-size: 20px; font-weight: bold; color: #9ca3af; opacity: 0.5;
+}
+.theme-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; border: 2px solid #e5e7eb;
+}
+.emoji-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.emoji-btn {
+  width: 80px; height: 80px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; border: none;
+}
+.emoji-btn:nth-child(1) { background: #fef9c3; }
+.emoji-btn:nth-child(2) { background: #fef3c7; }
+.emoji-btn:nth-child(3) { background: #fce7f3; }
+.emoji-btn:nth-child(4) { background: #dbeafe; }
+.emoji-btn:nth-child(5) { background: #f3e8ff; }
+.emoji-btn:nth-child(6) { background: #e0f2fe; }
+.hand-btn {
+  padding: 18px; border-radius: 20px; background: #f3f4f6;
+  text-align: center; font-size: 20px; font-weight: bold; color: #4a5568;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+}
+.mute-btn {
+  padding: 18px; border-radius: 20px;
+  background: linear-gradient(135deg, #34d399, #10b981);
+  text-align: center; font-size: 20px; font-weight: bold; color: #fff;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.mute-sub { font-size: 14px; opacity: 0.85; }
+</style>
+</head>
+<body>
+  <div class="text-side">
+    <h1>Zoomi</h1>
+    <p>Big, colorful buttons that make it easy for kids to participate in Zoom meetings. Send reactions, raise hands, and control audio — all from a friendly sidebar panel.</p>
+  </div>
+  <div class="panel">
+    <div class="header">
+      <div class="theme-btn">&#x1F3A8;</div>
+      <span class="logo">Zoomi</span>
+    </div>
+    <div class="emoji-grid">
+      <div class="emoji-btn">&#x1F44F;</div>
+      <div class="emoji-btn">&#x1F44D;</div>
+      <div class="emoji-btn">&#x2764;&#xFE0F;</div>
+      <div class="emoji-btn">&#x1F602;</div>
+      <div class="emoji-btn">&#x1F389;</div>
+      <div class="emoji-btn">&#x1F62E;</div>
+    </div>
+    <div class="hand-btn">&#x270B; Raise Hand</div>
+    <div class="mute-btn">
+      &#x1F3A4; I'm talking
+      <div class="mute-sub">tap to mute</div>
+    </div>
+  </div>
+</body>
+</html>

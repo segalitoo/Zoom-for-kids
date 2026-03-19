@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoomi - Zoom for Kids</title>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fffbfe;
+      color: #4a5568;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+      padding: 60px 24px 120px;
+      position: relative;
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      z-index: 2;
+    }
+
+    .hero-wave svg {
+      display: block;
+      width: 100%;
+      height: 80px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .hero-text {
+      flex: 1;
+      text-align: right;
+    }
+
+    .logo {
+      font-size: 64px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-size: 24px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
+    }
+
+    .hero-sub {
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ---- Widget mockup ---- */
+    .mockup-wrapper {
+      flex-shrink: 0;
+    }
+
+    .mockup {
+      width: 280px;
+      background: white;
+      border-radius: 36px;
+      padding: 28px;
+      box-shadow:
+        0 24px 48px rgba(219, 39, 119, 0.15),
+        0 8px 24px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: perspective(800px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.4s ease, background 0.4s, box-shadow 0.4s, border 0.4s;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .mockup:hover {
+      transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.03);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(0); }
+      50% { transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(-8px); }
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .mockup-logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #9ca3af;
+      opacity: 0.5;
+      letter-spacing: -1px;
+      transition: color 0.4s;
+    }
+
+    .mockup-theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #e5e7eb;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .mockup-theme-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .mockup-theme-label {
+      display: none;
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mockup-emoji {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      border: none;
+      transition: background 0.4s, box-shadow 0.4s, border 0.4s;
+    }
+
+    .mockup-hand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      border-radius: 25px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: inherit;
+      border: none;
+      transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+    }
+
+    .mockup-mute {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 25px;
+      background: #ef4444;
+      color: white;
+      font-family: inherit;
+      border: none;
+      box-shadow: 0 14px 28px rgba(239, 68, 68, 0.3);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    .mockup-mute-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .mockup-mute-status {
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .mockup-mute-hint {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .mockup-mute-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+
+
+    /* ---- Features ---- */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px 24px 56px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon-wrap {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .feature-icon-wrap.reactions { background: #fef3c7; }
+    .feature-icon-wrap.hand { background: #dbeafe; }
+    .feature-icon-wrap.mute { background: #d1fae5; }
+    .feature-icon-wrap.skins { background: #f3e8ff; }
+
+    .feature-text {
+      flex: 1;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #2d3748;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: #718096;
+      line-height: 1.5;
+    }
+
+    /* ---- Install ---- */
+    .install-section {
+      background: linear-gradient(180deg, #fffbfe 0%, #faf5ff 100%);
+      padding: 56px 24px 64px;
+      position: relative;
+    }
+
+    .install-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .install-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #2d3748;
+    }
+
+    .install-subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 40px;
+    }
+
+    .steps-simple {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .step-simple {
+      text-align: center;
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 16px;
+    }
+
+    .step-simple h3 {
+      font-size: 17px;
+      color: #2d3748;
+      margin-bottom: 6px;
+    }
+
+    .step-simple p {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.4;
+    }
+
+    .steps-arrow {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      color: #c4b5fd;
+      padding-top: 20px;
+    }
+
+    .steps-detail {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 32px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      border: 1px solid #f1f5f9;
+    }
+
+    .steps-detail summary {
+      font-size: 16px;
+      font-weight: bold;
+      color: #6366f1;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .steps-detail summary::before {
+      content: '>';
+      display: inline-block;
+      transition: transform 0.2s;
+      font-size: 14px;
+    }
+
+    .steps-detail[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .steps-detail ol {
+      margin-top: 20px;
+      padding-right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .steps-detail li {
+      font-size: 15px;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .steps-detail code {
+      background: #f1f5f9;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+
+    /* ---- Testimonials ---- */
+    .testimonials {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
+    }
+
+    .testimonials-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 36px;
+      color: #2d3748;
+    }
+
+    .testimonial-cards {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .testimonial {
+      background: linear-gradient(135deg, #fdf2f8, #faf5ff);
+      border-radius: 24px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .testimonial-avatar {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .testimonial-body {
+      flex: 1;
+    }
+
+    .testimonial-quote {
+      font-size: 17px;
+      color: #4a5568;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .testimonial-author {
+      font-size: 14px;
+      font-weight: bold;
+      color: #8b5cf6;
+    }
+
+    .testimonial-stars {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    /* ---- Bottom CTA ---- */
+    .bottom-cta {
+      text-align: center;
+      padding: 48px 24px 56px;
+      background: linear-gradient(180deg, #faf5ff 0%, #eef2ff 100%);
+      position: relative;
+    }
+
+    .bottom-cta h2 {
+      font-size: 28px;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .bottom-cta p {
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 28px;
+    }
+
+    /* ---- Floating blobs ---- */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%);
+      top: 20px; left: -60px;
+    }
+
+    .blob-2 {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(236,72,153,0.12), transparent 70%);
+      bottom: 40px; right: -40px;
+    }
+
+    .blob-3 {
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%);
+      top: 50%; left: 60%;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: #a0aec0;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #6366f1;
+      text-decoration: none;
+    }
+
+    @media (max-width: 750px) {
+      .hero-content { flex-direction: column; text-align: center; }
+      .hero-text { text-align: center; }
+      .logo { font-size: 48px; }
+      .tagline { font-size: 20px; }
+      .mockup { transform: none; animation: none; }
+      .mockup:hover { transform: scale(1.02); }
+      .features { grid-template-columns: 1fr; }
+      .steps-simple { flex-direction: column; align-items: center; }
+      .steps-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="logo">Zoomi</div>
+        <p class="tagline">כפתורים גדולים, צבעוניים<br>וקלים לשימוש לילדים</p>
+        <a href="zoomi-extension.zip" class="download-btn" download>
+          הורד בחינם
+        </a>
+        <div class="hero-sub">בלי הרשמה, בלי פרסומות, בלי מידע אישי</div>
+      </div>
+
+      <!-- Widget mockup -->
+      <div class="mockup-wrapper">
+        <div class="mockup" dir="rtl">
+          <div class="mockup-header">
+            <div class="mockup-theme-btn">&#x1F3A8;</div>
+            <div class="mockup-logo">Zoomi</div>
+          </div>
+
+          <div class="mockup-grid">
+            <div class="mockup-emoji" style="background:#fee2e2;box-shadow:0 10px 20px rgba(239,68,68,0.35)">&#x2764;&#xFE0F;</div>
+            <div class="mockup-emoji" style="background:#dcfce7;box-shadow:0 10px 20px rgba(34,197,94,0.35)">&#x1F44D;</div>
+            <div class="mockup-emoji" style="background:#fef3c7;box-shadow:0 10px 20px rgba(245,158,11,0.35)">&#x1F44F;</div>
+            <div class="mockup-emoji" style="background:#cffafe;box-shadow:0 10px 20px rgba(6,182,212,0.35)">&#x1F62E;</div>
+            <div class="mockup-emoji" style="background:#f3e8ff;box-shadow:0 10px 20px rgba(139,92,246,0.35)">&#x1F389;</div>
+            <div class="mockup-emoji" style="background:#ffedd5;box-shadow:0 10px 20px rgba(249,115,22,0.35)">&#x1F602;</div>
+          </div>
+
+          <div class="mockup-hand">
+            <span>&#x270B;</span>
+            <span>הרם יד</span>
+          </div>
+
+          <div class="mockup-mute">
+            <span class="mockup-mute-icon">&#x1F507;</span>
+            <div class="mockup-mute-text">
+              <span class="mockup-mute-status">אני בשקט</span>
+              <span class="mockup-mute-hint">לחץ לדבר</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 C200,70 400,20 720,35 C1040,50 1240,75 1440,45 L1440,80 L0,80 Z" fill="#fffbfe"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" style="position:relative">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="feature">
+      <div class="feature-icon-wrap reactions">&#x1F44F;</div>
+      <div class="feature-text">
+        <div class="feature-title">תגובות בקליק</div>
+        <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon-wrap hand">&#x270B;</div>
+      <div class="feature-text">
+        <div class="feature-title">הרמת יד</div>
+        <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon-wrap mute">&#x1F3A4;</div>
+      <div class="feature-text">
+        <div class="feature-title">השתקה</div>
+        <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור - אני מדבר / אני בשקט</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon-wrap skins">&#x1F3A8;</div>
+      <div class="feature-text">
+        <div class="feature-title">סקינים</div>
+        <div class="feature-desc">4 עיצובים כיפיים - קלאסי, גיימר, חלל וסוכריות</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section class="install-section">
+    <div class="blob blob-3"></div>
+    <div class="install-inner">
+      <h2 class="install-title">התקנה ב-3 צעדים</h2>
+      <p class="install-subtitle">לוקח פחות מדקה</p>
+
+      <div class="steps-simple">
+        <div class="step-simple">
+          <div class="step-icon">&#x1F4E5;</div>
+          <h3>הורד</h3>
+          <p>לחץ על "הורד בחינם" ופתח את קובץ ה-ZIP</p>
+        </div>
+        <div class="steps-arrow">&#x276F;</div>
+        <div class="step-simple">
+          <div class="step-icon">&#x1F9E9;</div>
+          <h3>התקן בכרום</h3>
+          <p>הוסף את התוסף לדפדפן כרום</p>
+        </div>
+        <div class="steps-arrow">&#x276F;</div>
+        <div class="step-simple">
+          <div class="step-icon">&#x1F389;</div>
+          <h3>היכנס לשיעור</h3>
+          <p>פתח זום בכרום והפאנל מופיע</p>
+        </div>
+      </div>
+
+      <details class="steps-detail">
+        <summary>הוראות מפורטות</summary>
+        <ol>
+          <li>לחץ על כפתור "הורד בחינם" למעלה. יירד קובץ ZIP למחשב.</li>
+          <li>לחץ לחיצה כפולה על קובץ ה-ZIP כדי לחלץ אותו.</li>
+          <li>הקלד בשורת הכתובת בכרום: <code>chrome://extensions</code></li>
+          <li>הפעל את המתג "מצב מפתח" (Developer mode) בפינה הימנית העליונה.</li>
+          <li>לחץ על "טען תוסף שלא נארז" (Load unpacked) ובחר את התיקייה שחילצת.</li>
+          <li>פתח פגישת זום בדפדפן כרום - החלונית של Zoomi תופיע אוטומטית בצד ימין!</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2 class="testimonials-title">מה ילדים אומרים עלינו</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial">
+        <div class="testimonial-avatar">י</div>
+        <div class="testimonial-body">
+          <div class="testimonial-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+          <p class="testimonial-quote">וואו זה מגניב בטירופים!</p>
+          <div class="testimonial-author">יונתן ס.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <h2>מוכנים לשדרג את שיעורי הזום?</h2>
+    <p>ההתקנה לוקחת פחות מדקה</p>
+    <a href="zoomi-extension.zip" class="download-btn" download>
+      הורד בחינם
+    </a>
+  </section>
+
+  <footer class="footer">
+    <p>
+      Zoomi - <a href="https://github.com/segalitoo/Zoom-for-kids">GitHub</a>
+      &nbsp;|&nbsp;
+      <a href="https://github.com/segalitoo/Zoom-for-kids/blob/claude/add-claude-documentation-gFq7q/PRIVACY.md">מדיניות פרטיות</a>
+    </p>
+  </footer>
+
+<script>
+(function() {
+  var themes = [
+    {
+      name: 'Classic',
+      icon: '\u{1F3A8}',
+      bg: 'white',
+      shadow: '0 24px 48px rgba(219,39,119,0.15), 0 8px 24px rgba(0,0,0,0.12)',
+      border: 'none',
+      logo: '#9ca3af',
+      labelColor: '#9ca3af',
+      emojis: [
+        { bg: '#fee2e2', shadow: '0 10px 20px rgba(239,68,68,0.35)' },
+        { bg: '#dcfce7', shadow: '0 10px 20px rgba(34,197,94,0.35)' },
+        { bg: '#fef3c7', shadow: '0 10px 20px rgba(245,158,11,0.35)' },
+        { bg: '#cffafe', shadow: '0 10px 20px rgba(6,182,212,0.35)' },
+        { bg: '#f3e8ff', shadow: '0 10px 20px rgba(139,92,246,0.35)' },
+        { bg: '#ffedd5', shadow: '0 10px 20px rgba(249,115,22,0.35)' }
+      ],
+      hand: { bg: '#f1f5f9', color: '#475569', shadow: 'none' },
+      mute: { bg: '#ef4444', shadow: '0 14px 28px rgba(239,68,68,0.3)' }
+    },
+    {
+      name: 'Gamer',
+      icon: '\u{1F3AE}',
+      bg: 'rgba(22,27,42,0.95)',
+      shadow: '0 24px 48px rgba(0,0,0,0.4), 0 0 30px rgba(139,92,246,0.2)',
+      border: '1px solid rgba(139,92,246,0.3)',
+      logo: '#818cf8',
+      labelColor: '#a78bfa',
+      emojis: [
+        { bg: 'rgba(239,68,68,0.15)', shadow: '0 0 12px rgba(239,68,68,0.4)' },
+        { bg: 'rgba(34,197,94,0.15)', shadow: '0 0 12px rgba(34,197,94,0.4)' },
+        { bg: 'rgba(245,158,11,0.15)', shadow: '0 0 12px rgba(245,158,11,0.4)' },
+        { bg: 'rgba(6,182,212,0.15)', shadow: '0 0 12px rgba(6,182,212,0.4)' },
+        { bg: 'rgba(139,92,246,0.15)', shadow: '0 0 12px rgba(139,92,246,0.4)' },
+        { bg: 'rgba(249,115,22,0.15)', shadow: '0 0 12px rgba(249,115,22,0.4)' }
+      ],
+      hand: { bg: 'rgba(139,92,246,0.2)', color: '#c4b5fd', shadow: '0 0 12px rgba(139,92,246,0.3)' },
+      mute: { bg: 'linear-gradient(135deg, #ef4444, #dc2626)', shadow: '0 0 20px rgba(239,68,68,0.5)' }
+    },
+    {
+      name: 'Space',
+      icon: '\u{1F680}',
+      bg: 'linear-gradient(180deg, #0f0c29, #302b63, #24243e)',
+      shadow: '0 24px 48px rgba(99,102,241,0.3), 0 0 40px rgba(99,102,241,0.15)',
+      border: '1px solid rgba(99,102,241,0.3)',
+      logo: '#818cf8',
+      labelColor: '#818cf8',
+      emojis: [
+        { bg: 'rgba(99,102,241,0.2)', shadow: '0 0 10px rgba(99,102,241,0.3)' },
+        { bg: 'rgba(139,92,246,0.2)', shadow: '0 0 10px rgba(139,92,246,0.3)' },
+        { bg: 'rgba(236,72,153,0.2)', shadow: '0 0 10px rgba(236,72,153,0.3)' },
+        { bg: 'rgba(59,130,246,0.2)', shadow: '0 0 10px rgba(59,130,246,0.3)' },
+        { bg: 'rgba(168,85,247,0.2)', shadow: '0 0 10px rgba(168,85,247,0.3)' },
+        { bg: 'rgba(14,165,233,0.2)', shadow: '0 0 10px rgba(14,165,233,0.3)' }
+      ],
+      hand: { bg: 'rgba(99,102,241,0.15)', color: '#c4b5fd', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #818cf8, #6366f1)', shadow: '0 14px 28px rgba(99,102,241,0.4)' }
+    },
+    {
+      name: 'Candy',
+      icon: '\u{1F36C}',
+      bg: '#fff0f6',
+      shadow: '0 24px 48px rgba(236,72,153,0.15), 0 8px 24px rgba(0,0,0,0.08)',
+      border: '2px dashed rgba(236,72,153,0.25)',
+      logo: '#f472b6',
+      labelColor: '#ec4899',
+      emojis: [
+        { bg: '#fff1f2', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
+        { bg: '#fdf4ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' },
+        { bg: '#fce7f3', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
+        { bg: '#faf5ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' },
+        { bg: '#fff1f2', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
+        { bg: '#fdf4ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' }
+      ],
+      hand: { bg: '#fff1f2', color: '#ec4899', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #f472b6, #ec4899)', shadow: '0 14px 28px rgba(236,72,153,0.35)' }
+    }
+  ];
+
+  var currentTheme = 0;
+  var mockup = document.querySelector('.mockup');
+  var themeBtn = document.querySelector('.mockup-theme-btn');
+  var themeLabel = document.querySelector('.mockup-theme-label');
+  var emojiEls = document.querySelectorAll('.mockup-emoji');
+  var handEl = document.querySelector('.mockup-hand');
+  var muteEl = document.querySelector('.mockup-mute');
+  var logoEl = document.querySelector('.mockup-logo');
+
+  function applyTheme(t) {
+    mockup.style.background = t.bg;
+    mockup.style.boxShadow = t.shadow;
+    mockup.style.border = t.border;
+    logoEl.style.color = t.logo;
+    themeBtn.textContent = t.icon;
+    themeLabel.textContent = t.name;
+    themeLabel.style.color = t.labelColor;
+    for (var i = 0; i < emojiEls.length; i++) {
+      emojiEls[i].style.background = t.emojis[i].bg;
+      emojiEls[i].style.boxShadow = t.emojis[i].shadow;
+    }
+    handEl.style.background = t.hand.bg;
+    handEl.style.color = t.hand.color;
+    handEl.style.boxShadow = t.hand.shadow;
+    muteEl.style.background = t.mute.bg;
+    muteEl.style.boxShadow = t.mute.shadow;
+  }
+
+  themeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentTheme = (currentTheme + 1) % themes.length;
+    applyTheme(themes[currentTheme]);
+  });
+
+  setInterval(function() {
+    currentTheme = (currentTheme + 1) % themes.length;
+    applyTheme(themes[currentTheme]);
+  }, 4000);
+})();
+</script>
+</body>
+</html>

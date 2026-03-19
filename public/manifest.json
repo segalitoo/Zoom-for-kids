@@ -3,7 +3,7 @@
   "name": "Zoom for Kids",
   "version": "1.0.0",
   "description": "Kid-friendly big buttons for Zoom reactions, hand raise, and mute",
-  "permissions": ["activeTab"],
+  "permissions": [],
   "host_permissions": ["https://*.zoom.us/*"],
   "content_scripts": [
     {

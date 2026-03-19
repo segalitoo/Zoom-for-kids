@@ -341,45 +341,58 @@
 
     .testimonial-cards {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .testimonial {
-      background: white;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-      position: relative;
+      background: linear-gradient(135deg, #fdf2f8, #faf5ff);
+      border-radius: 24px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
+      border: 1px solid rgba(139, 92, 246, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .testimonial-avatar {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .testimonial-body {
+      flex: 1;
     }
 
     .testimonial-quote {
-      font-size: 18px;
+      font-size: 17px;
       color: #4a5568;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .testimonial-quote::before {
-      content: '"';
-      font-size: 48px;
-      color: #e2e8f0;
-      position: absolute;
-      top: 12px;
-      right: 20px;
-      font-family: Georgia, serif;
-      line-height: 1;
+      line-height: 1.5;
+      margin-bottom: 6px;
     }
 
     .testimonial-author {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
-      color: #6366f1;
+      color: #8b5cf6;
     }
 
     .testimonial-stars {
-      font-size: 16px;
-      margin-bottom: 8px;
+      font-size: 13px;
+      margin-bottom: 4px;
     }
 
     .footer {
@@ -531,12 +544,15 @@
   </section>
 
   <section class="testimonials">
-    <h2 class="testimonials-title">מה אומרים עלינו</h2>
+    <h2 class="testimonials-title">מה ילדים אומרים עלינו</h2>
     <div class="testimonial-cards">
       <div class="testimonial">
-        <div class="testimonial-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
-        <p class="testimonial-quote">וואו זה מגניב בטירופים!</p>
-        <div class="testimonial-author">- יונתן ס.</div>
+        <div class="testimonial-avatar">י</div>
+        <div class="testimonial-body">
+          <div class="testimonial-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+          <p class="testimonial-quote">וואו זה מגניב בטירופים!</p>
+          <div class="testimonial-author">יונתן ס.</div>
+        </div>
       </div>
     </div>
   </section>

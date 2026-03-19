@@ -2,7 +2,7 @@
    Zoom App — Sidebar Panel (Themed, fills Zoom's WebView)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import '../fonts/varela-round.css';
 
 .panel {
   width: 100%;

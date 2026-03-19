@@ -2,7 +2,7 @@
    Zoom for Kids — Floating Panel (Themed)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import '../../fonts/varela-round.css';
 
 .panel {
   position: fixed;

@@ -3,46 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zoomi -Zoom for Kids</title>
+  <title>Zoomi - Zoom for Kids</title>
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f8f9fa;
+      background: #fffbfe;
       color: #4a5568;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* ---- Hero with dark gradient background ---- */
+    /* ---- Hero ---- */
     .hero {
       background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-      padding: 60px 24px 80px;
+      padding: 60px 24px 120px;
       position: relative;
-      overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    .hero-wave {
       position: absolute;
-      top: -50%;
-      right: -30%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
-      border-radius: 50%;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      z-index: 2;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -40%;
-      left: -20%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%);
-      border-radius: 50%;
+    .hero-wave svg {
+      display: block;
+      width: 100%;
+      height: 80px;
     }
 
     .hero-content {
@@ -51,8 +44,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      max-width: 700px;
+      gap: 40px;
+      max-width: 750px;
       margin: 0 auto;
     }
 
@@ -70,9 +63,39 @@
     }
 
     .tagline {
-      font-size: 22px;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 32px;
+      font-size: 24px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    }
+
+    .download-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
+    }
+
+    .hero-sub {
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
     }
 
     /* ---- Widget mockup ---- */
@@ -118,6 +141,7 @@
       color: #9ca3af;
       opacity: 0.5;
       letter-spacing: -1px;
+      transition: color 0.4s;
     }
 
     .mockup-theme-btn {
@@ -139,14 +163,7 @@
     }
 
     .mockup-theme-label {
-      font-size: 12px;
-      font-weight: bold;
-      color: #9ca3af;
-      opacity: 0.7;
-      text-align: center;
-      margin-top: -8px;
-      transition: color 0.4s;
-      direction: ltr;
+      display: none;
     }
 
     .mockup-grid {
@@ -221,121 +238,186 @@
       flex-shrink: 0;
     }
 
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      font-family: inherit;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 18px 40px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
-    }
 
-    .download-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
-    }
 
     /* ---- Features ---- */
     .features {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      padding: 48px 24px;
-      max-width: 800px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px 24px 56px;
+      max-width: 700px;
       margin: 0 auto;
-      flex-wrap: wrap;
     }
 
     .feature {
-      text-align: center;
-      flex: 1;
-      min-width: 200px;
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .feature-icon {
-      font-size: 48px;
-      margin-bottom: 12px;
+    .feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon-wrap {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .feature-icon-wrap.reactions { background: #fef3c7; }
+    .feature-icon-wrap.hand { background: #dbeafe; }
+    .feature-icon-wrap.mute { background: #d1fae5; }
+    .feature-icon-wrap.skins { background: #f3e8ff; }
+
+    .feature-text {
+      flex: 1;
     }
 
     .feature-title {
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       color: #2d3748;
     }
 
     .feature-desc {
-      font-size: 15px;
+      font-size: 14px;
       color: #718096;
+      line-height: 1.5;
     }
 
-    /* ---- Install steps ---- */
+    /* ---- Install ---- */
     .install-section {
+      background: linear-gradient(180deg, #fffbfe 0%, #faf5ff 100%);
+      padding: 56px 24px 64px;
+      position: relative;
+    }
+
+    .install-inner {
       max-width: 700px;
       margin: 0 auto;
-      padding: 0 24px 64px;
     }
 
     .install-title {
       font-size: 32px;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 12px;
       color: #2d3748;
     }
 
-    .steps {
+    .install-subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 40px;
+    }
+
+    .steps-simple {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       gap: 24px;
+      margin-bottom: 40px;
     }
 
-    .step {
-      background: white;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
+    .step-simple {
+      text-align: center;
+      flex: 1;
+      max-width: 200px;
     }
 
-    .step-number {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
+    .step-icon {
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
+      background: white;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 16px;
     }
 
-    .step-content h3 {
-      font-size: 18px;
+    .step-simple h3 {
+      font-size: 17px;
       color: #2d3748;
       margin-bottom: 6px;
     }
 
-    .step-content p {
+    .step-simple p {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.4;
+    }
+
+    .steps-arrow {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      color: #c4b5fd;
+      padding-top: 20px;
+    }
+
+    .steps-detail {
+      background: white;
+      border-radius: 20px;
+      padding: 28px 32px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      border: 1px solid #f1f5f9;
+    }
+
+    .steps-detail summary {
+      font-size: 16px;
+      font-weight: bold;
+      color: #6366f1;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .steps-detail summary::before {
+      content: '>';
+      display: inline-block;
+      transition: transform 0.2s;
+      font-size: 14px;
+    }
+
+    .steps-detail[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .steps-detail ol {
+      margin-top: 20px;
+      padding-right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .steps-detail li {
       font-size: 15px;
-      color: #718096;
+      color: #4a5568;
       line-height: 1.6;
     }
 
-    .step-content code {
+    .steps-detail code {
       background: #f1f5f9;
       padding: 2px 8px;
       border-radius: 6px;
@@ -348,7 +430,7 @@
     .testimonials {
       max-width: 700px;
       margin: 0 auto;
-      padding: 0 24px 64px;
+      padding: 0 24px 56px;
     }
 
     .testimonials-title {
@@ -415,6 +497,53 @@
       margin-bottom: 4px;
     }
 
+    /* ---- Bottom CTA ---- */
+    .bottom-cta {
+      text-align: center;
+      padding: 48px 24px 56px;
+      background: linear-gradient(180deg, #faf5ff 0%, #eef2ff 100%);
+      position: relative;
+    }
+
+    .bottom-cta h2 {
+      font-size: 28px;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .bottom-cta p {
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 28px;
+    }
+
+    /* ---- Floating blobs ---- */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%);
+      top: 20px; left: -60px;
+    }
+
+    .blob-2 {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(236,72,153,0.12), transparent 70%);
+      bottom: 40px; right: -40px;
+    }
+
+    .blob-3 {
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%);
+      top: 50%; left: 60%;
+    }
+
+    /* ---- Footer ---- */
     .footer {
       text-align: center;
       padding: 32px 24px;
@@ -431,11 +560,12 @@
       .hero-content { flex-direction: column; text-align: center; }
       .hero-text { text-align: center; }
       .logo { font-size: 48px; }
-      .tagline { font-size: 18px; }
+      .tagline { font-size: 20px; }
       .mockup { transform: none; animation: none; }
       .mockup:hover { transform: scale(1.02); }
-      .features { gap: 24px; }
-      .step { flex-direction: column; align-items: center; text-align: center; }
+      .features { grid-template-columns: 1fr; }
+      .steps-simple { flex-direction: column; align-items: center; }
+      .steps-arrow { display: none; }
     }
   </style>
 </head>
@@ -449,6 +579,7 @@
         <a href="zoomi-extension.zip" class="download-btn" download>
           הורד בחינם
         </a>
+        <div class="hero-sub">בלי הרשמה, בלי פרסומות, בלי מידע אישי</div>
       </div>
 
       <!-- Widget mockup -->
@@ -460,110 +591,112 @@
           </div>
 
           <div class="mockup-grid">
-            <div class="mockup-emoji" style="background:#fee2e2;box-shadow:0 10px 20px rgba(239,68,68,0.35)">❤️</div>
-            <div class="mockup-emoji" style="background:#dcfce7;box-shadow:0 10px 20px rgba(34,197,94,0.35)">👍</div>
-            <div class="mockup-emoji" style="background:#fef3c7;box-shadow:0 10px 20px rgba(245,158,11,0.35)">👏</div>
-            <div class="mockup-emoji" style="background:#cffafe;box-shadow:0 10px 20px rgba(6,182,212,0.35)">😮</div>
-            <div class="mockup-emoji" style="background:#f3e8ff;box-shadow:0 10px 20px rgba(139,92,246,0.35)">🎉</div>
-            <div class="mockup-emoji" style="background:#ffedd5;box-shadow:0 10px 20px rgba(249,115,22,0.35)">😂</div>
+            <div class="mockup-emoji" style="background:#fee2e2;box-shadow:0 10px 20px rgba(239,68,68,0.35)">&#x2764;&#xFE0F;</div>
+            <div class="mockup-emoji" style="background:#dcfce7;box-shadow:0 10px 20px rgba(34,197,94,0.35)">&#x1F44D;</div>
+            <div class="mockup-emoji" style="background:#fef3c7;box-shadow:0 10px 20px rgba(245,158,11,0.35)">&#x1F44F;</div>
+            <div class="mockup-emoji" style="background:#cffafe;box-shadow:0 10px 20px rgba(6,182,212,0.35)">&#x1F62E;</div>
+            <div class="mockup-emoji" style="background:#f3e8ff;box-shadow:0 10px 20px rgba(139,92,246,0.35)">&#x1F389;</div>
+            <div class="mockup-emoji" style="background:#ffedd5;box-shadow:0 10px 20px rgba(249,115,22,0.35)">&#x1F602;</div>
           </div>
 
           <div class="mockup-hand">
-            <span>✋</span>
+            <span>&#x270B;</span>
             <span>הָרֵם יָד</span>
           </div>
 
           <div class="mockup-mute">
-            <span class="mockup-mute-icon">🔇</span>
+            <span class="mockup-mute-icon">&#x1F507;</span>
             <div class="mockup-mute-text">
               <span class="mockup-mute-status">אֲנִי בְּשֶׁקֶט</span>
               <span class="mockup-mute-hint">לְחַץ לְדַבֵּר</span>
             </div>
           </div>
         </div>
-        <div class="mockup-theme-label">Classic</div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 C200,70 400,20 720,35 C1040,50 1240,75 1440,45 L1440,80 L0,80 Z" fill="#fffbfe"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" style="position:relative">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="feature">
+      <div class="feature-icon-wrap reactions">&#x1F44F;</div>
+      <div class="feature-text">
+        <div class="feature-title">תגובות בקליק</div>
+        <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon-wrap hand">&#x270B;</div>
+      <div class="feature-text">
+        <div class="feature-title">הרמת יד</div>
+        <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon-wrap mute">&#x1F3A4;</div>
+      <div class="feature-text">
+        <div class="feature-title">השתקה</div>
+        <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור - אני מדבר / אני בשקט</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feature-icon-wrap skins">&#x1F3A8;</div>
+      <div class="feature-text">
+        <div class="feature-title">סקינים</div>
+        <div class="feature-desc">4 עיצובים כיפיים - קלאסי, גיימר, חלל וסוכריות</div>
       </div>
     </div>
   </section>
 
-  <section class="features">
-    <div class="feature">
-      <div class="feature-icon">😂👏❤️</div>
-      <div class="feature-title">תגובות בקליק</div>
-      <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">✋</div>
-      <div class="feature-title">הרמת יד</div>
-      <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🎤</div>
-      <div class="feature-title">השתקה</div>
-      <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור -אני מדבר / אני בשקט</div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon">🎨</div>
-      <div class="feature-title">סקינים</div>
-      <div class="feature-desc">4 עיצובים כיפיים -קלאסי, גיימר, חלל וסוכריות</div>
-    </div>
-  </section>
-
+  <!-- Install -->
   <section class="install-section">
-    <h2 class="install-title">איך מתקינים?</h2>
-    <div class="steps">
+    <div class="blob blob-3"></div>
+    <div class="install-inner">
+      <h2 class="install-title">התקנה ב-3 צעדים</h2>
+      <p class="install-subtitle">לוקח פחות מדקה</p>
 
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>הורד את הקובץ</h3>
-          <p>לחץ על כפתור "הורד את התוסף" למעלה. יירד קובץ ZIP למחשב.</p>
+      <div class="steps-simple">
+        <div class="step-simple">
+          <div class="step-icon">&#x1F4E5;</div>
+          <h3>הורד</h3>
+          <p>לחץ על "הורד בחינם" ופתח את קובץ ה-ZIP</p>
+        </div>
+        <div class="steps-arrow">&#x276F;</div>
+        <div class="step-simple">
+          <div class="step-icon">&#x1F9E9;</div>
+          <h3>התקן בכרום</h3>
+          <p>הוסף את התוסף לדפדפן כרום</p>
+        </div>
+        <div class="steps-arrow">&#x276F;</div>
+        <div class="step-simple">
+          <div class="step-icon">&#x1F389;</div>
+          <h3>היכנס לשיעור</h3>
+          <p>פתח זום בכרום והפאנל מופיע</p>
         </div>
       </div>
 
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>חלץ את הקובץ</h3>
-          <p>לחץ לחיצה כפולה על קובץ ה-ZIP כדי לחלץ אותו. תיווצר תיקייה חדשה.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>פתח את דף התוספים בכרום</h3>
-          <p>הקלד בשורת הכתובת: <code>chrome://extensions</code> ולחץ Enter.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>הפעל מצב מפתח</h3>
-          <p>בפינה הימנית העליונה של הדף, הפעל את המתג "מצב מפתח" (Developer mode).</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <h3>טען את התוסף</h3>
-          <p>לחץ על "טען תוסף שלא נארז" (Load unpacked) ובחר את התיקייה שחילצת בשלב 2.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-number">6</div>
-        <div class="step-content">
-          <h3>היכנס לשיעור בזום</h3>
-          <p>פתח פגישת זום בדפדפן כרום. החלונית של Zoomi תופיע אוטומטית בצד ימין!</p>
-        </div>
-      </div>
-
+      <details class="steps-detail">
+        <summary>הוראות מפורטות</summary>
+        <ol>
+          <li>לחץ על כפתור "הורד בחינם" למעלה. יירד קובץ ZIP למחשב.</li>
+          <li>לחץ לחיצה כפולה על קובץ ה-ZIP כדי לחלץ אותו.</li>
+          <li>הקלד בשורת הכתובת בכרום: <code>chrome://extensions</code></li>
+          <li>הפעל את המתג "מצב מפתח" (Developer mode) בפינה הימנית העליונה.</li>
+          <li>לחץ על "טען תוסף שלא נארז" (Load unpacked) ובחר את התיקייה שחילצת.</li>
+          <li>פתח פגישת זום בדפדפן כרום - החלונית של Zoomi תופיע אוטומטית בצד ימין!</li>
+        </ol>
+      </details>
     </div>
   </section>
 
+  <!-- Testimonials -->
   <section class="testimonials">
     <h2 class="testimonials-title">מה ילדים אומרים עלינו</h2>
     <div class="testimonial-cards">
@@ -576,6 +709,15 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <h2>מוכנים לשדרג את שיעורי הזום?</h2>
+    <p>ההתקנה לוקחת פחות מדקה</p>
+    <a href="zoomi-extension.zip" class="download-btn" download>
+      הורד בחינם
+    </a>
   </section>
 
   <footer class="footer">
@@ -690,7 +832,6 @@
     muteEl.style.boxShadow = t.mute.shadow;
   }
 
-  // Auto-cycle every 4 seconds
   setInterval(function() {
     currentTheme = (currentTheme + 1) % themes.length;
     applyTheme(themes[currentTheme]);

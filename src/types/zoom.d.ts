@@ -32,4 +32,5 @@ export type MeetingState = {
   isMuted: boolean;
   isHandRaised: boolean;
   isMeetingActive: boolean;
+  isLeaveDialogOpen: boolean;
 };

@@ -168,6 +168,7 @@
 
     .mockup-hand {
       display: flex;
+      flex-direction: row-reverse;
       align-items: center;
       justify-content: center;
       gap: 10px;
@@ -444,7 +445,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <div class="logo">Zoomi</div>
-        <p class="tagline">כפתורים גדולים, צבעוניים<br>וקלים לשימוש לילדים</p>
+        <p class="tagline">כפתורים גדולים, צבעוניים<br>וקלים לשימוש לילדים בזום</p>
         <a href="zoomi-extension.zip" class="download-btn" download>
           הורד בחינם
         </a>
@@ -454,7 +455,7 @@
       <div class="mockup-wrapper">
         <div class="mockup" dir="rtl">
           <div class="mockup-header">
-            <div class="mockup-theme-btn">&#x1F3A8;</div>
+            <div class="mockup-theme-btn" style="pointer-events:none;cursor:default">&#x1F31F;</div>
             <div class="mockup-logo">Zoomi</div>
           </div>
 
@@ -469,14 +470,14 @@
 
           <div class="mockup-hand">
             <span>✋</span>
-            <span>הרם יד</span>
+            <span>הָרֵם יָד</span>
           </div>
 
           <div class="mockup-mute">
             <span class="mockup-mute-icon">🔇</span>
             <div class="mockup-mute-text">
-              <span class="mockup-mute-status">אני בשקט</span>
-              <span class="mockup-mute-hint">לחץ לדבר</span>
+              <span class="mockup-mute-status">אֲנִי בְּשֶׁקֶט</span>
+              <span class="mockup-mute-hint">לְחַץ לְדַבֵּר</span>
             </div>
           </div>
         </div>
@@ -590,79 +591,75 @@
   var themes = [
     {
       name: 'Classic',
-      icon: '🎨',
-      bg: 'white',
-      shadow: '0 24px 48px rgba(219,39,119,0.15), 0 8px 24px rgba(0,0,0,0.12)',
+      icon: '\u{1F31F}',
+      bg: '#ffffff',
+      shadow: '0 24px 48px rgba(219,39,119,0.1)',
       border: 'none',
       logo: '#9ca3af',
-      labelColor: '#9ca3af',
       emojis: [
-        { bg: '#fee2e2', shadow: '0 10px 20px rgba(239,68,68,0.35)' },
-        { bg: '#dcfce7', shadow: '0 10px 20px rgba(34,197,94,0.35)' },
-        { bg: '#fef3c7', shadow: '0 10px 20px rgba(245,158,11,0.35)' },
-        { bg: '#cffafe', shadow: '0 10px 20px rgba(6,182,212,0.35)' },
-        { bg: '#f3e8ff', shadow: '0 10px 20px rgba(139,92,246,0.35)' },
-        { bg: '#ffedd5', shadow: '0 10px 20px rgba(249,115,22,0.35)' }
+        { bg: '#fee2e2', shadow: 'none', border: 'none' },
+        { bg: '#dcfce7', shadow: 'none', border: 'none' },
+        { bg: '#fef3c7', shadow: 'none', border: 'none' },
+        { bg: '#e0f2fe', shadow: 'none', border: 'none' },
+        { bg: '#f3e8ff', shadow: 'none', border: 'none' },
+        { bg: '#ffedd5', shadow: 'none', border: 'none' }
       ],
       hand: { bg: '#f1f5f9', color: '#475569', shadow: 'none' },
       mute: { bg: '#ef4444', shadow: '0 14px 28px rgba(239,68,68,0.3)' }
     },
     {
       name: 'Gamer',
-      icon: '🎮',
-      bg: 'rgba(22,27,42,0.95)',
-      shadow: '0 24px 48px rgba(0,0,0,0.4), 0 0 30px rgba(139,92,246,0.2)',
-      border: '1px solid rgba(139,92,246,0.3)',
-      logo: '#818cf8',
-      labelColor: '#a78bfa',
+      icon: '\u{1F3AE}',
+      bg: 'rgba(22,27,42,0.85)',
+      shadow: '0 30px 60px rgba(0,0,0,0.4)',
+      border: '1px solid rgba(255,255,255,0.08)',
+      logo: '#ffffff',
       emojis: [
-        { bg: 'rgba(239,68,68,0.15)', shadow: '0 0 12px rgba(239,68,68,0.4)' },
-        { bg: 'rgba(34,197,94,0.15)', shadow: '0 0 12px rgba(34,197,94,0.4)' },
-        { bg: 'rgba(245,158,11,0.15)', shadow: '0 0 12px rgba(245,158,11,0.4)' },
-        { bg: 'rgba(6,182,212,0.15)', shadow: '0 0 12px rgba(6,182,212,0.4)' },
-        { bg: 'rgba(139,92,246,0.15)', shadow: '0 0 12px rgba(139,92,246,0.4)' },
-        { bg: 'rgba(249,115,22,0.15)', shadow: '0 0 12px rgba(249,115,22,0.4)' }
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(255,51,102,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(0,230,118,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(255,234,0,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(0,229,255,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(213,0,249,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(255,145,0,0.4)', border: '2px solid transparent' }
       ],
-      hand: { bg: 'rgba(139,92,246,0.2)', color: '#c4b5fd', shadow: '0 0 12px rgba(139,92,246,0.3)' },
-      mute: { bg: 'linear-gradient(135deg, #ef4444, #dc2626)', shadow: '0 0 20px rgba(239,68,68,0.5)' }
+      hand: { bg: 'linear-gradient(135deg, #3a22f2, #8338ec)', color: '#ffffff', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #f2135d, #ff4c4c)', shadow: '0 0 20px rgba(242,19,93,0.4)' }
     },
     {
       name: 'Space',
-      icon: '🚀',
-      bg: 'linear-gradient(180deg, #0f0c29, #302b63, #24243e)',
-      shadow: '0 24px 48px rgba(99,102,241,0.3), 0 0 40px rgba(99,102,241,0.15)',
-      border: '1px solid rgba(99,102,241,0.3)',
-      logo: '#818cf8',
-      labelColor: '#818cf8',
+      icon: '\u{1F680}',
+      bg: 'linear-gradient(160deg, #0f0c29, #1a1145, #24243e)',
+      shadow: '0 20px 50px rgba(0,0,0,0.5)',
+      border: '1px solid rgba(167,139,250,0.15)',
+      logo: '#a78bfa',
       emojis: [
-        { bg: 'rgba(99,102,241,0.2)', shadow: '0 0 10px rgba(99,102,241,0.3)' },
-        { bg: 'rgba(139,92,246,0.2)', shadow: '0 0 10px rgba(139,92,246,0.3)' },
-        { bg: 'rgba(236,72,153,0.2)', shadow: '0 0 10px rgba(236,72,153,0.3)' },
-        { bg: 'rgba(59,130,246,0.2)', shadow: '0 0 10px rgba(59,130,246,0.3)' },
-        { bg: 'rgba(168,85,247,0.2)', shadow: '0 0 10px rgba(168,85,247,0.3)' },
-        { bg: 'rgba(14,165,233,0.2)', shadow: '0 0 10px rgba(14,165,233,0.3)' }
+        { bg: 'rgba(99,102,241,0.15)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(129,140,248,0.2)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(167,139,250,0.2)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(99,102,241,0.18)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(139,92,246,0.2)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(129,140,248,0.18)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' }
       ],
-      hand: { bg: 'rgba(99,102,241,0.15)', color: '#c4b5fd', shadow: 'none' },
-      mute: { bg: 'linear-gradient(135deg, #818cf8, #6366f1)', shadow: '0 14px 28px rgba(99,102,241,0.4)' }
+      hand: { bg: 'linear-gradient(135deg, #818cf8, #6366f1)', color: '#ffffff', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #ec4899, #db2777)', shadow: '0 14px 28px rgba(236,72,153,0.35)' }
     },
     {
       name: 'Candy',
-      icon: '🍬',
+      icon: '\u{1F36C}',
       bg: '#fff0f6',
-      shadow: '0 24px 48px rgba(236,72,153,0.15), 0 8px 24px rgba(0,0,0,0.08)',
-      border: '2px dashed rgba(236,72,153,0.25)',
+      shadow: '0 24px 48px rgba(244,114,182,0.15)',
+      border: 'none',
       logo: '#f472b6',
-      labelColor: '#ec4899',
       emojis: [
-        { bg: '#fff1f2', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
-        { bg: '#fdf4ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' },
-        { bg: '#fce7f3', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
-        { bg: '#faf5ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' },
-        { bg: '#fff1f2', shadow: '0 8px 16px rgba(236,72,153,0.2)' },
-        { bg: '#fdf4ff', shadow: '0 8px 16px rgba(168,85,247,0.2)' }
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' }
       ],
-      hand: { bg: '#fff1f2', color: '#ec4899', shadow: 'none' },
-      mute: { bg: 'linear-gradient(135deg, #f472b6, #ec4899)', shadow: '0 14px 28px rgba(236,72,153,0.35)' }
+      hand: { bg: '#fce4ec', color: '#9d4b73', shadow: 'none' },
+      mute: { bg: '#f472b6', shadow: '0 14px 28px rgba(244,114,182,0.3)' }
     }
   ];
 
@@ -681,11 +678,10 @@
     mockup.style.border = t.border;
     logoEl.style.color = t.logo;
     themeBtn.textContent = t.icon;
-    themeLabel.textContent = t.name;
-    themeLabel.style.color = t.labelColor;
     for (var i = 0; i < emojiEls.length; i++) {
       emojiEls[i].style.background = t.emojis[i].bg;
       emojiEls[i].style.boxShadow = t.emojis[i].shadow;
+      emojiEls[i].style.border = t.emojis[i].border;
     }
     handEl.style.background = t.hand.bg;
     handEl.style.color = t.hand.color;
@@ -693,12 +689,6 @@
     muteEl.style.background = t.mute.bg;
     muteEl.style.boxShadow = t.mute.shadow;
   }
-
-  themeBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    currentTheme = (currentTheme + 1) % themes.length;
-    applyTheme(themes[currentTheme]);
-  });
 
   // Auto-cycle every 4 seconds
   setInterval(function() {

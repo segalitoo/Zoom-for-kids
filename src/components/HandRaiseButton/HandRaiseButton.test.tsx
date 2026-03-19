@@ -3,24 +3,24 @@ import userEvent from '@testing-library/user-event';
 import { HandRaiseButton } from './HandRaiseButton';
 
 describe('HandRaiseButton', () => {
-  it('renders with "הרם יד" label when hand is not raised', () => {
+  it('renders with "הָרֵם יָד" label when hand is not raised', () => {
     render(<HandRaiseButton isHandRaised={false} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByRole('button', { name: /הרם יד/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /הָרֵם יָד/i })).toBeInTheDocument();
   });
 
-  it('renders with "הורד יד" label when hand is raised', () => {
+  it('renders with "הוֹרֵד יָד" label when hand is raised', () => {
     render(<HandRaiseButton isHandRaised={true} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByRole('button', { name: /הורד יד/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /הוֹרֵד יָד/i })).toBeInTheDocument();
   });
 
-  it('shows "הורד יד" text when raised', () => {
+  it('shows "הוֹרֵד יָד" text when raised', () => {
     render(<HandRaiseButton isHandRaised={true} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByText('הורד יד')).toBeInTheDocument();
+    expect(screen.getByText('הוֹרֵד יָד')).toBeInTheDocument();
   });
 
-  it('shows "הרם יד" text when not raised', () => {
+  it('shows "הָרֵם יָד" text when not raised', () => {
     render(<HandRaiseButton isHandRaised={false} onRaise={jest.fn()} onLower={jest.fn()} />);
-    expect(screen.getByText('הרם יד')).toBeInTheDocument();
+    expect(screen.getByText('הָרֵם יָד')).toBeInTheDocument();
   });
 
   it('calls onRaise when clicked and hand is not raised', async () => {

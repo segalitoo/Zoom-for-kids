@@ -26,10 +26,10 @@ export function HandRaiseButton({ isHandRaised, onRaise, onLower }: HandRaiseBut
         className={`${styles.btn} ${isHandRaised ? styles.raised : styles.lowered} ${isAnimating ? styles.animating : ''}`}
         onClick={handleClick}
         aria-pressed={isHandRaised}
-        aria-label={isHandRaised ? 'הורד יד' : 'הרם יד'}
+        aria-label={isHandRaised ? 'הוֹרֵד יָד' : 'הָרֵם יָד'}
       >
         <span className={styles.label}>
-          {isHandRaised ? 'הורד יד' : 'הרם יד'}
+          {isHandRaised ? 'הוֹרֵד יָד' : 'הָרֵם יָד'}
         </span>
         <span className={styles.handIcon} aria-hidden="true">
           ✋

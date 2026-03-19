@@ -23,6 +23,17 @@ function getIsMeetingActive(): boolean {
   );
 }
 
+function getIsLeaveDialogOpen(): boolean {
+  // Zoom shows a "Leave Meeting" confirmation button when the user clicks the leave/end button.
+  // Detect it by aria-label or by button text content.
+  return !!(
+    findByAriaLabelContaining('Leave Meeting') ||
+    findByAriaLabelContaining('leave meeting') ||
+    document.querySelector('[class*="leave-meeting"]') ||
+    document.querySelector('[class*="LeaveBtn"]')
+  );
+}
+
 /**
  * Observes the Zoom meeting DOM via MutationObserver to track real-time state.
  * Cleans up the observer on unmount.
@@ -32,6 +43,7 @@ export function useMeetingState(): MeetingState {
     isMuted: false,
     isHandRaised: false,
     isMeetingActive: false,
+    isLeaveDialogOpen: false,
   });
 
   useEffect(() => {
@@ -42,6 +54,7 @@ export function useMeetingState(): MeetingState {
         isMuted: getIsMuted(),
         isHandRaised: getIsHandRaised(),
         isMeetingActive: getIsMeetingActive(),
+        isLeaveDialogOpen: getIsLeaveDialogOpen(),
       });
     }
 

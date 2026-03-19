@@ -6,13 +6,13 @@ describe('MuteToggle', () => {
   it('renders unmuted state correctly', () => {
     render(<MuteToggle isMuted={false} onToggle={jest.fn()} />);
     expect(screen.getByRole('button', { name: /השתק מיקרופון/i })).toBeInTheDocument();
-    expect(screen.getByText('אני מדבר')).toBeInTheDocument();
+    expect(screen.getByText('אֲנִי מְדַבֵּר')).toBeInTheDocument();
   });
 
   it('renders muted state correctly', () => {
     render(<MuteToggle isMuted={true} onToggle={jest.fn()} />);
     expect(screen.getByRole('button', { name: /הפעל מיקרופון/i })).toBeInTheDocument();
-    expect(screen.getByText('אני בשקט')).toBeInTheDocument();
+    expect(screen.getByText('אֲנִי בְּשֶׁקֶט')).toBeInTheDocument();
   });
 
   it('calls onToggle when clicked', async () => {
@@ -41,10 +41,10 @@ describe('MuteToggle', () => {
 
   it('shows action hint text', () => {
     const { rerender } = render(<MuteToggle isMuted={false} onToggle={jest.fn()} />);
-    expect(screen.getByText('לחץ להשתיק')).toBeInTheDocument();
+    expect(screen.getByText('לְחַץ לְהַשְׁתִּיק')).toBeInTheDocument();
 
     rerender(<MuteToggle isMuted={true} onToggle={jest.fn()} />);
-    expect(screen.getByText('לחץ לדבר')).toBeInTheDocument();
+    expect(screen.getByText('לְחַץ לְדַבֵּר')).toBeInTheDocument();
   });
 
   it('is keyboard accessible via Space', async () => {

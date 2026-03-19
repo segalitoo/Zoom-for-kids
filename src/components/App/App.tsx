@@ -23,7 +23,7 @@ type AppProps = {
 function AppInner({ shadowRoot }: AppProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const { themeStyle } = useTheme();
-  const { isMuted, isHandRaised, isMeetingActive } = useMeetingState();
+  const { isMuted, isHandRaised, isMeetingActive, isLeaveDialogOpen } = useMeetingState();
   const {
     sendClap,
     sendThumbsUp,
@@ -49,11 +49,16 @@ function AppInner({ shadowRoot }: AppProps) {
 
   if (!isMeetingActive) return null;
 
+  const panelStyle: React.CSSProperties = {
+    ...(themeStyle as React.CSSProperties),
+    ...(isLeaveDialogOpen ? { bottom: '160px' } : {}),
+  };
+
   if (!isExpanded) {
     return (
       <button
         className={styles.minimizedBtn}
-        style={themeStyle as React.CSSProperties}
+        style={panelStyle}
         onClick={() => setIsExpanded(true)}
         aria-label="פתח את בקרי זום לילדים"
         title="פתח זום לילדים"
@@ -66,7 +71,7 @@ function AppInner({ shadowRoot }: AppProps) {
   return (
     <div
       className={styles.panel}
-      style={themeStyle as React.CSSProperties}
+      style={panelStyle}
       role="complementary"
       aria-label="בקרי זום לילדים"
       dir="rtl"

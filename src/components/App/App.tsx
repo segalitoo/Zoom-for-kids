@@ -15,6 +15,7 @@ import emojiCss from '../EmojiPanel/EmojiPanel.module.css?inline';
 import handRaiseCss from '../HandRaiseButton/HandRaiseButton.module.css?inline';
 import muteCss from '../MuteToggle/MuteToggle.module.css?inline';
 import themePickerCss from '../../themes/ThemePicker.module.css?inline';
+import fontCss from '../../fonts/varela-round.css?inline';
 
 type AppProps = {
   shadowRoot: ShadowRoot;
@@ -43,7 +44,7 @@ function AppInner({ shadowRoot }: AppProps) {
 
     const styleEl = document.createElement('style');
     styleEl.id = 'zoom-kids-styles';
-    styleEl.textContent = [contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
+    styleEl.textContent = [fontCss, contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
     shadowRoot.insertBefore(styleEl, shadowRoot.firstChild);
   }, [shadowRoot]);
 

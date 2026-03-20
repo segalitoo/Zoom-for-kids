@@ -2,7 +2,7 @@
    Zoom for Kids — Floating Panel (Themed)
    ============================================================ */
 
-@import '../../fonts/varela-round.css';
+/* Font is injected programmatically in App.tsx via chrome.runtime.getURL */
 
 .panel {
   position: fixed;

@@ -15,6 +15,18 @@ import emojiCss from '../EmojiPanel/EmojiPanel.module.css?inline';
 import handRaiseCss from '../HandRaiseButton/HandRaiseButton.module.css?inline';
 import muteCss from '../MuteToggle/MuteToggle.module.css?inline';
 import themePickerCss from '../../themes/ThemePicker.module.css?inline';
+
+function getFontFaceCss(): string {
+  const fontUrl = chrome.runtime.getURL('fonts/VarelaRound-Regular.woff2');
+  return `@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('${fontUrl}') format('woff2');
+}`;
+}
+
 type AppProps = {
   shadowRoot: ShadowRoot;
 };
@@ -40,26 +52,20 @@ function AppInner({ shadowRoot }: AppProps) {
     const existing = shadowRoot.querySelector('#zoom-kids-styles');
     if (existing) return;
 
-    // @font-face must be in the main document — Shadow DOM doesn't load fonts
+    const fontFaceCss = getFontFaceCss();
+
+    // Register font globally so the browser downloads it
     if (!document.querySelector('#zoom-kids-font')) {
-      const fontUrl = chrome.runtime.getURL('fonts/VarelaRound-Regular.woff2');
       const fontStyle = document.createElement('style');
       fontStyle.id = 'zoom-kids-font';
-      fontStyle.textContent = `
-        @font-face {
-          font-family: 'Varela Round';
-          font-style: normal;
-          font-weight: 400;
-          font-display: swap;
-          src: url('${fontUrl}') format('woff2');
-        }
-      `;
+      fontStyle.textContent = fontFaceCss;
       document.head.appendChild(fontStyle);
     }
 
+    // Include @font-face inside shadow DOM too so scoped CSS can reference it
     const styleEl = document.createElement('style');
     styleEl.id = 'zoom-kids-styles';
-    styleEl.textContent = [contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
+    styleEl.textContent = [fontFaceCss, contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
     shadowRoot.insertBefore(styleEl, shadowRoot.firstChild);
   }, [shadowRoot]);
 

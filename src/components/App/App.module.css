@@ -2,7 +2,7 @@
    Zoom for Kids — Floating Panel (Themed)
    ============================================================ */
 
-/* Font is injected programmatically in App.tsx via chrome.runtime.getURL */
+/* Font is loaded via Google Fonts <link> in App.tsx */
 
 .panel {
   position: fixed;

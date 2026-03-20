@@ -41,22 +41,20 @@ function AppInner({ shadowRoot }: AppProps) {
     const existing = shadowRoot.querySelector('#zoom-kids-styles');
     if (existing) return;
 
-    // Load font via <link> from the extension's own context (bypasses page CSP)
-    const fontCssUrl = chrome.runtime.getURL('fonts/fonts.css');
+    // Load Varela Round from Google Fonts in both document and shadow DOM
+    const googleFontsUrl = 'https://fonts.googleapis.com/css2?family=Varela+Round&display=swap';
 
-    // Add font <link> to document.head for global registration
     if (!document.querySelector('#zoom-kids-font')) {
       const fontLink = document.createElement('link');
       fontLink.id = 'zoom-kids-font';
       fontLink.rel = 'stylesheet';
-      fontLink.href = fontCssUrl;
+      fontLink.href = googleFontsUrl;
       document.head.appendChild(fontLink);
     }
 
-    // Add font <link> inside shadow DOM too for scoped access
     const fontLink = document.createElement('link');
     fontLink.rel = 'stylesheet';
-    fontLink.href = fontCssUrl;
+    fontLink.href = googleFontsUrl;
     shadowRoot.insertBefore(fontLink, shadowRoot.firstChild);
 
     const styleEl = document.createElement('style');

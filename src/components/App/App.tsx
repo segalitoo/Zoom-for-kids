@@ -16,17 +16,6 @@ import handRaiseCss from '../HandRaiseButton/HandRaiseButton.module.css?inline';
 import muteCss from '../MuteToggle/MuteToggle.module.css?inline';
 import themePickerCss from '../../themes/ThemePicker.module.css?inline';
 
-function getFontFaceCss(): string {
-  const fontUrl = chrome.runtime.getURL('fonts/VarelaRound-Regular.woff2');
-  return `@font-face {
-  font-family: 'Varela Round';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('${fontUrl}') format('woff2');
-}`;
-}
-
 type AppProps = {
   shadowRoot: ShadowRoot;
 };
@@ -52,20 +41,27 @@ function AppInner({ shadowRoot }: AppProps) {
     const existing = shadowRoot.querySelector('#zoom-kids-styles');
     if (existing) return;
 
-    const fontFaceCss = getFontFaceCss();
+    // Load font via <link> from the extension's own context (bypasses page CSP)
+    const fontCssUrl = chrome.runtime.getURL('fonts/fonts.css');
 
-    // Register font globally so the browser downloads it
+    // Add font <link> to document.head for global registration
     if (!document.querySelector('#zoom-kids-font')) {
-      const fontStyle = document.createElement('style');
-      fontStyle.id = 'zoom-kids-font';
-      fontStyle.textContent = fontFaceCss;
-      document.head.appendChild(fontStyle);
+      const fontLink = document.createElement('link');
+      fontLink.id = 'zoom-kids-font';
+      fontLink.rel = 'stylesheet';
+      fontLink.href = fontCssUrl;
+      document.head.appendChild(fontLink);
     }
 
-    // Include @font-face inside shadow DOM too so scoped CSS can reference it
+    // Add font <link> inside shadow DOM too for scoped access
+    const fontLink = document.createElement('link');
+    fontLink.rel = 'stylesheet';
+    fontLink.href = fontCssUrl;
+    shadowRoot.insertBefore(fontLink, shadowRoot.firstChild);
+
     const styleEl = document.createElement('style');
     styleEl.id = 'zoom-kids-styles';
-    styleEl.textContent = [fontFaceCss, contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
+    styleEl.textContent = [contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
     shadowRoot.insertBefore(styleEl, shadowRoot.firstChild);
   }, [shadowRoot]);
 

@@ -31,7 +31,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["fonts/VarelaRound-Regular.woff2"],
+      "resources": ["fonts/fonts.css", "fonts/VarelaRound-Regular.woff2"],
       "matches": ["https://*.zoom.us/*"]
     }
   ]

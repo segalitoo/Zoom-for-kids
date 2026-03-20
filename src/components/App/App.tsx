@@ -15,8 +15,6 @@ import emojiCss from '../EmojiPanel/EmojiPanel.module.css?inline';
 import handRaiseCss from '../HandRaiseButton/HandRaiseButton.module.css?inline';
 import muteCss from '../MuteToggle/MuteToggle.module.css?inline';
 import themePickerCss from '../../themes/ThemePicker.module.css?inline';
-import fontCss from '../../fonts/varela-round.css?inline';
-
 type AppProps = {
   shadowRoot: ShadowRoot;
 };
@@ -44,9 +42,18 @@ function AppInner({ shadowRoot }: AppProps) {
 
     // @font-face must be in the main document — Shadow DOM doesn't load fonts
     if (!document.querySelector('#zoom-kids-font')) {
+      const fontUrl = chrome.runtime.getURL('fonts/VarelaRound-Regular.woff2');
       const fontStyle = document.createElement('style');
       fontStyle.id = 'zoom-kids-font';
-      fontStyle.textContent = fontCss;
+      fontStyle.textContent = `
+        @font-face {
+          font-family: 'Varela Round';
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url('${fontUrl}') format('woff2');
+        }
+      `;
       document.head.appendChild(fontStyle);
     }
 

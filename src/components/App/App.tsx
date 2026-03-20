@@ -42,9 +42,17 @@ function AppInner({ shadowRoot }: AppProps) {
     const existing = shadowRoot.querySelector('#zoom-kids-styles');
     if (existing) return;
 
+    // @font-face must be in the main document — Shadow DOM doesn't load fonts
+    if (!document.querySelector('#zoom-kids-font')) {
+      const fontStyle = document.createElement('style');
+      fontStyle.id = 'zoom-kids-font';
+      fontStyle.textContent = fontCss;
+      document.head.appendChild(fontStyle);
+    }
+
     const styleEl = document.createElement('style');
     styleEl.id = 'zoom-kids-styles';
-    styleEl.textContent = [fontCss, contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
+    styleEl.textContent = [contentCss, appCss, emojiCss, handRaiseCss, muteCss, themePickerCss].join('\n');
     shadowRoot.insertBefore(styleEl, shadowRoot.firstChild);
   }, [shadowRoot]);
 

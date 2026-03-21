@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zoomi Case Study - UX Design for Kids</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,9 +42,17 @@
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+      text-align: right;
     }
 
     .hero-badge {
@@ -66,11 +75,109 @@
     }
 
     .hero-subtitle {
-      font-size: 22px;
+      font-size: 20px;
       color: rgba(255,255,255,0.7);
       line-height: 1.6;
-      max-width: 550px;
-      margin: 0 auto;
+    }
+
+    /* ---- Hero Mockup ---- */
+    .hero-mockup {
+      flex-shrink: 0;
+    }
+
+    .mockup {
+      width: 220px;
+      background: white;
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow: 0 24px 48px rgba(219, 39, 119, 0.15), 0 8px 24px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-logo {
+      font-size: 16px;
+      font-weight: bold;
+      color: #9ca3af;
+      opacity: 0.5;
+      letter-spacing: -1px;
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mockup-emoji {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      border: none;
+    }
+
+    .mockup-hand {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: inherit;
+      border: none;
+    }
+
+    .mockup-mute {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 20px;
+      background: #ef4444;
+      color: white;
+      font-family: inherit;
+      border: none;
+      box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+    }
+
+    .mockup-mute-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
+
+    .mockup-mute-status {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .mockup-mute-hint {
+      font-size: 11px;
+      opacity: 0.9;
     }
 
     /* ---- Section Shared ---- */
@@ -395,8 +502,11 @@
     }
 
     @media (max-width: 600px) {
+      .hero-content { flex-direction: column; gap: 32px; }
+      .hero-text { text-align: center; }
       .hero h1 { font-size: 36px; }
       .hero-subtitle { font-size: 18px; }
+      .mockup { width: 190px; }
       .problem-grid, .solution-grid { grid-template-columns: 1fr; }
       .results-grid { grid-template-columns: 1fr; }
       .section-title { font-size: 26px; }
@@ -408,13 +518,38 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">Case Study</div>
-      <h1>Zoomi</h1>
-      <p class="hero-subtitle">
-        עיצוב חוויית שימוש בזום לילדים בגילאי 5-12
-        <br>
-        כשהכפתורים של המבוגרים פשוט לא עובדים
-      </p>
+      <div class="hero-text">
+        <div class="hero-badge">Case Study</div>
+        <h1>Zoomi</h1>
+        <p class="hero-subtitle">
+          עיצוב חוויית שימוש בזום לילדים בגילאי 5-12
+          <br>
+          כשהכפתורים של המבוגרים פשוט לא עובדים
+        </p>
+      </div>
+      <div class="hero-mockup">
+        <div class="mockup">
+          <div class="mockup-header">
+            <span class="mockup-logo">Zoomi</span>
+          </div>
+          <div class="mockup-grid">
+            <div class="mockup-emoji" style="background:#fef3c7">👏</div>
+            <div class="mockup-emoji" style="background:#dbeafe">👍</div>
+            <div class="mockup-emoji" style="background:#fce7f3">❤️</div>
+            <div class="mockup-emoji" style="background:#fef9c3">😂</div>
+            <div class="mockup-emoji" style="background:#ede9fe">🎉</div>
+            <div class="mockup-emoji" style="background:#e0f2fe">😮</div>
+          </div>
+          <div class="mockup-hand">✋ הרמת יד</div>
+          <div class="mockup-mute">
+            <span style="font-size:22px">🔇</span>
+            <div class="mockup-mute-text">
+              <span class="mockup-mute-status">אני שקט/ה</span>
+              <span class="mockup-mute-hint">לחצו לדבר</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="hero-wave">
       <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zoomi - Zoom for Kids</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Playpen+Sans+Hebrew:wght@400&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -429,7 +429,7 @@
 
     /* ---- Testimonials ---- */
     .testimonials {
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto;
       padding: 48px 24px 56px;
     }
@@ -438,45 +438,75 @@
       font-size: 32px;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
       color: #2d3748;
     }
 
     .testimonial-cards {
       display: flex;
-      gap: 16px;
+      gap: 24px;
       flex-wrap: wrap;
       justify-content: center;
     }
 
     .testimonial {
-      background: linear-gradient(135deg, #fdf2f8, #faf5ff);
-      border-radius: 24px;
-      padding: 24px 28px;
-      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
-      border: 1px solid rgba(139, 92, 246, 0.1);
+      background: #fffef5;
+      border-radius: 4px;
+      padding: 28px 24px 20px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.08);
       display: flex;
-      align-items: center;
-      gap: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
       flex: 1;
-      min-width: 280px;
+      min-width: 200px;
+      max-width: 220px;
+      position: relative;
+      transition: transform 0.3s ease;
     }
+
+    .testimonial:hover {
+      transform: scale(1.05);
+    }
+
+    .testimonial:nth-child(1) { transform: rotate(-2deg); }
+    .testimonial:nth-child(2) { transform: rotate(1.5deg); }
+    .testimonial:nth-child(3) { transform: rotate(-1deg); }
+    .testimonial:nth-child(1):hover { transform: rotate(-2deg) scale(1.05); }
+    .testimonial:nth-child(2):hover { transform: rotate(1.5deg) scale(1.05); }
+    .testimonial:nth-child(3):hover { transform: rotate(-1deg) scale(1.05); }
+
+    .testimonial-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 20px;
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+
+    .testimonial:nth-child(1) .testimonial-tape { background: #fca5a5; transform: translateX(-50%) rotate(3deg); }
+    .testimonial:nth-child(2) .testimonial-tape { background: #93c5fd; transform: translateX(-50%) rotate(-2deg); }
+    .testimonial:nth-child(3) .testimonial-tape { background: #86efac; transform: translateX(-50%) rotate(1deg); }
 
     .testimonial-body {
       flex: 1;
     }
 
     .testimonial-quote {
-      font-size: 17px;
-      color: #4a5568;
+      font-family: 'Playpen Sans Hebrew', cursive;
+      font-size: 22px;
+      color: #374151;
       line-height: 1.5;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .testimonial-author {
-      font-size: 14px;
-      font-weight: bold;
-      color: #8b5cf6;
+      font-family: 'Playpen Sans Hebrew', cursive;
+      font-size: 16px;
+      color: #9ca3af;
     }
 
     /* ---- Bottom CTA ---- */
@@ -559,7 +589,7 @@
         <div class="logo">Zoomi</div>
         <p class="tagline">כפתורים גדולים, צבעוניים<br>וקלים לשימוש לילדים בזום</p>
         <a href="https://chromewebstore.google.com/detail/zoom-for-kids/nkdkjpialpoebdialgmnipjlibmnfogj" class="download-btn" target="_blank" rel="noopener">
-          הוסף לכרום — בחינם
+          הוסף לכרום
         </a>
 
       </div>
@@ -643,24 +673,24 @@
     <h2 class="testimonials-title">מה (ילדים) אומרים עלינו</h2>
     <div class="testimonial-cards">
       <div class="testimonial">
-
+        <div class="testimonial-tape"></div>
         <div class="testimonial-body">
-          <p class="testimonial-quote">זה מגניב בטירופים!</p>
-          <div class="testimonial-author">יונתן ס. (בן 6)</div>
+          <p class="testimonial-quote">"זה מגניב בטירופים!"</p>
+          <div class="testimonial-author">- יונתן ס. (בן 6)</div>
         </div>
       </div>
       <div class="testimonial">
-
+        <div class="testimonial-tape"></div>
         <div class="testimonial-body">
-          <p class="testimonial-quote">אני מצליחה להשתיק ולהפעיל לבד בלי לקרוא לאמא!</p>
-          <div class="testimonial-author">חן א. (בת 7)</div>
+          <p class="testimonial-quote">"אני מצליחה להשתיק ולהפעיל לבד בלי לקרוא לאמא!"</p>
+          <div class="testimonial-author">- חן א. (בת 7)</div>
         </div>
       </div>
       <div class="testimonial">
-
+        <div class="testimonial-tape"></div>
         <div class="testimonial-body">
-          <p class="testimonial-quote">אני אוהב שאפשר להחליף צבעים! הסקין של החלל הכי טוב</p>
-          <div class="testimonial-author">אורי ר. (בן 7)</div>
+          <p class="testimonial-quote">"אני אוהב שאפשר להחליף צבעים! הסקין של החלל הכי טוב"</p>
+          <div class="testimonial-author">- אורי ר. (בן 7)</div>
         </div>
       </div>
     </div>
@@ -671,7 +701,7 @@
     <h2>מוכנים לשדרג את שיעורי הזום?</h2>
     <p>התוסף זמין בחנות כרום — התקנה בקליק אחד</p>
     <a href="https://chromewebstore.google.com/detail/zoom-for-kids/nkdkjpialpoebdialgmnipjlibmnfogj" class="download-btn" target="_blank" rel="noopener">
-      הוסף לכרום — בחינם
+      הוסף לכרום
     </a>
   </section>
 

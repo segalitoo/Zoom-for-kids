@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zoomi - Zoom for Kids</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Playpen+Sans+Hebrew:wght@400&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -70,7 +70,7 @@
       line-height: 1.5;
     }
 
-    .download-btn {
+    .download-btn-hero {
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -88,7 +88,7 @@
       box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
     }
 
-    .download-btn:hover {
+    .download-btn-hero:hover {
       transform: translateY(-3px);
       box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
     }
@@ -239,15 +239,33 @@
       flex-shrink: 0;
     }
 
-
-
     /* ---- Features ---- */
+    .features-section {
+      background: #fffdf7;
+      padding: 64px 24px;
+      position: relative;
+    }
+
+    .features-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #2d3748;
+    }
+
+    .features-subtitle {
+      font-size: 16px;
+      color: #9ca3af;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
     .features {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 20px 24px 56px;
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
@@ -269,14 +287,14 @@
     }
 
     .feature-icon-wrap {
-      width: 56px;
-      height: 56px;
-      min-width: 56px;
-      border-radius: 18px;
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      font-size: 30px;
     }
 
     .feature-icon-wrap.reactions { background: #fef3c7; }
@@ -291,199 +309,126 @@
     .feature-title {
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       color: #2d3748;
     }
 
     .feature-desc {
       font-size: 14px;
       color: #718096;
-      line-height: 1.5;
-    }
-
-    /* ---- Install ---- */
-    .install-section {
-      background: linear-gradient(180deg, #fffbfe 0%, #faf5ff 100%);
-      padding: 56px 24px 64px;
-      position: relative;
-    }
-
-    .install-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .install-title {
-      font-size: 32px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 12px;
-      color: #2d3748;
-    }
-
-    .install-subtitle {
-      text-align: center;
-      font-size: 16px;
-      color: #9ca3af;
-      margin-bottom: 40px;
-    }
-
-    .steps-simple {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 40px;
-    }
-
-    .step-simple {
-      text-align: center;
-      flex: 1;
-      max-width: 200px;
-    }
-
-    .step-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: white;
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      margin: 0 auto 16px;
-    }
-
-    .step-simple h3 {
-      font-size: 17px;
-      color: #2d3748;
-      margin-bottom: 6px;
-    }
-
-    .step-simple p {
-      font-size: 13px;
-      color: #9ca3af;
-      line-height: 1.4;
-    }
-
-    .steps-arrow {
-      display: flex;
-      align-items: center;
-      font-size: 24px;
-      color: #c4b5fd;
-      padding-top: 20px;
-    }
-
-    .steps-detail {
-      background: white;
-      border-radius: 20px;
-      padding: 28px 32px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-      border: 1px solid #f1f5f9;
-    }
-
-    .steps-detail summary {
-      font-size: 16px;
-      font-weight: bold;
-      color: #6366f1;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .steps-detail summary::before {
-      content: '>';
-      display: inline-block;
-      transition: transform 0.2s;
-      font-size: 14px;
-    }
-
-    .steps-detail[open] summary::before {
-      transform: rotate(90deg);
-    }
-
-    .steps-detail ol {
-      margin-top: 20px;
-      padding-right: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .steps-detail li {
-      font-size: 15px;
-      color: #4a5568;
       line-height: 1.6;
-    }
-
-    .steps-detail code {
-      background: #f1f5f9;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 14px;
-      direction: ltr;
-      unicode-bidi: embed;
     }
 
     /* ---- Testimonials ---- */
     .testimonials {
-      max-width: 700px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 48px 24px 56px;
+      padding: 64px 24px;
     }
 
     .testimonials-title {
       font-size: 32px;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
       color: #2d3748;
     }
 
     .testimonial-cards {
       display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+      gap: 28px;
       justify-content: center;
     }
 
     .testimonial {
-      background: linear-gradient(135deg, #fdf2f8, #faf5ff);
-      border-radius: 24px;
-      padding: 24px 28px;
-      box-shadow: 0 4px 16px rgba(139, 92, 246, 0.08);
-      border: 1px solid rgba(139, 92, 246, 0.1);
+      border-radius: 6px;
+      padding: 28px 24px 20px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.08);
       display: flex;
-      align-items: center;
-      gap: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
       flex: 1;
-      min-width: 280px;
+      min-width: 200px;
+      max-width: 240px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial:nth-child(1) {
+      background: #fffbcf;
+      transform: rotate(-2.5deg);
+    }
+    .testimonial:nth-child(2) {
+      background: #eef6ff;
+      transform: rotate(1.5deg);
+    }
+    .testimonial:nth-child(3) {
+      background: #f0fdf4;
+      transform: rotate(-1deg);
+    }
+
+    .testimonial:hover { z-index: 2; }
+    .testimonial:nth-child(1):hover { transform: rotate(-2.5deg) scale(1.06); }
+    .testimonial:nth-child(2):hover { transform: rotate(1.5deg) scale(1.06); }
+    .testimonial:nth-child(3):hover { transform: rotate(-1deg) scale(1.06); }
+
+    .testimonial-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 20px;
+      border-radius: 2px;
+      opacity: 0.65;
+    }
+
+    .testimonial:nth-child(1) .testimonial-tape { background: #fca5a5; transform: translateX(-50%) rotate(3deg); }
+    .testimonial:nth-child(2) .testimonial-tape { background: #93c5fd; transform: translateX(-50%) rotate(-2deg); }
+    .testimonial:nth-child(3) .testimonial-tape { background: #86efac; transform: translateX(-50%) rotate(1deg); }
+
+    /* Subtle lined paper effect */
+    .testimonial::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 28px,
+        rgba(0,0,0,0.03) 28px,
+        rgba(0,0,0,0.03) 29px
+      );
+      border-radius: 6px;
+      pointer-events: none;
     }
 
     .testimonial-body {
       flex: 1;
+      position: relative;
+      z-index: 1;
     }
 
     .testimonial-quote {
-      font-size: 17px;
-      color: #4a5568;
+      font-family: 'Playpen Sans Hebrew', cursive;
+      font-size: 22px;
+      color: #374151;
       line-height: 1.5;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .testimonial-author {
-      font-size: 14px;
-      font-weight: bold;
-      color: #8b5cf6;
+      font-family: 'Playpen Sans Hebrew', cursive;
+      font-size: 16px;
+      color: #9ca3af;
     }
 
     /* ---- Bottom CTA ---- */
     .bottom-cta {
       text-align: center;
-      padding: 48px 24px 56px;
-      background: linear-gradient(180deg, #faf5ff 0%, #eef2ff 100%);
+      padding: 64px 24px;
+      background: linear-gradient(180deg, #fffbfe 0%, #eef6ff 100%);
       position: relative;
     }
 
@@ -497,6 +442,29 @@
       font-size: 16px;
       color: #9ca3af;
       margin-bottom: 28px;
+    }
+
+    .download-btn-bottom {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    }
+
+    .download-btn-bottom:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
     }
 
     /* ---- Floating blobs ---- */
@@ -519,12 +487,6 @@
       bottom: 40px; right: -40px;
     }
 
-    .blob-3 {
-      width: 180px; height: 180px;
-      background: radial-gradient(circle, rgba(99,102,241,0.1), transparent 70%);
-      top: 50%; left: 60%;
-    }
-
     /* ---- Footer ---- */
     .footer {
       text-align: center;
@@ -538,6 +500,7 @@
       text-decoration: none;
     }
 
+    /* ---- Mobile ---- */
     @media (max-width: 750px) {
       .hero-content { flex-direction: column; text-align: center; }
       .hero-text { text-align: center; }
@@ -546,8 +509,40 @@
       .mockup { transform: none; animation: none; }
       .mockup:hover { transform: scale(1.02); }
       .features { grid-template-columns: 1fr; }
-      .steps-simple { flex-direction: column; align-items: center; }
-      .steps-arrow { display: none; }
+
+      .testimonial-cards {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding: 20px 0;
+        gap: 20px;
+      }
+
+      .testimonial {
+        min-width: 240px;
+        max-width: 260px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+      }
+
+      .testimonial:nth-child(1),
+      .testimonial:nth-child(2),
+      .testimonial:nth-child(3) {
+        transform: rotate(0deg);
+      }
+
+      .testimonial:nth-child(1):hover,
+      .testimonial:nth-child(2):hover,
+      .testimonial:nth-child(3):hover {
+        transform: scale(1.03);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo { font-size: 42px; }
+      .tagline { font-size: 20px; }
+      .download-btn-hero { font-size: 18px; padding: 16px 32px; }
     }
   </style>
 </head>
@@ -558,10 +553,9 @@
       <div class="hero-text">
         <div class="logo">Zoomi</div>
         <p class="tagline">כפתורים גדולים, צבעוניים<br>וקלים לשימוש לילדים בזום</p>
-        <a href="zoomi-extension.zip" class="download-btn" download>
-          הורד בחינם
+        <a href="https://chromewebstore.google.com/detail/zoom-for-kids/nkdkjpialpoebdialgmnipjlibmnfogj" class="download-btn-hero" target="_blank" rel="noopener">
+          הוסף לכרום
         </a>
-
       </div>
 
       <!-- Widget mockup -->
@@ -604,103 +598,66 @@
   </section>
 
   <!-- Features -->
-  <section class="features" style="position:relative">
+  <section class="features-section">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    <div class="feature">
-      <div class="feature-icon-wrap reactions">&#x1F44F;</div>
-      <div class="feature-text">
-        <div class="feature-title">תגובות בקליק</div>
-        <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
-      </div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon-wrap hand">&#x270B;</div>
-      <div class="feature-text">
-        <div class="feature-title">הרמת יד</div>
-        <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
-      </div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon-wrap mute">&#x1F3A4;</div>
-      <div class="feature-text">
-        <div class="feature-title">השתקה</div>
-        <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור - אני מדבר / אני בשקט</div>
-      </div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon-wrap skins">&#x1F3A8;</div>
-      <div class="feature-text">
-        <div class="feature-title">סקינים</div>
-        <div class="feature-desc">4 עיצובים כיפיים - קלאסי, גיימר, חלל וסוכריות</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Install -->
-  <section class="install-section">
-    <div class="blob blob-3"></div>
-    <div class="install-inner">
-      <h2 class="install-title">התקנה ב-3 צעדים</h2>
-      <p class="install-subtitle">לוקח פחות מדקה</p>
-
-      <div class="steps-simple">
-        <div class="step-simple">
-          <div class="step-icon">&#x1F4E5;</div>
-          <h3>הורד</h3>
-          <p>לחץ על "הורד בחינם" ופתח את קובץ ה-ZIP</p>
-        </div>
-        <div class="steps-arrow">&#x276F;</div>
-        <div class="step-simple">
-          <div class="step-icon">&#x1F9E9;</div>
-          <h3>התקן בכרום</h3>
-          <p>הוסף את התוסף לדפדפן כרום</p>
-        </div>
-        <div class="steps-arrow">&#x276F;</div>
-        <div class="step-simple">
-          <div class="step-icon">&#x1F389;</div>
-          <h3>היכנס לשיעור</h3>
-          <p>פתח זום בכרום והפאנל מופיע</p>
+    <h2 class="features-title">מה זומי עושה?</h2>
+    <p class="features-subtitle">הכל מותאם לידיים קטנות ולמסכים גדולים</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon-wrap reactions">&#x1F44F;</div>
+        <div class="feature-text">
+          <div class="feature-title">תגובות בקליק</div>
+          <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
         </div>
       </div>
-
-      <details class="steps-detail">
-        <summary>הוראות מפורטות</summary>
-        <ol>
-          <li>לחץ על כפתור "הורד בחינם" למעלה. יירד קובץ ZIP למחשב.</li>
-          <li>לחץ לחיצה כפולה על קובץ ה-ZIP כדי לחלץ אותו.</li>
-          <li>הקלד בשורת הכתובת בכרום: <code>chrome://extensions</code></li>
-          <li>הפעל את המתג "מצב מפתח" (Developer mode) בפינה הימנית העליונה.</li>
-          <li>לחץ על "טען תוסף שלא נארז" (Load unpacked) ובחר את התיקייה שחילצת.</li>
-          <li>פתח פגישת זום בדפדפן כרום - החלונית של Zoomi תופיע אוטומטית בצד ימין!</li>
-        </ol>
-      </details>
+      <div class="feature">
+        <div class="feature-icon-wrap hand">&#x270B;</div>
+        <div class="feature-text">
+          <div class="feature-title">הרמת יד</div>
+          <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon-wrap mute">&#x1F3A4;</div>
+        <div class="feature-text">
+          <div class="feature-title">השתקה</div>
+          <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור - אני מדבר / אני בשקט</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon-wrap skins">&#x1F3A8;</div>
+        <div class="feature-text">
+          <div class="feature-title">סקינים</div>
+          <div class="feature-desc">4 עיצובים כיפיים - קלאסי, גיימר, חלל וסוכריות</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Testimonials -->
   <section class="testimonials">
-    <h2 class="testimonials-title">מה (ילדים) אומרים עלינו</h2>
+    <h2 class="testimonials-title">מה הילדים אומרים?</h2>
     <div class="testimonial-cards">
       <div class="testimonial">
-
+        <div class="testimonial-tape"></div>
         <div class="testimonial-body">
-          <p class="testimonial-quote">זה מגניב בטירופים!</p>
-          <div class="testimonial-author">יונתן ס. (בן 6)</div>
+          <p class="testimonial-quote">"זה מגניב בטירופים!"</p>
+          <div class="testimonial-author">- יונתן ס. (בן 6)</div>
         </div>
       </div>
       <div class="testimonial">
-
+        <div class="testimonial-tape"></div>
         <div class="testimonial-body">
-          <p class="testimonial-quote">אני מצליחה להשתיק ולהפעיל לבד בלי לקרוא לאמא!</p>
-          <div class="testimonial-author">חן א. (בת 7)</div>
+          <p class="testimonial-quote">"אני מצליחה להשתיק ולהפעיל לבד בלי לקרוא לאמא!"</p>
+          <div class="testimonial-author">- חן א. (בת 7)</div>
         </div>
       </div>
       <div class="testimonial">
-
+        <div class="testimonial-tape"></div>
         <div class="testimonial-body">
-          <p class="testimonial-quote">אני אוהב שאפשר להחליף צבעים! הסקין של החלל הכי טוב</p>
-          <div class="testimonial-author">אורי ר. (בן 7)</div>
+          <p class="testimonial-quote">"אני אוהב שאפשר להחליף צבעים! החלל הכי טוב!"</p>
+          <div class="testimonial-author">- אורי ר. (בן 7)</div>
         </div>
       </div>
     </div>
@@ -709,9 +666,9 @@
   <!-- Bottom CTA -->
   <section class="bottom-cta">
     <h2>מוכנים לשדרג את שיעורי הזום?</h2>
-    <p>ההתקנה לוקחת פחות מדקה</p>
-    <a href="zoomi-extension.zip" class="download-btn" download>
-      הורד בחינם
+    <p>התוסף זמין בחנות כרום — התקנה בקליק אחד</p>
+    <a href="https://chromewebstore.google.com/detail/zoom-for-kids/nkdkjpialpoebdialgmnipjlibmnfogj" class="download-btn-bottom" target="_blank" rel="noopener">
+      הוסף לכרום
     </a>
   </section>
 

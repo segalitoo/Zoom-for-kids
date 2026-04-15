@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1200px; height: 780px;
+  background: radial-gradient(ellipse at 60% 10%, #1a1a6e 0%, #0d0d2b 45%, #020210 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  font-family: 'Varela Round', sans-serif;
+  overflow: hidden;
+  direction: rtl;
+  text-align: center;
+  position: relative;
+}
+
+/* ── Stars ── */
+.star { position: absolute; background: white; border-radius: 50%; }
+.s1  { width:2px;height:2px;  top: 8%;  left: 12%; opacity:.7; }
+.s2  { width:1px;height:1px;  top:15%;  left:28%;  opacity:.5; }
+.s3  { width:3px;height:3px;  top: 6%;  left:55%;  opacity:.6; }
+.s4  { width:2px;height:2px;  top:22%;  left:78%;  opacity:.8; }
+.s5  { width:1px;height:1px;  top:35%;  left: 5%;  opacity:.4; }
+.s6  { width:2px;height:2px;  top:70%;  left:20%;  opacity:.6; }
+.s7  { width:1px;height:1px;  top:80%;  left:42%;  opacity:.5; }
+.s8  { width:3px;height:3px;  top:75%;  left:68%;  opacity:.7; }
+.s9  { width:1px;height:1px;  top:90%;  left:85%;  opacity:.4; }
+.s10 { width:2px;height:2px;  top:48%;  left:92%;  opacity:.6; }
+.s11 { width:1px;height:1px;  top:12%;  left:90%;  opacity:.5; }
+.s12 { width:2px;height:2px;  top:58%;  left: 3%;  opacity:.5; }
+
+/* ── Header text ── */
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: rgba(180, 190, 255, 0.55);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.main-title {
+  font-size: 50px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 64px;
+  letter-spacing: -1px;
+}
+
+/* ── Steps row ── */
+.steps-row {
+  display: flex;
+  flex-direction: row; /* RTL: step 1 appears on the right */
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* Arrow between steps — vertically centered with the number badge */
+.arrow {
+  margin-top: 22px; /* aligns with center of the 44px number badge */
+  padding: 0 12px;
+  flex-shrink: 0;
+  width: 28px; height: 2px;
+  background: rgba(160, 175, 255, 0.35);
+  position: relative;
+  align-self: flex-start;
+  margin-top: 44px; /* center of badge: 22px top + 22px offset */
+}
+.arrow::after {
+  content: '';
+  position: absolute;
+  left: -1px; top: -4px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid rgba(160, 175, 255, 0.35);
+}
+
+/* ── Individual step card ── */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px;
+}
+
+/* Number badge — always the very first element, so numbers stay level */
+.step-number {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255,255,255,0.9);
+  font-size: 18px;
+  font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+/* Visual zone — fixed height so title row stays level across all cards */
+.step-visual {
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+/* Generic icon container for steps 1 & 2 */
+.icon-box {
+  width: 96px; height: 96px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+}
+
+/* ── Zoom logo (step 2) ── */
+.zoom-logo {
+  width: 96px; height: 96px;
+  border-radius: 22px;
+  background: #2D8CFF;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(45, 140, 255, 0.45);
+}
+
+/* ── Mini Zoom-in-Chrome mockup (step 3) ── */
+.chrome-mockup {
+  width: 210px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.chrome-bar {
+  height: 28px;
+  background: #2d2d2d;
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 10px;
+  direction: ltr;
+}
+.chrome-dot { width: 9px; height: 9px; border-radius: 50%; }
+.chrome-dot.r { background: #ff5f57; }
+.chrome-dot.y { background: #febc2e; }
+.chrome-dot.g { background: #28c840; }
+.chrome-content {
+  background: #1c1c1c;
+  padding: 8px;
+  display: flex; gap: 6px;
+}
+.video-tile {
+  flex: 1; height: 70px;
+  background: #2a2a2a;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.panel-mini {
+  width: 66px;
+  background: white;
+  border-radius: 10px;
+  padding: 6px;
+  display: flex; flex-direction: column; gap: 4px;
+  flex-shrink: 0;
+}
+.mini-emoji-row { display: flex; gap: 3px; }
+.mini-emoji {
+  width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+}
+.mini-emoji:nth-child(1) { background: #fef9c3; }
+.mini-emoji:nth-child(2) { background: #fce7f3; }
+.mini-emoji:nth-child(3) { background: #dbeafe; }
+.mini-hand {
+  background: #fef3c7;
+  border-radius: 5px;
+  font-size: 8px;
+  padding: 2px 3px;
+  text-align: center;
+  color: #92400e;
+  font-weight: bold;
+  font-family: 'Varela Round', sans-serif;
+  direction: rtl;
+}
+.mini-mute {
+  background: #ef4444;
+  border-radius: 5px;
+  font-size: 7px;
+  padding: 2px 3px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-family: 'Varela Round', sans-serif;
+  direction: rtl;
+}
+
+/* ── Step description — below visual zone ── */
+.step-desc {
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.55;
+  max-width: 220px;
+}
+</style>
+</head>
+<body>
+  <div class="star s1"></div><div class="star s2"></div><div class="star s3"></div>
+  <div class="star s4"></div><div class="star s5"></div><div class="star s6"></div>
+  <div class="star s7"></div><div class="star s8"></div><div class="star s9"></div>
+  <div class="star s10"></div><div class="star s11"></div><div class="star s12"></div>
+
+  <p class="eyebrow">איך זה עובד</p>
+  <h2 class="main-title">3 צעדים פשוטים</h2>
+
+  <div class="steps-row">
+
+    <!-- Step 1: Install from Chrome Web Store -->
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-visual">
+        <div class="icon-box">🧩</div>
+      </div>
+      <div class="step-desc">הוסף את הכלי לדפדפן כרום מחנות התוספים</div>
+    </div>
+
+    <div class="arrow"></div>
+
+    <!-- Step 2: Enter Zoom — Zoom logo shows it's Zoom in Chrome -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-visual">
+        <div class="zoom-logo">
+          <!-- Zoom camera icon SVG -->
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="16" width="28" height="24" rx="4" fill="white"/>
+            <path d="M37 20.5L50 14V42L37 35.5V20.5Z" fill="white"/>
+          </svg>
+        </div>
+      </div>
+      <div class="step-desc">פתח פגישת זום בדפדפן כרום</div>
+    </div>
+
+    <div class="arrow"></div>
+
+    <!-- Step 3: Buttons appear automatically -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-visual">
+        <div class="chrome-mockup">
+          <div class="chrome-bar">
+            <div class="chrome-dot r"></div>
+            <div class="chrome-dot y"></div>
+            <div class="chrome-dot g"></div>
+          </div>
+          <div class="chrome-content">
+            <div class="video-tile">👦</div>
+            <div class="video-tile">👧</div>
+            <div class="panel-mini">
+              <div class="mini-emoji-row">
+                <div class="mini-emoji">👏</div>
+                <div class="mini-emoji">❤️</div>
+                <div class="mini-emoji">😂</div>
+              </div>
+              <div class="mini-hand">✋ יד!</div>
+              <div class="mini-mute">🎤 דבר</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-desc">Zoomi מופיע אוטומטית בצד המסך ומוכן לשימוש</div>
+    </div>
+
+  </div>
+</body>
+</html>

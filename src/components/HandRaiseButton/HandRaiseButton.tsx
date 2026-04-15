@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useLang } from '../../i18n/language-context';
 import styles from './HandRaiseButton.module.css';
 
 type HandRaiseButtonProps = {
@@ -9,6 +10,7 @@ type HandRaiseButtonProps = {
 
 export function HandRaiseButton({ isHandRaised, onRaise, onLower }: HandRaiseButtonProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const { t } = useLang();
 
   const handleClick = useCallback(async () => {
     setIsAnimating(true);
@@ -21,15 +23,15 @@ export function HandRaiseButton({ isHandRaised, onRaise, onLower }: HandRaiseBut
   }, [isHandRaised, onRaise, onLower]);
 
   return (
-    <section aria-label="הרמת יד">
+    <section aria-label={t.raiseHandSection}>
       <button
         className={`${styles.btn} ${isHandRaised ? styles.raised : styles.lowered} ${isAnimating ? styles.animating : ''}`}
         onClick={handleClick}
         aria-pressed={isHandRaised}
-        aria-label={isHandRaised ? 'הוֹרֵד יָד' : 'הָרֵם יָד'}
+        aria-label={isHandRaised ? t.lowerHand : t.raiseHand}
       >
         <span className={styles.label}>
-          {isHandRaised ? 'הוֹרֵד יָד' : 'הָרֵם יָד'}
+          {isHandRaised ? t.lowerHand : t.raiseHand}
         </span>
         <span className={styles.handIcon} aria-hidden="true">
           ✋

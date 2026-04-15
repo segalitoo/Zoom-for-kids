@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useTheme } from './theme-context';
 import { themes, themeIds, type ThemeId } from './themes';
+import { useLang } from '../i18n/language-context';
 import styles from './ThemePicker.module.css';
 
 export function ThemePicker() {
   const [isOpen, setIsOpen] = useState(false);
   const { themeId, setTheme } = useTheme();
+  const { t } = useLang();
 
   return (
     <div style={{ position: 'relative' }}>
@@ -23,14 +25,14 @@ export function ThemePicker() {
           cursor: 'pointer',
         }}
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="בחר עיצוב"
-        title="בחר עיצוב"
+        aria-label={t.chooseTheme}
+        title={t.chooseTheme}
       >
         🎨
       </button>
 
       {isOpen && (
-        <div className={styles.dropdown} role="listbox" aria-label="עיצובים">
+        <div className={styles.dropdown} role="listbox" aria-label={t.themes}>
           {themeIds.map((id: ThemeId) => {
             const theme = themes[id];
             const isActive = id === themeId;
@@ -50,7 +52,7 @@ export function ThemePicker() {
                   style={{ background: theme.vars['--zoomi-bg'] }}
                 />
                 <span className={styles.optionEmoji}>{theme.emoji}</span>
-                <span className={styles.optionName}>{theme.name}</span>
+                <span className={styles.optionName}>{t.themeNames[id]}</span>
               </button>
             );
           })}

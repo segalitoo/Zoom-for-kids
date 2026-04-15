@@ -4,6 +4,7 @@ import { HandRaiseButton } from '../HandRaiseButton/HandRaiseButton';
 import { MuteToggle } from '../MuteToggle/MuteToggle';
 import { ThemeProvider, useTheme } from '../../themes/theme-context';
 import { ThemePicker } from '../../themes/ThemePicker';
+import { LanguageProvider, useLang } from '../../i18n/language-context';
 import { useZoomControls } from '../../hooks/useZoomControls';
 import { useMeetingState } from '../../hooks/useMeetingState';
 import styles from './App.module.css';
@@ -23,6 +24,7 @@ type AppProps = {
 function AppInner({ shadowRoot }: AppProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const { themeStyle } = useTheme();
+  const { t, toggleLang } = useLang();
   const { isMuted, isHandRaised, isMeetingActive, isLeaveDialogOpen } = useMeetingState();
   const {
     sendClap,
@@ -76,8 +78,8 @@ function AppInner({ shadowRoot }: AppProps) {
         className={styles.minimizedBtn}
         style={panelStyle}
         onClick={() => setIsExpanded(true)}
-        aria-label="פתח את בקרי זום לילדים"
-        title="פתח זום לילדים"
+        aria-label={t.openPanel}
+        title={t.openTitle}
       >
         🚀
       </button>
@@ -89,18 +91,26 @@ function AppInner({ shadowRoot }: AppProps) {
       className={styles.panel}
       style={panelStyle}
       role="complementary"
-      aria-label="בקרי זום לילדים"
-      dir="rtl"
+      aria-label={t.panelLabel}
+      dir={t.dir}
     >
       {/* Header */}
       <div className={styles.header}>
         <span className={styles.logo} aria-label="Zoomi">Zoomi</span>
         <div className={styles.headerRight}>
+          <button
+            className={styles.langBtn}
+            onClick={toggleLang}
+            aria-label={t.langToggle}
+            title={t.langToggle}
+          >
+            {t.langToggle}
+          </button>
           <ThemePicker />
           <button
             className={styles.minimizeBtn}
             onClick={() => setIsExpanded(false)}
-            aria-label="מזער"
+            aria-label={t.minimize}
           >
             ✕
           </button>
@@ -133,7 +143,9 @@ function AppInner({ shadowRoot }: AppProps) {
 export function App({ shadowRoot }: AppProps) {
   return (
     <ThemeProvider>
-      <AppInner shadowRoot={shadowRoot} />
+      <LanguageProvider>
+        <AppInner shadowRoot={shadowRoot} />
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

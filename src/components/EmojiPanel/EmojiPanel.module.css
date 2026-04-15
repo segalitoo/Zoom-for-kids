@@ -33,19 +33,21 @@
   box-shadow: var(--zoomi-emoji-hover-shadow, 0 0 20px var(--btn-shadow, rgba(243, 232, 255, 0.95)));
 }
 
-.emojiBtn:active {
+.emojiBtn:active:not(.popping) {
   transform: scale(0.95);
   transition-duration: 0.1s;
 }
+
 
 .emojiBtn:focus-visible {
   outline: 3px solid var(--zoomi-focus-color, #7c3aed);
   outline-offset: 3px;
 }
 
-/* Pop animation on reaction sent */
+/* Pop animation on reaction sent — transition:none prevents conflict with :active */
 .popping {
   animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: none;
 }
 
 @keyframes pop {

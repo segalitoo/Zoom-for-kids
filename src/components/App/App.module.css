@@ -105,6 +105,34 @@
   gap: 8px;
 }
 
+.langBtn {
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 18px;
+  border: var(--zoomi-minimize-border, none);
+  background: var(--zoomi-minimize-bg, #edf2f7);
+  color: var(--zoomi-minimize-text, #a0aec0);
+  font-size: 12px;
+  font-weight: bold;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  letter-spacing: 0.5px;
+}
+
+.langBtn:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.langBtn:focus-visible {
+  outline: 2px solid var(--zoomi-focus-color, #7c3aed);
+  outline-offset: 2px;
+}
+
 .minimizeBtn {
   width: 36px;
   height: 36px;

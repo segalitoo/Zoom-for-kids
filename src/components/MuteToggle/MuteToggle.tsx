@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useLang } from '../../i18n/language-context';
 import styles from './MuteToggle.module.css';
 
 type MuteToggleProps = {
@@ -8,6 +9,7 @@ type MuteToggleProps = {
 
 export function MuteToggle({ isMuted, onToggle }: MuteToggleProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const { t } = useLang();
 
   const handleClick = useCallback(() => {
     setIsAnimating(true);
@@ -16,21 +18,21 @@ export function MuteToggle({ isMuted, onToggle }: MuteToggleProps) {
   }, [onToggle]);
 
   return (
-    <section aria-label="שליטה במיקרופון">
+    <section aria-label={t.micSection}>
       <button
         className={`${styles.btn} ${isMuted ? styles.muted : styles.unmuted} ${isAnimating ? styles.animating : ''}`}
         onClick={handleClick}
         aria-pressed={isMuted}
-        aria-label={isMuted ? 'הפעל מיקרופון' : 'השתק מיקרופון'}
+        aria-label={isMuted ? t.unmute : t.mute}
       >
         <span className={styles.micIcon} aria-hidden="true">
           {isMuted ? '🔇' : '🎤'}
         </span>
         <div className={styles.textGroup}>
           <span className={styles.statusText}>
-            {isMuted ? 'אֲנִי בְּשֶׁקֶט' : 'אֲנִי מְדַבֵּר'}
+            {isMuted ? t.muted : t.speaking}
           </span>
-          <span className={styles.actionHint}>{isMuted ? 'לְחַץ לְדַבֵּר' : 'לְחַץ לְהַשְׁתִּיק'}</span>
+          <span className={styles.actionHint}>{isMuted ? t.tapToSpeak : t.tapToMute}</span>
         </div>
       </button>
     </section>

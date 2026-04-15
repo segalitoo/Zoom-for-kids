@@ -1,20 +1,24 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { translations, type Lang, LANG_STORAGE_KEY } from '../i18n/translations';
 import './popup.css';
 
 function Popup() {
+  let lang: Lang = 'he';
+  try {
+    lang = (localStorage.getItem(LANG_STORAGE_KEY) as Lang) || 'he';
+  } catch { /* ignore */ }
+
+  const t = translations[lang];
+
   return (
-    <main className="popup">
+    <main className="popup" dir={t.dir}>
       <header className="popup-header">
         <span className="popup-icon" aria-hidden="true">🌟</span>
-        <h1 className="popup-title">זום לילדים</h1>
+        <h1 className="popup-title">{t.popupTitle}</h1>
       </header>
-      <p className="popup-description">
-        כפתורים גדולים וקלים לזום — מיוחד לילדים!
-      </p>
-      <p className="popup-tip">
-        הצטרפו לפגישת זום כדי לראות את הכפתורים שלכם.
-      </p>
+      <p className="popup-description">{t.popupDesc}</p>
+      <p className="popup-tip">{t.popupTip}</p>
       <footer className="popup-footer">
         <span aria-hidden="true">👏 👍 ❤️ ✋ 🎤</span>
       </footer>

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Zoom for Kids",
-  "version": "1.0.2",
-  "description": "Kid-friendly big buttons for Zoom reactions, hand raise, and mute",
+  "version": "1.1.0",
+  "description": "Big, colorful buttons for Zoom meetings — made for kids. Reactions, hand raise, and mute in 5 languages.",
   "permissions": [],
   "host_permissions": ["https://*.zoom.us/wc/*"],
   "content_scripts": [

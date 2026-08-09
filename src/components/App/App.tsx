@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { EmojiPanel } from '../EmojiPanel/EmojiPanel';
 import { HandRaiseButton } from '../HandRaiseButton/HandRaiseButton';
 import { MuteToggle } from '../MuteToggle/MuteToggle';
 import { ThemeProvider, useTheme } from '../../themes/theme-context';
 import { ThemePicker } from '../../themes/ThemePicker';
 import { LanguageProvider, useLang } from '../../i18n/language-context';
+import { LANG_NAMES, type Lang } from '../../i18n/translations';
 import { useZoomControls } from '../../hooks/useZoomControls';
 import { useMeetingState } from '../../hooks/useMeetingState';
 import styles from './App.module.css';
@@ -21,10 +22,31 @@ type AppProps = {
   shadowRoot: ShadowRoot;
 };
 
+const GLOBE_ICON = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="2" y1="12" x2="22" y2="12" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
 function AppInner({ shadowRoot }: AppProps) {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [isLangOpen, setIsLangOpen] = useState(false);
+  const langPickerRef = useRef<HTMLDivElement>(null);
   const { themeStyle } = useTheme();
-  const { t, toggleLang } = useLang();
+  const { lang, t, setLang } = useLang();
   const { isMuted, isHandRaised, isMeetingActive, isLeaveDialogOpen } = useMeetingState();
   const {
     sendClap,
@@ -65,6 +87,18 @@ function AppInner({ shadowRoot }: AppProps) {
     shadowRoot.insertBefore(styleEl, shadowRoot.firstChild);
   }, [shadowRoot]);
 
+  // Close lang picker when clicking outside (composedPath works across shadow DOM boundary)
+  useEffect(() => {
+    if (!isLangOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (langPickerRef.current && !e.composedPath().includes(langPickerRef.current)) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener('click', handler, { capture: true });
+    return () => document.removeEventListener('click', handler, { capture: true });
+  }, [isLangOpen]);
+
   if (!isMeetingActive) return null;
 
   const panelStyle: React.CSSProperties = {
@@ -98,14 +132,41 @@ function AppInner({ shadowRoot }: AppProps) {
       <div className={styles.header}>
         <span className={styles.logo} aria-label="Zoomi">Zoomi</span>
         <div className={styles.headerRight}>
-          <button
-            className={styles.langBtn}
-            onClick={toggleLang}
-            aria-label={t.langToggle}
-            title={t.langToggle}
-          >
-            {t.langToggle}
-          </button>
+
+          {/* Language picker */}
+          <div ref={langPickerRef} style={{ position: 'relative' }}>
+            <button
+              className={styles.globeBtn}
+              onClick={() => setIsLangOpen(!isLangOpen)}
+              aria-label={t.chooseLang}
+              title={t.chooseLang}
+              aria-expanded={isLangOpen}
+              aria-haspopup="listbox"
+            >
+              {GLOBE_ICON}
+            </button>
+
+            {isLangOpen && (
+              <div className={styles.langDropdown} role="listbox" aria-label={t.chooseLang}>
+                {(Object.keys(LANG_NAMES) as Lang[]).map((code) => (
+                  <button
+                    key={code}
+                    className={`${styles.langOption} ${code === lang ? styles.langOptionActive : ''}`}
+                    role="option"
+                    aria-selected={code === lang}
+                    onClick={() => {
+                      setLang(code);
+                      setIsLangOpen(false);
+                    }}
+                  >
+                    {code === lang && <span className={styles.langCheck} aria-hidden="true">✓</span>}
+                    {LANG_NAMES[code]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <ThemePicker />
           <button
             className={styles.minimizeBtn}

@@ -105,32 +105,83 @@
   gap: 8px;
 }
 
-.langBtn {
+.globeBtn {
+  width: 36px;
   height: 36px;
-  padding: 0 10px;
-  border-radius: 18px;
+  border-radius: 50%;
   border: var(--zoomi-minimize-border, none);
   background: var(--zoomi-minimize-bg, #edf2f7);
   color: var(--zoomi-minimize-text, #a0aec0);
-  font-size: 12px;
-  font-weight: bold;
   font-family: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: 0.2s;
-  letter-spacing: 0.5px;
 }
 
-.langBtn:hover {
+.globeBtn:hover {
   transform: scale(1.05);
   opacity: 0.8;
 }
 
-.langBtn:focus-visible {
+.globeBtn:focus-visible {
   outline: 2px solid var(--zoomi-focus-color, #7c3aed);
   outline-offset: 2px;
+}
+
+.langDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 10;
+  min-width: 140px;
+  background: var(--zoomi-bg, #ffffff);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: slideIn 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--zoomi-text, #4a5568);
+  font-family: inherit;
+  font-size: 13px;
+  text-align: start;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.langOption:hover {
+  background: var(--zoomi-minimize-bg, #edf2f7);
+}
+
+.langOption:focus-visible {
+  outline: 2px solid var(--zoomi-focus-color, #7c3aed);
+  outline-offset: 2px;
+}
+
+.langOptionActive {
+  font-weight: bold;
+  color: var(--zoomi-focus-color, #7c3aed);
+}
+
+.langCheck {
+  font-size: 11px;
+  width: 14px;
+  flex-shrink: 0;
 }
 
 .minimizeBtn {

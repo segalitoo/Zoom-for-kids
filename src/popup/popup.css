@@ -51,6 +51,19 @@ body {
   line-height: 1.4;
 }
 
+.popup-langs {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.popup-lang-list {
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.02em;
+}
+
 .popup-footer {
   font-size: 1.3rem;
   text-align: center;

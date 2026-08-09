@@ -1,6 +1,6 @@
 {
   "name": "zoom-for-kids",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A kid-friendly control panel extension for Zoom web meetings",
   "scripts": {
     "dev": "vite build --watch",

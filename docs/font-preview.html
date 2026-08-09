@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Font Preview — Testimonials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Playpen+Sans+Hebrew:wght@400;700&family=Amatic+SC:wght@400;700&family=Karantina:wght@300;400;700&family=Secular+One&family=Suez+One&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Varela Round', sans-serif;
+      background: #f8f6f1;
+      min-height: 100vh;
+      padding: 40px 24px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    .font-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .font-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 3px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .font-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    .font-card.selected {
+      border-color: #6366f1;
+      box-shadow: 0 6px 24px rgba(99, 102, 241, 0.2);
+    }
+
+    .font-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .font-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d3748;
+    }
+
+    .font-vibe {
+      font-size: 13px;
+      color: #9ca3af;
+      background: #f3f4f6;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .font-card.selected .font-vibe {
+      background: #eef2ff;
+      color: #6366f1;
+    }
+
+    /* Mini testimonial cards inside each font option */
+    .mini-testimonials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .mini-note {
+      flex: 1;
+      background: #fffef5;
+      border-radius: 4px;
+      padding: 16px 14px 12px;
+      box-shadow: 1px 2px 6px rgba(0,0,0,0.06);
+      position: relative;
+    }
+
+    .mini-note:nth-child(1) { transform: rotate(-1.5deg); }
+    .mini-note:nth-child(2) { transform: rotate(1deg); }
+
+    .mini-tape {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 14px;
+      border-radius: 2px;
+      opacity: 0.7;
+    }
+
+    .mini-note:nth-child(1) .mini-tape { background: #fca5a5; transform: translateX(-50%) rotate(2deg); }
+    .mini-note:nth-child(2) .mini-tape { background: #93c5fd; transform: translateX(-50%) rotate(-1deg); }
+
+    .mini-quote {
+      font-size: 20px;
+      color: #374151;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .mini-author {
+      font-size: 15px;
+      color: #9ca3af;
+    }
+
+    /* Selected banner */
+    .selected-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .selected-banner.visible {
+      transform: translateY(0);
+    }
+
+    .selected-banner span {
+      font-size: 16px;
+      color: #2d3748;
+    }
+
+    .selected-banner strong {
+      color: #6366f1;
+    }
+
+    .selected-banner code {
+      background: #f3f4f6;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>בחר פונט עברי לציטוטים</h1>
+  <p class="subtitle">כל הפונטים תומכים בעברית - לחץ על הכרטיס שהכי מתאים</p>
+
+  <div class="font-grid" id="grid"></div>
+
+  <div class="selected-banner" id="banner">
+    <span>נבחר: <strong id="banner-name"></strong></span>
+    <code id="banner-code"></code>
+  </div>
+
+<script>
+var fonts = [
+  { family: 'Playpen Sans Hebrew', vibe: 'כתב יד ילדותי', css: "'Playpen Sans Hebrew', cursive", weight: '400' },
+  { family: 'Playpen Sans Hebrew', vibe: 'כתב יד ילדותי (בולד)', css: "'Playpen Sans Hebrew', cursive", weight: '700', label: 'Playpen Sans Hebrew Bold' },
+  { family: 'Amatic SC', vibe: 'גבוה, דק, מצויר ביד', css: "'Amatic SC', cursive", weight: '400' },
+  { family: 'Amatic SC', vibe: 'גבוה, מצויר ביד (בולד)', css: "'Amatic SC', cursive", weight: '700', label: 'Amatic SC Bold' },
+  { family: 'Karantina', vibe: 'בולט, אקספרסיבי', css: "'Karantina', cursive", weight: '400' },
+  { family: 'Karantina', vibe: 'קל, אקספרסיבי', css: "'Karantina', cursive", weight: '300', label: 'Karantina Light' },
+  { family: 'Secular One', vibe: 'עבה, מודרני, שובב', css: "'Secular One', sans-serif", weight: '400' },
+  { family: 'Suez One', vibe: 'קליגרפי, חם', css: "'Suez One', serif", weight: '400' }
+];
+
+var grid = document.getElementById('grid');
+var banner = document.getElementById('banner');
+var bannerName = document.getElementById('banner-name');
+var bannerCode = document.getElementById('banner-code');
+var selectedCard = null;
+
+fonts.forEach(function(font) {
+  var displayName = font.label || font.family;
+  var card = document.createElement('div');
+  card.className = 'font-card';
+  card.innerHTML =
+    '<div class="font-card-header">' +
+      '<div class="font-name">' + displayName + '</div>' +
+      '<div class="font-vibe">' + font.vibe + '</div>' +
+    '</div>' +
+    '<div class="mini-testimonials">' +
+      '<div class="mini-note">' +
+        '<div class="mini-tape"></div>' +
+        '<p class="mini-quote" style="font-family: ' + font.css + '; font-weight: ' + font.weight + '">"זה מגניב בטירופים!"</p>' +
+        '<div class="mini-author" style="font-family: ' + font.css + '; font-weight: ' + font.weight + '">- יונתן ס. (בן 6)</div>' +
+      '</div>' +
+      '<div class="mini-note">' +
+        '<div class="mini-tape"></div>' +
+        '<p class="mini-quote" style="font-family: ' + font.css + '; font-weight: ' + font.weight + '">"אני מצליחה להשתיק ולהפעיל לבד!"</p>' +
+        '<div class="mini-author" style="font-family: ' + font.css + '; font-weight: ' + font.weight + '">- חן א. (בת 7)</div>' +
+      '</div>' +
+    '</div>';
+
+  card.addEventListener('click', function() {
+    if (selectedCard) selectedCard.classList.remove('selected');
+    card.classList.add('selected');
+    selectedCard = card;
+    bannerName.textContent = displayName;
+    bannerCode.textContent = font.css + ' (weight: ' + font.weight + ')';
+    banner.classList.add('visible');
+  });
+
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

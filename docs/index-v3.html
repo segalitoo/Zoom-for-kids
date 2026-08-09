@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoomi - Zoom for Kids</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Playpen+Sans+Hebrew:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Varela Round', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fffbfe;
+      color: #4a5568;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---- Hero ---- */
+    .hero {
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+      padding: 60px 24px 120px;
+      position: relative;
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      z-index: 2;
+    }
+
+    .hero-wave svg {
+      display: block;
+      width: 100%;
+      height: 80px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .hero-text {
+      flex: 1;
+      text-align: right;
+    }
+
+    .logo {
+      font-size: 64px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      font-size: 24px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .download-btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    }
+
+    .download-btn-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
+    }
+
+    .hero-sub {
+      margin-top: 16px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ---- Widget mockup ---- */
+    .mockup-wrapper {
+      flex-shrink: 0;
+    }
+
+    .mockup {
+      width: 280px;
+      background: white;
+      border-radius: 36px;
+      padding: 28px;
+      box-shadow:
+        0 24px 48px rgba(219, 39, 119, 0.15),
+        0 8px 24px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transform: perspective(800px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.4s ease, background 0.4s, box-shadow 0.4s, border 0.4s;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .mockup:hover {
+      transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1.03);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(0); }
+      50% { transform: perspective(800px) rotateY(-4deg) rotateX(2deg) translateY(-8px); }
+    }
+
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .mockup-logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #9ca3af;
+      opacity: 0.5;
+      letter-spacing: -1px;
+      transition: color 0.4s;
+    }
+
+    .mockup-theme-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f472b6, #a78bfa, #60a5fa);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #e5e7eb;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .mockup-theme-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .mockup-theme-label {
+      display: none;
+    }
+
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mockup-emoji {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      border: none;
+      transition: background 0.4s, box-shadow 0.4s, border 0.4s;
+    }
+
+    .mockup-hand {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      border-radius: 25px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: inherit;
+      border: none;
+      transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+    }
+
+    .mockup-mute {
+      display: flex;
+      align-items: center;
+      flex-direction: row-reverse;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 25px;
+      background: #ef4444;
+      color: white;
+      font-family: inherit;
+      border: none;
+      box-shadow: 0 14px 28px rgba(239, 68, 68, 0.3);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    .mockup-mute-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .mockup-mute-status {
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .mockup-mute-hint {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .mockup-mute-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    /* ---- Features ---- */
+    .features-section {
+      background: #fffdf7;
+      padding: 64px 24px;
+      position: relative;
+    }
+
+    .features-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #2d3748;
+    }
+
+    .features-subtitle {
+      font-size: 16px;
+      color: #9ca3af;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon-wrap {
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .feature-icon-wrap.reactions { background: #fef3c7; }
+    .feature-icon-wrap.hand { background: #dbeafe; }
+    .feature-icon-wrap.mute { background: #d1fae5; }
+    .feature-icon-wrap.skins { background: #f3e8ff; }
+
+    .feature-text {
+      flex: 1;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #2d3748;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: #718096;
+      line-height: 1.6;
+    }
+
+    /* ---- Testimonials ---- */
+    .testimonials {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .testimonials-title {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 40px;
+      color: #2d3748;
+    }
+
+    .testimonial-cards {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+    }
+
+    .testimonial {
+      border-radius: 6px;
+      padding: 28px 24px 20px;
+      box-shadow: 2px 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 1;
+      min-width: 200px;
+      max-width: 240px;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial:nth-child(1) {
+      background: #fffbcf;
+      transform: rotate(-2.5deg);
+    }
+    .testimonial:nth-child(2) {
+      background: #eef6ff;
+      transform: rotate(1.5deg);
+    }
+    .testimonial:nth-child(3) {
+      background: #f0fdf4;
+      transform: rotate(-1deg);
+    }
+
+    .testimonial:hover { z-index: 2; }
+    .testimonial:nth-child(1):hover { transform: rotate(-2.5deg) scale(1.06); }
+    .testimonial:nth-child(2):hover { transform: rotate(1.5deg) scale(1.06); }
+    .testimonial:nth-child(3):hover { transform: rotate(-1deg) scale(1.06); }
+
+    .testimonial-tape {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 20px;
+      border-radius: 2px;
+      opacity: 0.65;
+    }
+
+    .testimonial:nth-child(1) .testimonial-tape { background: #fca5a5; transform: translateX(-50%) rotate(3deg); }
+    .testimonial:nth-child(2) .testimonial-tape { background: #93c5fd; transform: translateX(-50%) rotate(-2deg); }
+    .testimonial:nth-child(3) .testimonial-tape { background: #86efac; transform: translateX(-50%) rotate(1deg); }
+
+    /* Subtle lined paper effect */
+    .testimonial::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 28px,
+        rgba(0,0,0,0.03) 28px,
+        rgba(0,0,0,0.03) 29px
+      );
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .testimonial-body {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-quote {
+      font-family: 'Playpen Sans Hebrew', cursive;
+      font-size: 22px;
+      color: #374151;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .testimonial-author {
+      font-family: 'Playpen Sans Hebrew', cursive;
+      font-size: 16px;
+      color: #9ca3af;
+    }
+
+    /* ---- Bottom CTA ---- */
+    .bottom-cta {
+      text-align: center;
+      padding: 64px 24px;
+      background: linear-gradient(180deg, #fffbfe 0%, #eef6ff 100%);
+      position: relative;
+    }
+
+    .bottom-cta h2 {
+      font-size: 28px;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+
+    .bottom-cta p {
+      font-size: 16px;
+      color: #9ca3af;
+      margin-bottom: 28px;
+    }
+
+    .download-btn-bottom {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      font-family: inherit;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 18px 40px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+    }
+
+    .download-btn-bottom:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(99, 102, 241, 0.5);
+    }
+
+    /* ---- Floating blobs ---- */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%);
+      top: 20px; left: -60px;
+    }
+
+    .blob-2 {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(236,72,153,0.12), transparent 70%);
+      bottom: 40px; right: -40px;
+    }
+
+    /* ---- Footer ---- */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: #a0aec0;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #6366f1;
+      text-decoration: none;
+    }
+
+    /* ---- Mobile ---- */
+    @media (max-width: 750px) {
+      .hero-content { flex-direction: column; text-align: center; }
+      .hero-text { text-align: center; }
+      .logo { font-size: 48px; }
+      .tagline { font-size: 20px; }
+      .mockup { transform: none; animation: none; }
+      .mockup:hover { transform: scale(1.02); }
+      .features { grid-template-columns: 1fr; }
+
+      .testimonial-cards {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding: 20px 0;
+        gap: 20px;
+      }
+
+      .testimonial {
+        min-width: 240px;
+        max-width: 260px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+      }
+
+      .testimonial:nth-child(1),
+      .testimonial:nth-child(2),
+      .testimonial:nth-child(3) {
+        transform: rotate(0deg);
+      }
+
+      .testimonial:nth-child(1):hover,
+      .testimonial:nth-child(2):hover,
+      .testimonial:nth-child(3):hover {
+        transform: scale(1.03);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo { font-size: 42px; }
+      .tagline { font-size: 20px; }
+      .download-btn-hero { font-size: 18px; padding: 16px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="logo">Zoomi</div>
+        <p class="tagline">כפתורים גדולים, צבעוניים<br>וקלים לשימוש לילדים בזום</p>
+        <a href="https://chromewebstore.google.com/detail/zoom-for-kids/nkdkjpialpoebdialgmnipjlibmnfogj" class="download-btn-hero" target="_blank" rel="noopener">
+          הוסף לכרום
+        </a>
+      </div>
+
+      <!-- Widget mockup -->
+      <div class="mockup-wrapper">
+        <div class="mockup" dir="rtl">
+          <div class="mockup-header">
+            <div class="mockup-theme-btn" style="pointer-events:none;cursor:default">&#x1F31F;</div>
+            <div class="mockup-logo">Zoomi</div>
+          </div>
+
+          <div class="mockup-grid">
+            <div class="mockup-emoji" style="background:#fee2e2;box-shadow:0 10px 20px rgba(239,68,68,0.35)">&#x2764;&#xFE0F;</div>
+            <div class="mockup-emoji" style="background:#dcfce7;box-shadow:0 10px 20px rgba(34,197,94,0.35)">&#x1F44D;</div>
+            <div class="mockup-emoji" style="background:#fef3c7;box-shadow:0 10px 20px rgba(245,158,11,0.35)">&#x1F44F;</div>
+            <div class="mockup-emoji" style="background:#cffafe;box-shadow:0 10px 20px rgba(6,182,212,0.35)">&#x1F62E;</div>
+            <div class="mockup-emoji" style="background:#f3e8ff;box-shadow:0 10px 20px rgba(139,92,246,0.35)">&#x1F389;</div>
+            <div class="mockup-emoji" style="background:#ffedd5;box-shadow:0 10px 20px rgba(249,115,22,0.35)">&#x1F602;</div>
+          </div>
+
+          <div class="mockup-hand">
+            <span>&#x270B;</span>
+            <span>הָרֵם יָד</span>
+          </div>
+
+          <div class="mockup-mute">
+            <span class="mockup-mute-icon">&#x1F507;</span>
+            <div class="mockup-mute-text">
+              <span class="mockup-mute-status">אֲנִי בְּשֶׁקֶט</span>
+              <span class="mockup-mute-hint">לְחַץ לְדַבֵּר</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 C200,70 400,20 720,35 C1040,50 1240,75 1440,45 L1440,80 L0,80 Z" fill="#fffbfe"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features-section">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <h2 class="features-title">מה זומי עושה?</h2>
+    <p class="features-subtitle">הכל מותאם לידיים קטנות ולמסכים גדולים</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon-wrap reactions">&#x1F44F;</div>
+        <div class="feature-text">
+          <div class="feature-title">תגובות בקליק</div>
+          <div class="feature-desc">6 אימוג'ים גדולים וצבעוניים שקל ללחוץ עליהם</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon-wrap hand">&#x270B;</div>
+        <div class="feature-text">
+          <div class="feature-title">הרמת יד</div>
+          <div class="feature-desc">כפתור ברור להרמת והורדת יד בשיעור</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon-wrap mute">&#x1F3A4;</div>
+        <div class="feature-text">
+          <div class="feature-title">השתקה</div>
+          <div class="feature-desc">כפתור מיוט גדול עם סטטוס ברור - אני מדבר / אני בשקט</div>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon-wrap skins">&#x1F3A8;</div>
+        <div class="feature-text">
+          <div class="feature-title">סקינים</div>
+          <div class="feature-desc">4 עיצובים כיפיים - קלאסי, גיימר, חלל וסוכריות</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <h2 class="testimonials-title">מה הילדים אומרים?</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial">
+        <div class="testimonial-tape"></div>
+        <div class="testimonial-body">
+          <p class="testimonial-quote">"זה מגניב בטירופים!"</p>
+          <div class="testimonial-author">- יונתן ס. (בן 6)</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-tape"></div>
+        <div class="testimonial-body">
+          <p class="testimonial-quote">"אני מצליחה להשתיק ולהפעיל לבד בלי לקרוא לאמא!"</p>
+          <div class="testimonial-author">- חן א. (בת 7)</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-tape"></div>
+        <div class="testimonial-body">
+          <p class="testimonial-quote">"אני אוהב שאפשר להחליף צבעים! החלל הכי טוב!"</p>
+          <div class="testimonial-author">- אורי ר. (בן 7)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <h2>מוכנים לשדרג את שיעורי הזום?</h2>
+    <p>התוסף זמין בחנות כרום — התקנה בקליק אחד</p>
+    <a href="https://chromewebstore.google.com/detail/zoom-for-kids/nkdkjpialpoebdialgmnipjlibmnfogj" class="download-btn-bottom" target="_blank" rel="noopener">
+      הוסף לכרום
+    </a>
+  </section>
+
+  <footer class="footer">
+    <p>
+      Zoomi
+      &nbsp;|&nbsp;
+      <a href="https://github.com/segalitoo/Zoom-for-kids/blob/claude/add-claude-documentation-gFq7q/PRIVACY.md">מדיניות פרטיות</a>
+      &nbsp;|&nbsp;
+      <a href="mailto:zoomi.kids.app@gmail.com">zoomi.kids.app@gmail.com</a>
+      &nbsp;|&nbsp;
+      <a href="case-study.html">Case Study</a>
+    </p>
+  </footer>
+
+<script>
+(function() {
+  var themes = [
+    {
+      name: 'Classic',
+      icon: '\u{1F31F}',
+      bg: '#ffffff',
+      shadow: '0 24px 48px rgba(219,39,119,0.1)',
+      border: 'none',
+      logo: '#9ca3af',
+      emojis: [
+        { bg: '#fee2e2', shadow: 'none', border: 'none' },
+        { bg: '#dcfce7', shadow: 'none', border: 'none' },
+        { bg: '#fef3c7', shadow: 'none', border: 'none' },
+        { bg: '#e0f2fe', shadow: 'none', border: 'none' },
+        { bg: '#f3e8ff', shadow: 'none', border: 'none' },
+        { bg: '#ffedd5', shadow: 'none', border: 'none' }
+      ],
+      hand: { bg: '#f1f5f9', color: '#475569', shadow: 'none' },
+      mute: { bg: '#ef4444', shadow: '0 14px 28px rgba(239,68,68,0.3)' }
+    },
+    {
+      name: 'Gamer',
+      icon: '\u{1F3AE}',
+      bg: 'rgba(22,27,42,0.85)',
+      shadow: '0 30px 60px rgba(0,0,0,0.4)',
+      border: '1px solid rgba(255,255,255,0.08)',
+      logo: '#ffffff',
+      emojis: [
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(255,51,102,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(0,230,118,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(255,234,0,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(0,229,255,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(213,0,249,0.4)', border: '2px solid transparent' },
+        { bg: 'rgba(0,0,0,0.3)', shadow: '0 0 12px rgba(255,145,0,0.4)', border: '2px solid transparent' }
+      ],
+      hand: { bg: 'linear-gradient(135deg, #3a22f2, #8338ec)', color: '#ffffff', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #f2135d, #ff4c4c)', shadow: '0 0 20px rgba(242,19,93,0.4)' }
+    },
+    {
+      name: 'Space',
+      icon: '\u{1F680}',
+      bg: 'linear-gradient(160deg, #0f0c29, #1a1145, #24243e)',
+      shadow: '0 20px 50px rgba(0,0,0,0.5)',
+      border: '1px solid rgba(167,139,250,0.15)',
+      logo: '#a78bfa',
+      emojis: [
+        { bg: 'rgba(99,102,241,0.15)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(129,140,248,0.2)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(167,139,250,0.2)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(99,102,241,0.18)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(139,92,246,0.2)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' },
+        { bg: 'rgba(129,140,248,0.18)', shadow: 'none', border: '1px solid rgba(167,139,250,0.2)' }
+      ],
+      hand: { bg: 'linear-gradient(135deg, #818cf8, #6366f1)', color: '#ffffff', shadow: 'none' },
+      mute: { bg: 'linear-gradient(135deg, #ec4899, #db2777)', shadow: '0 14px 28px rgba(236,72,153,0.35)' }
+    },
+    {
+      name: 'Candy',
+      icon: '\u{1F36C}',
+      bg: '#fff0f6',
+      shadow: '0 24px 48px rgba(244,114,182,0.15)',
+      border: 'none',
+      logo: '#f472b6',
+      emojis: [
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' },
+        { bg: 'rgba(255,255,255,0.7)', shadow: 'none', border: '2px dashed rgba(244,114,182,0.25)' }
+      ],
+      hand: { bg: '#fce4ec', color: '#9d4b73', shadow: 'none' },
+      mute: { bg: '#f472b6', shadow: '0 14px 28px rgba(244,114,182,0.3)' }
+    }
+  ];
+
+  var currentTheme = 0;
+  var mockup = document.querySelector('.mockup');
+  var themeBtn = document.querySelector('.mockup-theme-btn');
+  var themeLabel = document.querySelector('.mockup-theme-label');
+  var emojiEls = document.querySelectorAll('.mockup-emoji');
+  var handEl = document.querySelector('.mockup-hand');
+  var muteEl = document.querySelector('.mockup-mute');
+  var logoEl = document.querySelector('.mockup-logo');
+
+  function applyTheme(t) {
+    mockup.style.background = t.bg;
+    mockup.style.boxShadow = t.shadow;
+    mockup.style.border = t.border;
+    logoEl.style.color = t.logo;
+    themeBtn.textContent = t.icon;
+    for (var i = 0; i < emojiEls.length; i++) {
+      emojiEls[i].style.background = t.emojis[i].bg;
+      emojiEls[i].style.boxShadow = t.emojis[i].shadow;
+      emojiEls[i].style.border = t.emojis[i].border;
+    }
+    handEl.style.background = t.hand.bg;
+    handEl.style.color = t.hand.color;
+    handEl.style.boxShadow = t.hand.shadow;
+    muteEl.style.background = t.mute.bg;
+    muteEl.style.boxShadow = t.mute.shadow;
+  }
+
+  setInterval(function() {
+    currentTheme = (currentTheme + 1) % themes.length;
+    applyTheme(themes[currentTheme]);
+  }, 4000);
+})();
+</script>
+</body>
+</html>

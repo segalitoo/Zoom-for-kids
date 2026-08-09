@@ -4,3 +4,9 @@ coverage/
 *.local
 .DS_Store
 .vercel
+
+# Build artifacts
+*.zip
+
+# Agent worktree scratch
+.claude/worktrees/
